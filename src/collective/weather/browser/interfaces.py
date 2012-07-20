@@ -7,8 +7,6 @@ from zope.schema.vocabulary import SimpleTerm
 
 from plone.directives import form
 
-from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
-
 from collective.weather import _
 
 units_vocab = SimpleVocabulary(
@@ -23,7 +21,7 @@ class IGoogleWeatherSchema(form.Schema):
 
     use_google = schema.Bool(title=_(u"Use Google weather service"))
 
-    form.widget(g_locations_id=EnhancedTextLinesFieldWidget)
+    form.widget(g_locations_id="collective.z3cform.widgets.enhancedtextlines.EnhancedTextLinesFieldWidget")
     g_locations_id = schema.List(title=_(u"Available options"),
                                  description=_(u"Enter here all available locations that will be shown in the locations drop down."),
                                  value_type= schema.TextLine(),
@@ -37,7 +35,7 @@ class IGoogleWeatherSchema(form.Schema):
     g_units = schema.Choice(title=_(u'Units'),
                             description=_(u"Units to show the results."),
                             default='metric',
-                            required=True,
+                            required=False,
                             source=units_vocab)
 
 
@@ -48,7 +46,7 @@ class IYahooWeatherSchema(form.Schema):
 
     use_yahoo = schema.Bool(title=_(u"Use Yahoo weather service"))
 
-    form.widget(y_locations_id=EnhancedTextLinesFieldWidget)
+    form.widget(y_locations_id="collective.z3cform.widgets.enhancedtextlines.EnhancedTextLinesFieldWidget")
     y_locations_id = schema.List(title=_(u"Available options"),
                                  description=_(u"Enter here all available locations that "
                                                 "will be shown in the locations drop down."
@@ -60,7 +58,7 @@ class IYahooWeatherSchema(form.Schema):
     y_units = schema.Choice(title=_(u'Units'),
                             description=_(u"Units to show the results."),
                             default='metric',
-                            required=True,
+                            required=False,
                             source=units_vocab)
 
 
@@ -71,7 +69,7 @@ class INoaaWeatherSchema(form.Schema):
 
     use_noaa = schema.Bool(title=_(u"Use NOAA weather service"))
 
-    form.widget(n_locations_id=EnhancedTextLinesFieldWidget)
+    form.widget(n_locations_id="collective.z3cform.widgets.enhancedtextlines.EnhancedTextLinesFieldWidget")
     n_locations_id = schema.List(title=_(u"Available options"),
                                  description=_(u"Enter here all available locations that "
                                                 "will be shown in the locations drop down. "

@@ -5,8 +5,6 @@
              xmlns:zcml="http://namespaces.zope.org/zcml"
              zcml:condition="have plone-41" />
 
-     <adapter factory=".controlpanel.WeatherControlPanelAdapter" />
-
      <browser:resourceDirectory
         name="collective.weather.icons"
         directory="icons"

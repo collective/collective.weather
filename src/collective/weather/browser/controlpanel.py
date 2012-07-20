@@ -1,31 +1,17 @@
-
-from zope.component import adapts
-from zope.component import getMultiAdapter
 from zope.component import getUtility
 
-from zope.event import notify
-from zope.interface import implements
+from zope.interface import alsoProvides
 
-from zope.schema.fieldproperty import FieldProperty
+from z3c.form import field
+from z3c.form import group
 
-from plone.app.controlpanel.form import ControlPanelForm
-from plone.app.controlpanel.events import ConfigurationChangedEvent
-
-from plone.app.form.validators import null_validator
-
-from zope.formlib import form
+from plone.app.registry.browser import controlpanel
 
 from plone.fieldsets.fieldsets import FormFieldsets
 
-from plone.protect import CheckAuthenticator
+from plone.registry.interfaces import IRegistry
 
-from Products.CMFCore.utils import getToolByName
-
-from Products.CMFDefault.formlib.schema import SchemaAdapterBase
-
-from Products.CMFPlone.interfaces import IPloneSiteRoot
-
-from Products.statusmessages.interfaces import IStatusMessage
+from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
 
 from collective.weather.browser.interfaces import IWeatherControlPanelForm
 from collective.weather.browser.interfaces import IGoogleWeatherSchema
@@ -36,88 +22,83 @@ from collective.weather.browser.interfaces import IWeatherSchema
 from collective.weather import _
 
 
-class WeatherControlPanelAdapter(SchemaAdapterBase):
-
-    adapts(IPloneSiteRoot)
-    implements(IWeatherSchema)
-
-    use_google = FieldProperty(IGoogleWeatherSchema["use_google"])
-    g_locations_id = FieldProperty(IGoogleWeatherSchema["g_locations_id"])
-    g_hl = FieldProperty(IGoogleWeatherSchema["g_hl"])
-    g_units = FieldProperty(IGoogleWeatherSchema["g_units"])
-    use_yahoo = FieldProperty(IYahooWeatherSchema["use_yahoo"])
-    y_locations_id = FieldProperty(IYahooWeatherSchema["y_locations_id"])
-    y_units = FieldProperty(IYahooWeatherSchema["y_units"])
-    use_noaa = FieldProperty(INoaaWeatherSchema["use_noaa"])
-    n_locations_id = FieldProperty(INoaaWeatherSchema["n_locations_id"])
+class YahooGroup(group.Group):
+    label = _(u"Yahoo")
+    fields = field.Fields(IYahooWeatherSchema)
 
 
-class WeatherControlPanel(ControlPanelForm):
-    """
-    Weather control panel view
-    """
+class NoaaGroup(group.Group):
+    label = _(u"NOAA")
+    fields = field.Fields(INoaaWeatherSchema)
 
-    implements(IWeatherControlPanelForm)
 
-    # template = ViewPageTemplateFile('./templates/facebook-control-panel.pt')
+class WeatherControlPanelEditForm(controlpanel.RegistryEditForm):
+    schema = IWeatherSchema
+
     label = _("Weather setup")
     description = _("""Lets you configure several weather locations""")
 
-    google_w = FormFieldsets(IGoogleWeatherSchema)
-    google_w.id = 'google_w'
-    google_w.label = _(u"Google")
+    fields = IGoogleWeatherSchema
 
-    yahoo_w = FormFieldsets(IYahooWeatherSchema)
-    yahoo_w.id = 'yahoo_w'
-    yahoo_w.label = _(u"Yahoo")
+    groups = YahooGroup, NoaaGroup
 
-    noaa_w = FormFieldsets(INoaaWeatherSchema)
-    noaa_w.id = 'noaa_w'
-    noaa_w.label = _(u"NOAA")
+    def getContent(self):
+        return AbstractRecordsProxy(self.schema)
 
-    form_fields = FormFieldsets(
-                        google_w,
-                        yahoo_w,
-                        noaa_w
-                        )
+    # def updateFields(self):
+    #     super(WeatherControlPanelEditForm, self).updateFields()
+    #     self.fields['g_locations_id'].widgetFactory = EnhancedTextLinesFieldWidget
+    #     self.groups[0].fields['y_locations_id'].widgetFactory = EnhancedTextLinesFieldWidget
+    #     self.groups[1].fields['n_locations_id'].widgetFactory = EnhancedTextLinesFieldWidget
 
-    # def __call__(self):
-    #     if 'form.actions.save' not in self.request:
-    #         return super(WeatherControlPanel, self).__call__()
-
-    #     import pdb;pdb.set_trace()
-    # @button.buttonAndHandler(_(u'Save'), name='save')
-    # def handleApply(self, action):
-    #     self.saveIdea(action)
-
-    # @button.buttonAndHandler(_(u'Cancel'), name='cancel')
-    # def handleCancel(self, action):
-    #     IStatusMessage(self.request).addStatusMessage(
-    #                                               _(u"Edit cancelled"), "info")
-    #     self.request.response.redirect(self.nextURL())
-    #     notify(EditCancelledEvent(self.context))
+    # def updateWidgets(self):
+    #     super(NITFSettingsEditForm, self).updateWidgets()
+    #     self.widgets['available_sections'].rows = 8
+    #     self.widgets['available_sections'].style = u'width: 30%;'
 
 
-    # @form.action(_(u'label_save', default=u'Save'), name=u'save')
-    # def handle_edit_action(self, action, data):
-    #     CheckAuthenticator(self.request)
-    #     if form.applyChanges(self.context, self.form_fields, data,
-    #                          self.adapters):
-    #         self.status = _("Changes saved.")
-    #         notify(ConfigurationChangedEvent(self, data))
-    #         self._on_save(data)
-    #     else:
-    #         self.status = _("No changes made.")
+class WeatherControlPanel(controlpanel.ControlPanelFormWrapper):
+    form = WeatherControlPanelEditForm
 
-    # @form.action(_(u'label_cancel', default=u'Cancel'),
-    #             validator=null_validator,
-    #             name=u'cancel')
-    # def handle_cancel_action(self, action, data):
-    #     IStatusMessage(self.request).addStatusMessage(_("Changes canceled."),
-    #                                                     type="info")
-    #     portal = getToolByName(self.context, name='portal_url')\
-    #         .getPortalObject()
-    #     url = getMultiAdapter((portal, self.request),
-    #                             name='absolute_url')()
-    #     self.request.response.redirect(url + '/plone_control_panel')
-    #     return ''
+
+class AbstractRecordsProxy(object):
+    """Multiple registry schema proxy.
+
+This class supports schemas that contain derived fields. The
+settings will be stored with respect to the individual field
+interfaces.
+"""
+
+    def __init__(self, schema):
+        state = self.__dict__
+        state["__registry__"] = getUtility(IRegistry)
+        state["__proxies__"] = {}
+        state["__schema__"] = schema
+        alsoProvides(self, schema)
+
+    def __getattr__(self, name):
+        try:
+            field = self.__schema__[name]
+        except KeyError:
+            raise AttributeError(name)
+        else:
+            proxy = self._get_proxy(field.interface)
+            return getattr(proxy, name)
+
+    def __setattr__(self, name, value):
+        try:
+            field = self.__schema__[name]
+        except KeyError:
+            self.__dict__[name] = value
+        else:
+            proxy = self._get_proxy(field.interface)
+            return setattr(proxy, name, value)
+
+    def __repr__(self):
+        return "<AbstractRecordsProxy for %s>" % self.__schema__.__identifier__
+
+    def _get_proxy(self, interface):
+        proxies = self.__proxies__
+        return proxies.get(interface) or \
+               proxies.setdefault(interface, self.__registry__.\
+                                  forInterface(interface))

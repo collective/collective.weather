@@ -43,6 +43,7 @@ setup(name='collective.weather',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'plone.app.registry',
           'collective.z3cform.widgets',
           'pywapi==0.2.2'
       ],

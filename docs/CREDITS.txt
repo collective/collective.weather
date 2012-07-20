@@ -1,6 +1,7 @@
-Note:  place names and roles of the people who contribute to this package
-       in this file, one to a line, like so:
+Credits
+-------
 
-- Joe Schmoe, Original Author
-- Bob Slob, contributed monkey patches
-- Jane Main, wrote flibberty module
+- Franco Pellegrini
+- Hector Velarde
+
+Icons provided by the Tango Desktop Project (http://tango.freedesktop.org)
