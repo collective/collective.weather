@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from zope.component import getUtility
 
 from zope.interface import alsoProvides
@@ -35,7 +37,7 @@ class NoaaGroup(group.Group):
 class WeatherControlPanelEditForm(controlpanel.RegistryEditForm):
     schema = IWeatherSchema
 
-    label = _("Weather setup")
+    label = _("Weather Setup")
     description = _("""Lets you configure several weather locations""")
 
     fields = IGoogleWeatherSchema
@@ -47,12 +49,12 @@ class WeatherControlPanelEditForm(controlpanel.RegistryEditForm):
 
     # def updateFields(self):
     #     super(WeatherControlPanelEditForm, self).updateFields()
-    #     self.fields['g_locations_id'].widgetFactory = EnhancedTextLinesFieldWidget
-    #     self.groups[0].fields['y_locations_id'].widgetFactory = EnhancedTextLinesFieldWidget
-    #     self.groups[1].fields['n_locations_id'].widgetFactory = EnhancedTextLinesFieldWidget
+    #     self.fields['google_location_ids'].widgetFactory = EnhancedTextLinesFieldWidget
+    #     self.groups[0].fields['yahoo_location_ids'].widgetFactory = EnhancedTextLinesFieldWidget
+    #     self.groups[1].fields['noaa_location_ids'].widgetFactory = EnhancedTextLinesFieldWidget
 
     # def updateWidgets(self):
-    #     super(NITFSettingsEditForm, self).updateWidgets()
+    #     super(WeatherControlPanelEditForm, self).updateWidgets()
     #     self.widgets['available_sections'].rows = 8
     #     self.widgets['available_sections'].style = u'width: 30%;'
 
@@ -100,5 +102,5 @@ interfaces.
     def _get_proxy(self, interface):
         proxies = self.__proxies__
         return proxies.get(interface) or \
-               proxies.setdefault(interface, self.__registry__.\
-                                  forInterface(interface))
+               proxies.setdefault(interface,
+                                  self.__registry__.forInterface(interface))

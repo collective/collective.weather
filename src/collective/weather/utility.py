@@ -1,8 +1,6 @@
 
 from AccessControl import ClassSecurityInfo
 
-from zope.component import getUtility
-
 from zope.interface import classProvides
 from zope.interface import implements
 
@@ -29,14 +27,12 @@ class Weather(SimpleItem):
 
     security = ClassSecurityInfo()
 
-    use_google = FieldProperty(IGoogleWeatherSchema("use_google"))
-    g_locations_id = FieldProperty(IGoogleWeatherSchema("g_locations_id"))
-    g_hl = FieldProperty(IGoogleWeatherSchema("g_hl"))
-    g_units = FieldProperty(IGoogleWeatherSchema("g_units"))
-    use_yahoo = FieldProperty(IYahooWeatherSchema("use_yahoo"))
-    y_locations_id = FieldProperty(IYahooWeatherSchema("y_locations_id"))
-    y_units = FieldProperty(IYahooWeatherSchema("y_units"))
-    use_noaa = FieldProperty(INoaaWeatherSchema("use_noaa"))
-    n_locations_id = FieldProperty(INoaaWeatherSchema("n_locations_id"))
-
-
+    use_google = FieldProperty(IGoogleWeatherSchema('use_google'))
+    google_location_ids = FieldProperty(IGoogleWeatherSchema('google_location_ids'))
+    google_language = FieldProperty(IGoogleWeatherSchema('google_language'))
+    google_units = FieldProperty(IGoogleWeatherSchema('google_units'))
+    use_yahoo = FieldProperty(IYahooWeatherSchema('use_yahoo'))
+    yahoo_location_ids = FieldProperty(IYahooWeatherSchema('yahoo_location_ids'))
+    yahoo_units = FieldProperty(IYahooWeatherSchema('yahoo_units'))
+    use_noaa = FieldProperty(INoaaWeatherSchema('use_noaa'))
+    noaa_location_ids = FieldProperty(INoaaWeatherSchema('noaa_location_ids'))
