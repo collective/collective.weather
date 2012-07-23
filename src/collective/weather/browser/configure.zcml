@@ -9,7 +9,7 @@
         name="collective.weather.icons"
         directory="icons"
         />
-
+<!--
      <browser:resourceDirectory
         name="collective.weather.js"
         directory="js"
@@ -19,7 +19,7 @@
         name="collective.weather.css"
         directory="css"
         />
-
+-->
     <browser:page
         name="weather-controlpanel"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
