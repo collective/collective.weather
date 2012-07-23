@@ -1,7 +1,14 @@
-Credits
--------
+Share and Enjoy
+---------------
+
+collective.weather would not have been possible without the contribution of
+the following people:
 
 - Franco Pellegrini
-- Hector Velarde
+- Héctor Velarde
+- `Tango Desktop Project`_ (icon)
 
-Icons provided by the Tango Desktop Project (http://tango.freedesktop.org)
+Development sponsored by Open Multimedia.
+
+.. _`Tango Desktop Project`: http://tango.freedesktop.org/
+

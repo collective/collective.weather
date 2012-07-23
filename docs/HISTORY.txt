@@ -1,8 +1,10 @@
 Changelog
-=========
+---------
 
-1.0a1.dev0 (unreleased)
-----------------------
+Because you have to know where your towel is.
 
-- Package created using templer
-  []
+1.0a1 (unreleased)
+--------------------
+
+- Initial release.
+
