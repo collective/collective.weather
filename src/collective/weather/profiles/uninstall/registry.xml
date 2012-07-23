@@ -4,9 +4,9 @@
  <record name="collective.weather.browser.interfaces.IGoogleWeatherSchema.google_location_ids" delete="true" />
  <record name="collective.weather.browser.interfaces.IGoogleWeatherSchema.google_language" delete="true" />
  <record name="collective.weather.browser.interfaces.IGoogleWeatherSchema.google_units" delete="true" />
- <record name="collective.weather.browser.interfaces.IGoogleWeatherSchema.use_yahoo" delete="true" />
- <record name="collective.weather.browser.interfaces.IGoogleWeatherSchema.yahoo_location_ids" delete="true" />
- <record name="collective.weather.browser.interfaces.IGoogleWeatherSchema.yahoo_units" delete="true" />
- <record name="collective.weather.browser.interfaces.IGoogleWeatherSchema.use_noaa" delete="true" />
- <record name="collective.weather.browser.interfaces.IGoogleWeatherSchema.noaa_location_ids" delete="true" />
+ <record name="collective.weather.browser.interfaces.IYahooWeatherSchema.use_yahoo" delete="true" />
+ <record name="collective.weather.browser.interfaces.IYahooWeatherSchema.yahoo_location_ids" delete="true" />
+ <record name="collective.weather.browser.interfaces.IYahooWeatherSchema.yahoo_units" delete="true" />
+ <record name="collective.weather.browser.interfaces.INoaaWeatherSchema.use_noaa" delete="true" />
+ <record name="collective.weather.browser.interfaces.INoaaWeatherSchema.noaa_location_ids" delete="true" />
 </registry>
