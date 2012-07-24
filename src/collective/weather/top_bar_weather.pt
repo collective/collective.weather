@@ -14,6 +14,7 @@
     <div id="current-weather"
          tal:define="current_weather python:view.weather_info[view.current_city['id']]['weather']">
       <tal:block condition="current_weather">
+        <img class="weather-icon" tal:attributes="src python:current_weather['icon']"/>
         <span tal:content="python:current_weather['temp']" />
         <span class="condition" tal:content="python:current_weather['conditions']" />
         <!--<img src="#" tal:attributes="src python:current_weather['icon']" />-->
