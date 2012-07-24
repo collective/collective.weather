@@ -1,0 +1,39 @@
+#top-weather-viewlet dt.actionMenuHeader a:after {
+    content: " ▼";
+}
+
+dl.actionMenu a#current-city{
+    float: right;
+}
+
+#top-weather-viewlet dd a:hover {
+    background: none repeat scroll 0 0 #205C90;
+    color: White;
+}
+
+#top-weather-viewlet {
+    background: none repeat scroll 0 0 #E3E3E3;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    float: right;
+    font-size: 80%;
+    padding: 0.25em 0.5em;
+    position: relative;
+    right: 0;
+    top: 0;
+    z-index: 3;
+}
+
+#top-weather-viewlet dd {
+    background: none repeat scroll 0 0 #E3E3E3;    
+    margin-top: 1.2em;
+    min-width: 0px;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    right: 0;
+}
+
+#top-weather-viewlet #current-weather {
+    float: right;
+    padding-right: 0.5em;
+}

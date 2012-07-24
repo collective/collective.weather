@@ -19,7 +19,7 @@
         name="collective.weather.css"
         directory="css"
         />
-
+      
     <browser:page
         name="weather-controlpanel"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"

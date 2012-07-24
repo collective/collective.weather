@@ -27,7 +27,7 @@ class IGoogleWeatherSchema(form.Schema):
 
     form.widget(google_location_ids="collective.z3cform.widgets.enhancedtextlines.EnhancedTextLinesFieldWidget")
     google_location_ids = schema.List(title=_(u"Available options"),
-                                 description=_(u"Enter here all available locations that will be shown in the locations drop down."),
+                                 description=_(u"Enter here all available locations that will be shown in the locations drop down. Format: id|name|location_id."),
                                  value_type=schema.TextLine(),
                                  default=[],
                                  required=False)
@@ -55,7 +55,7 @@ class IYahooWeatherSchema(form.Schema):
     form.widget(yahoo_location_ids="collective.z3cform.widgets.enhancedtextlines.EnhancedTextLinesFieldWidget")
     yahoo_location_ids = schema.List(title=_(u"Available options"),
                                  description=_(u"Enter here all available locations that "
-                                                "will be shown in the locations drop down."
+                                                "will be shown in the locations drop down. Format: id|name|location_id. "
                                                 "Check http://code.google.com/p/python-weather-api/#Yahoo!_Weather for further information."),
                                  value_type=schema.TextLine(),
                                  default=[],
@@ -80,7 +80,7 @@ class INoaaWeatherSchema(form.Schema):
     form.widget(noaa_location_ids="collective.z3cform.widgets.enhancedtextlines.EnhancedTextLinesFieldWidget")
     noaa_location_ids = schema.List(title=_(u"Available options"),
                                  description=_(u"Enter here all available locations that "
-                                                "will be shown in the locations drop down. "
+                                                "will be shown in the locations drop down. Format: id|name|location_id. "
                                                 "Check http://code.google.com/p/python-weather-api/#NOAA for further information."),
                                  value_type=schema.TextLine(),
                                  default=[],
