@@ -21,7 +21,7 @@ class IGoogleWeatherSchema(form.Schema):
     Configurations for getting weather information from Google
     """
 
-    use_google = schema.Bool(title=_(u"Use Google weather service"),
+    use_google = schema.Bool(title=_(u"Use Google Weather service"),
         default=False,
         )
 
@@ -48,7 +48,7 @@ class IYahooWeatherSchema(form.Schema):
     Configurations for getting weather information from Yahoo
     """
 
-    use_yahoo = schema.Bool(title=_(u"Use Yahoo weather service"),
+    use_yahoo = schema.Bool(title=_(u"Use Yahoo! Weather service (XXX: not yet implemented)"),
         default=False,
         )
 
@@ -73,7 +73,7 @@ class INoaaWeatherSchema(form.Schema):
     Configurations for getting weather information from NOAA
     """
 
-    use_noaa = schema.Bool(title=_(u"Use NOAA weather service"),
+    use_noaa = schema.Bool(title=_(u"Use NOAA weather service (XXX: not yet implemented)"),
         default=False,
         )
 
