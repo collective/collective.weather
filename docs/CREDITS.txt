@@ -6,6 +6,7 @@ the following people:
 
 - Franco Pellegrini
 - Héctor Velarde
+- Silvestre Huens
 - `Tango Desktop Project`_ (icon)
 
 Development sponsored by Open Multimedia.

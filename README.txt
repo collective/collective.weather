@@ -28,8 +28,8 @@ the viewlet.
 
 .. figure:: https://raw.github.com/collective/collective.weather/master/viewlet.png
     :align: center
-    :height: 321px
-    :width: 140px
+    :height: 140px
+    :width: 321px
 
     The Weather viewlet.
 
