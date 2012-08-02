@@ -26,6 +26,13 @@ will be stored inside a browser cookie.
 The current weather condition of the selected location will be displayed at
 the viewlet.
 
+.. figure:: https://raw.github.com/collective/collective.weather/master/viewlet.png
+    :align: center
+    :height: 321px
+    :width: 140px
+
+    The Weather viewlet.
+
 Mostly Harmless
 ---------------
 
