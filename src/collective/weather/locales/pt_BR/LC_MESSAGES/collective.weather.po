@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2012-07-23 17:37+0000\n"
-"PO-Revision-Date: 2012-01-06 21:56-0600\n"
+"POT-Creation-Date: 2012-08-01 23:55+0000\n"
+"PO-Revision-Date: 2012-08-01 21:11-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
 "MIME-Version: 1.0\n"
@@ -15,79 +15,91 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.nitf\n"
 
-#: collective/weather/browser/interfaces.py:25
+#: collective/weather/viewlet.py:81
+msgid "%sºC"
+msgstr "%sºC"
+
+#: collective/weather/viewlet.py:79
+msgid "%sºF"
+msgstr "%sºF"
+
+#: collective/weather/browser/interfaces.py:29
 msgid "Available options"
+msgstr "Opções disponíveis"
+
+#: collective/weather/browser/interfaces.py:30
+msgid "Enter here all available locations that will be shown in the locations drop down. Format: id|name|location_id."
+msgstr "Liste aqui todos os locais que serão mostrados. Formato: id | nome | id_do_local."
+
+#: collective/weather/browser/interfaces.py:82
+msgid "Enter here all available locations that will be shown in the locations drop down. Format: id|name|location_id. Check http://code.google.com/p/python-weather-api/#NOAA for further information."
 msgstr ""
 
-#: collective/weather/browser/interfaces.py:26
-msgid "Enter here all available locations that will be shown in the locations drop down."
-msgstr ""
-
-#: collective/weather/browser/interfaces.py:74
-msgid "Enter here all available locations that will be shown in the locations drop down. Check http://code.google.com/p/python-weather-api/#NOAA for further information."
-msgstr ""
-
-#: collective/weather/browser/interfaces.py:51
-msgid "Enter here all available locations that will be shown in the locations drop down.Check http://code.google.com/p/python-weather-api/#Yahoo!_Weather for further information."
-msgstr ""
-
-#: collective/weather/browser/interfaces.py:32
-msgid "Enter the language code to show the content."
-msgstr ""
-
-#: collective/weather/browser/interfaces.py:14
-msgid "Imperial"
-msgstr ""
-
-#: collective/weather/browser/interfaces.py:31
-msgid "Language"
-msgstr ""
-
-#: collective/weather/browser/controlpanel.py:39
-msgid "Lets you configure several weather locations"
-msgstr ""
-
-#: collective/weather/browser/interfaces.py:13
-msgid "Metric"
-msgstr ""
-
-#: collective/weather/browser/controlpanel.py:31
-msgid "NOAA"
-msgstr ""
-
-#: configure.zcml
-msgid "Uninstall profile for the collective.weather package."
-msgstr ""
-
-#: collective/weather/browser/interfaces.py:35
-msgid "Units"
+#: collective/weather/browser/interfaces.py:57
+msgid "Enter here all available locations that will be shown in the locations drop down. Format: id|name|location_id. Check http://code.google.com/p/python-weather-api/#Yahoo!_Weather for further information."
 msgstr ""
 
 #: collective/weather/browser/interfaces.py:36
+msgid "Enter the language code to show the content."
+msgstr "Digite o código do idioma para mostrar o conteúdo."
+
+#: collective/weather/browser/interfaces.py:16
+msgid "Imperial"
+msgstr "Imperial"
+
+#: collective/weather/browser/interfaces.py:35
+msgid "Language"
+msgstr "Idioma"
+
+#: collective/weather/browser/controlpanel.py:41
+msgid "Lets you configure several weather locations"
+msgstr ""
+
+#: collective/weather/browser/interfaces.py:15
+msgid "Metric"
+msgstr "Métrico"
+
+#: collective/weather/browser/controlpanel.py:33
+msgid "NOAA"
+msgstr ""
+
+#: collective/weather/top_bar_weather.pt:23
+msgid "No weather information"
+msgstr "Sem informação das condições meteorológicas"
+
+#: configure.zcml
+msgid "Uninstall profile for the collective.weather package."
+msgstr "Desinstalar o pacote collective.weather."
+
+#: collective/weather/browser/interfaces.py:39
+msgid "Units"
+msgstr "Unidades"
+
+#: collective/weather/browser/interfaces.py:40
 msgid "Units to show the results."
+msgstr "Unidades para mostrar os resultados."
+
+#: collective/weather/browser/interfaces.py:24
+msgid "Use Google Weather service"
+msgstr "Usar o serviço Google Weather"
+
+#: collective/weather/browser/interfaces.py:76
+msgid "Use NOAA weather service (XXX: not yet implemented)"
 msgstr ""
 
-#: collective/weather/browser/interfaces.py:22
-msgid "Use Google weather service"
-msgstr ""
-
-#: collective/weather/browser/interfaces.py:70
-msgid "Use NOAA weather service"
-msgstr ""
-
-#: collective/weather/browser/interfaces.py:47
-msgid "Use Yahoo weather service"
+#: collective/weather/browser/interfaces.py:51
+msgid "Use Yahoo! Weather service (XXX: not yet implemented)"
 msgstr ""
 
 #: collective/weather/profiles/default/controlpanel.xml
 msgid "Weather"
-msgstr ""
+msgstr "Condições meteorológicas"
 
-#: collective/weather/browser/controlpanel.py:38
-msgid "Weather setup"
-msgstr ""
+#: collective/weather/browser/controlpanel.py:40
+msgid "Weather Setup"
+msgstr "Configuração do collective.weather"
 
-#: collective/weather/browser/controlpanel.py:26
+#: collective/weather/browser/controlpanel.py:28
 msgid "Yahoo"
 msgstr ""
 
