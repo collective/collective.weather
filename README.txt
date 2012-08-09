@@ -37,6 +37,7 @@ Mostly Harmless
 ---------------
 
 .. image:: https://secure.travis-ci.org/collective/collective.weather.png
+    :target: http://travis-ci.org/collective/collective.weather
 
 Have an idea? Found a bug? Let us know by `opening a support ticket`_.
 
