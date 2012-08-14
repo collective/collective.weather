@@ -74,19 +74,23 @@ class TopBarWeatherViewlet(ViewletBase):
             except urllib2.URLError:
                 result = ""
 
-            if result:
-                if units == 'imperial':
-                    temp = _(u"%sºF") % result['current_conditions']['temp_f']
-                else:
-                    temp = _(u"%sºC") % result['current_conditions']['temp_c']
+            if result and 'current_conditions' in result:
+                try:
+                    conditions = result['current_conditions']
 
-                new_weather = {'temp': temp,
-                               'conditions': result['current_conditions']['condition'],
-                               'icon': u"http://www.google.com%s" % result['current_conditions']['icon']}
+                    if units == 'imperial':
+                        temp = _(u"%sºF") % conditions['temp_f']
+                    else:
+                        temp = _(u"%sºC") % conditions['temp_c']
 
-                self.weather_info[city['id']] = {'date': now,
-                                                 'weather': new_weather}
+                    new_weather = {'temp': temp,
+                                   'conditions': conditions['condition'],
+                                   'icon': u"http://www.google.com%s" % conditions.get('icon', '')}
 
+                    self.weather_info[city['id']] = {'date': now,
+                                                     'weather': new_weather}
+                except KeyError:
+                    self.weather_info[city['id']] = {'weather': ""}
             else:
                 self.weather_info[city['id']] = {'weather': ""}
 
