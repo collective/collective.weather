@@ -73,6 +73,9 @@ class TopBarWeatherViewlet(ViewletBase):
                 result = pywapi.get_weather_from_google(city['location_id'].encode('utf-8'), hl=lang)
             except urllib2.URLError:
                 result = ""
+            except:
+                # Just avoid any error silently
+                result = ""
 
             if result and 'current_conditions' in result:
                 try:
