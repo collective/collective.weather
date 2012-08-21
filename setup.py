@@ -40,8 +40,7 @@ setup(name='collective.weather',
       install_requires=[
           'setuptools',
           'pywapi',
-          'Plone>=4.1',
-          'plone.app.registry',
+          'Products.CMFPlone>=4.1',
           'collective.z3cform.widgets',
       ],
       extras_require={
