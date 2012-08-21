@@ -11,11 +11,19 @@
        tal:define="city_name view/current_city/name">
         <span tal:content="python: city_name.split(',')[0] if city_name else ''">Cordoba, Argentina</span>
     </a>
+    <tal:cities repeat="city view/cities_list">
+        <a class="city-not-selected"
+           href="#"
+           tal:define="city_name city/name"
+           tal:attributes="id python:'current-city-' + city['id']">
+            <span tal:content="python: city_name.split(',')[0] if city_name else ''">Cordoba, Argentina</span>
+        </a>
+    </tal:cities>
     <div id="current-weather"
          tal:define="current_weather python:view.weather_info[view.current_city['id']]['weather']">
       <tal:block condition="current_weather">
         <img class="weather-icon" tal:attributes="src python:current_weather['icon']"/>
-        <span tal:content="python:current_weather['temp']" />
+        <span class="weather-temp" tal:content="python:current_weather['temp']" />
         <span class="condition" tal:content="python:current_weather['conditions']" />
         <!--<img src="#" tal:attributes="src python:current_weather['icon']" />-->
       </tal:block>
@@ -23,12 +31,29 @@
         <span class="no-weather-info" i18n:translate="">No weather information</span>
       </tal:block>
     </div>
+    <tal:cities-weather repeat="city view/cities_list">
+        <div id="current-weather" class="not-selected-weather"
+             tal:define="current_weather python:view.weather_info[city['id']]['weather']"
+             tal:attributes="id python:'current-weather-'+ city['id']">
+          <tal:block condition="current_weather">
+            <img class="weather-icon" tal:attributes="src python:current_weather['icon']"/>
+            <span class="weather-temp" tal:content="python:current_weather['temp']" />
+            <span class="condition" tal:content="python:current_weather['conditions']" />
+            <!--<img src="#" tal:attributes="src python:current_weather['icon']" />-->
+          </tal:block>
+          <tal:block condition="not:current_weather">
+            <span class="no-weather-info" i18n:translate="">No weather information</span>
+          </tal:block>
+        </div>
+    </tal:cities-weather>
   </dt>
   <dd class="actionMenuContent">
     <ul>
-        <li tal:repeat="city python:[i for i in view.cities_list if i['id'] != view.current_city['id']]"
-            tal:attributes="id string:top-weather-${city/id}">
+        <li tal:repeat="city view/cities_list"
+            tal:attributes="id string:top-weather-${city/id};
+                            data-city-id city/id">
             <a href="#"
+               class="weather-choose-city"
                tal:attributes="href string:${context/absolute_url}?city_weather=${city/id}"
                tal:content="city/name"
                i18n:translate="">

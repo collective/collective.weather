@@ -37,3 +37,8 @@ dl.actionMenu a#current-city{
     float: right;
     padding-right: 0.5em;
 }
+
+dl.actionMenu div.not-selected-weather,
+dl.actionMenu a.city-not-selected {
+    display: none !important;
+}
