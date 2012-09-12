@@ -66,10 +66,10 @@ class WeatherControlPanel(controlpanel.ControlPanelFormWrapper):
 class AbstractRecordsProxy(object):
     """Multiple registry schema proxy.
 
-This class supports schemas that contain derived fields. The
-settings will be stored with respect to the individual field
-interfaces.
-"""
+    This class supports schemas that contain derived fields. The
+    settings will be stored with respect to the individual field
+    interfaces.
+    """
 
     def __init__(self, schema):
         state = self.__dict__

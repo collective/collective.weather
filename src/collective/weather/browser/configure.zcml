@@ -27,4 +27,19 @@
         permission="cmf.ManagePortal"
         />
 
+    <browser:page
+        name="current-weather"
+        for="*"
+        class=".current_weather.CurrentWeather"
+        template="templates/current_weather.pt"
+        permission="zope2.Public"
+        />
+
+    <browser:page
+        name="update-weather"
+        for="*"
+        class=".current_weather.UpdateWeather"
+        permission="zope2.Public"
+        />
+
 </configure>

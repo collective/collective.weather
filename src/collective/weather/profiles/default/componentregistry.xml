@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<componentregistry>
+  <utilities>
+    <utility
+      interface="collective.weather.interfaces.IWeatherUtility"
+      factory="collective.weather.weather_utility.WeatherUtility"
+    />
+  </utilities>
+</componentregistry>
