@@ -24,6 +24,12 @@ from collective.weather.browser.interfaces import IWeatherSchema
 from collective.weather import _
 
 
+class GoogleGroup(group.Group):
+    label = _(u"Google")
+    description = _("""WARNING: Google Weather is not working at the moment.""")
+    fields = field.Fields(IGoogleWeatherSchema)
+
+
 class YahooGroup(group.Group):
     label = _(u"Yahoo")
     fields = field.Fields(IYahooWeatherSchema)
@@ -31,6 +37,7 @@ class YahooGroup(group.Group):
 
 class NoaaGroup(group.Group):
     label = _(u"NOAA")
+    description = _("""WARNING: NOAA Weather is not working at the moment.""")
     fields = field.Fields(INoaaWeatherSchema)
 
 
@@ -40,9 +47,9 @@ class WeatherControlPanelEditForm(controlpanel.RegistryEditForm):
     label = _("Weather Setup")
     description = _("""Lets you configure several weather locations""")
 
-    fields = IGoogleWeatherSchema
+    fields = IYahooWeatherSchema
 
-    groups = YahooGroup, NoaaGroup
+    groups = NoaaGroup, GoogleGroup
 
     def getContent(self):
         return AbstractRecordsProxy(self.schema)

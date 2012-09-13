@@ -48,7 +48,7 @@ class IYahooWeatherSchema(form.Schema):
     Configurations for getting weather information from Yahoo
     """
 
-    use_yahoo = schema.Bool(title=_(u"Use Yahoo! Weather service (XXX: not yet implemented)"),
+    use_yahoo = schema.Bool(title=_(u"Use Yahoo! Weather service"),
         default=False,
         )
 

@@ -1,13 +1,15 @@
-<div id="current-weather"
-     tal:condition="view/weather_info"
-     tal:define="current_weather python:view.weather_info['weather']">
-  <tal:block>
-    <img class="weather-icon" tal:attributes="src python:current_weather['icon']"/>
-    <span class="weather-temp" tal:content="python:current_weather['temp']" />
-    <span class="condition" tal:content="python:current_weather['conditions']" />
-  </tal:block>
-</div>
+<div i18n:domain="collective.weather"
+     tal:omit-tag="">
+  <div tal:condition="view/weather_info">
+    <tal:block tal:define="current_weather python:view.weather_info['weather']">
+      <img class="weather-icon" tal:attributes="src python:current_weather['icon']"/>
+      <span class="weather-temp" tal:content="python:current_weather['temp']" />
+      <span class="condition" tal:content="python:current_weather['conditions']" 
+            i18n:translate=""/>
+    </tal:block>
+  </div>
 
-<tal:block condition="not:view/weather_info">
-  <span class="no-weather-info" i18n:translate="">No weather information</span>
-</tal:block>
+  <div tal:condition="not:view/weather_info">
+    <span class="no-weather-info" i18n:translate="">No weather information</span>
+  </div>
+</div>

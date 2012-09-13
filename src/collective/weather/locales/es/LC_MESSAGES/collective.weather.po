@@ -102,4 +102,3 @@ msgstr "Configuración de collective.weather"
 #: collective/weather/browser/controlpanel.py:28
 msgid "Yahoo"
 msgstr ""
-

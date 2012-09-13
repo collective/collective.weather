@@ -24,15 +24,8 @@ class TopBarWeatherViewlet(ViewletBase):
 
         return result
 
-    def set_current_city(self):
-        city = self.request.get('city_weather', None)
-        self.weather_utility.set_current_city(city)
-
-
     def update(self):
         super(TopBarWeatherViewlet, self).update()
         
-        self.set_current_city()
-
         self.current_city = self.get_current_city()
         self.cities_list = self.weather_utility.get_cities_list()

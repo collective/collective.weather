@@ -9,18 +9,10 @@
     <a id="current-city"
        href="#"
        tal:define="city_name view/current_city/name">
-        <span tal:content="python: city_name.split(',')[0] if city_name else ''">Cordoba, Argentina</span>
+        <span tal:content="city_name">Cordoba, Argentina</span>
     </a>
-    <tal:cities repeat="city view/cities_list">
-        <a class="city-not-selected"
-           href="#"
-           tal:define="city_name city/name"
-           tal:attributes="id python:'current-city-' + city['id']">
-            <span tal:content="python: city_name.split(',')[0] if city_name else ''">Cordoba, Argentina</span>
-        </a>
-    </tal:cities>
 
-    <div id="current-weather-wrapper">
+    <div id="current-weather">
       <div tal:replace="structure here/current-weather" />
     </div>
     <!--
@@ -54,10 +46,10 @@
     <ul>
         <li tal:repeat="city view/cities_list"
             tal:attributes="id string:top-weather-${city/id};
-                            data-city-id city/id">
+                            data-city-id city/id;
+                            data-city-name city/name;">
             <a href="#"
                class="weather-choose-city"
-               tal:attributes="href string:${context/absolute_url}?city_weather=${city/id}"
                tal:content="city/name"
                i18n:translate="">
                 City name
