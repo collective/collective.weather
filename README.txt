@@ -41,6 +41,29 @@ Mostly Harmless
 
 Have an idea? Found a bug? Let us know by `opening a support ticket`_.
 
+Current Status
+--------------
+
+At this moment, `Yahoo! Weather`_ is the only service currently working.
+As per 2012/09/14 `Google`_ Weather has stopped working and `NOAA`_'s `National Weather Service`_
+is not currently implemented.
+
+Yahoo Weather
+-------------
+
+In order to load locations to be used with the Yahoo! Weather service, you need to enter each one in the following format:
+
+id|name|location_id
+
+Where "id" should be a unique value and not repeated between any of the cities.
+"name" is the name to be shown in the drop down, this doesn't need to be unique.
+"location_id" is the id used by `Yahoo! Weather`_ to get the forecast information.
+
+To know the location id for specific places, go to that location in `Yahoo! Weather`_ and the location id is part of the url.
+For example, in the case of "Los Angeles" (http://weather.yahoo.com/forecast/USCA0638.html) the location id would be "USCA0638"
+
+
+
 .. _`opening a support ticket`: https://github.com/collective/collective.weather/issues
 .. _`Yahoo! Weather`: http://weather.yahoo.com/
 .. _`Google`: http://www.google.com/

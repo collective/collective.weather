@@ -8,6 +8,10 @@ Because you have to know where your towel is.
 
 - Made the code to be more resistent to invalid data from the weather server [frapell]
 
+- Major refactoring to allow updates and city changes through AJAX calls [frapell]
+
+- Implemented Yahoo! weather [frapell]
+
 
 1.0a1 (2012-08-01)
 ------------------
