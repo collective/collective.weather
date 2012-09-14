@@ -21,6 +21,14 @@
       />
 
   <genericsetup:registerProfile
+      name="test_fixture"
+      title="collective.weather"
+      directory="profiles/test_fixture"
+      description="Test fixture for the collective.weather package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:registerProfile
       name="uninstall"
       title="collective.weather uninstall"
       directory="profiles/uninstall"

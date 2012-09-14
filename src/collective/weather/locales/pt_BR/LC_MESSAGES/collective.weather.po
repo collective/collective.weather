@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.weather\n"
-"POT-Creation-Date: 2012-08-01 23:55+0000\n"
+"POT-Creation-Date: 2012-09-13 20:14+0000\n"
 "PO-Revision-Date: 2012-08-01 21:32-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.weather\n"
 
-#: collective/weather/viewlet.py:81
+#: collective/weather/weather_utility.py:120
 msgid "%sºC"
 msgstr "%sºC"
 
-#: collective/weather/viewlet.py:79
+#: collective/weather/weather_utility.py:118
 msgid "%sºF"
 msgstr "%sºF"
 
@@ -43,6 +43,14 @@ msgstr ""
 msgid "Enter the language code to show the content."
 msgstr "Digite o código do idioma para mostrar o conteúdo."
 
+#. Default: "Despejado"
+msgid "Fair"
+msgstr ""
+
+#: collective/weather/browser/controlpanel.py:28
+msgid "Google"
+msgstr ""
+
 #: collective/weather/browser/interfaces.py:16
 msgid "Imperial"
 msgstr "Imperial"
@@ -51,7 +59,7 @@ msgstr "Imperial"
 msgid "Language"
 msgstr "Idioma"
 
-#: collective/weather/browser/controlpanel.py:41
+#: collective/weather/browser/controlpanel.py:48
 msgid "Lets you configure several weather locations"
 msgstr ""
 
@@ -59,13 +67,18 @@ msgstr ""
 msgid "Metric"
 msgstr "Métrico"
 
-#: collective/weather/browser/controlpanel.py:33
+#: collective/weather/browser/controlpanel.py:39
 msgid "NOAA"
 msgstr ""
 
-#: collective/weather/top_bar_weather.pt:23
+#: collective/weather/browser/templates/current_weather.pt:13
 msgid "No weather information"
 msgstr "Sem informação das condições meteorológicas"
+
+# Translations for weather conditions from Yahoo
+#. Default: "Parcialmente Nublado"
+msgid "Partly Cloudy"
+msgstr ""
 
 #: configure.zcml
 msgid "Uninstall profile for the collective.weather package."
@@ -88,18 +101,26 @@ msgid "Use NOAA weather service (XXX: not yet implemented)"
 msgstr ""
 
 #: collective/weather/browser/interfaces.py:51
-msgid "Use Yahoo! Weather service (XXX: not yet implemented)"
+msgid "Use Yahoo! Weather service"
+msgstr ""
+
+#: collective/weather/browser/controlpanel.py:29
+msgid "WARNING: Google Weather is not working at the moment."
+msgstr ""
+
+#: collective/weather/browser/controlpanel.py:40
+msgid "WARNING: NOAA Weather is not working at the moment."
 msgstr ""
 
 #: collective/weather/profiles/default/controlpanel.xml
 msgid "Weather"
 msgstr "Condições meteorológicas"
 
-#: collective/weather/browser/controlpanel.py:40
+#: collective/weather/browser/controlpanel.py:47
 msgid "Weather Setup"
 msgstr "Configuração do collective.weather"
 
-#: collective/weather/browser/controlpanel.py:28
+#: collective/weather/browser/controlpanel.py:34
 msgid "Yahoo"
 msgstr ""
 

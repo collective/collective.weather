@@ -13,27 +13,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Domain: collective.weather\n"
 
-#: configure.zcml
-msgid ""
+
+# Translations for weather conditions from Yahoo
+
+msgid "Partly Cloudy"
 msgstr ""
 
-#: configure.zcml
-msgid ""
-msgstr ""
-
-#: configure.zcml
-msgid ""
-msgstr ""
-
-#: configure.zcml
-msgid ""
-msgstr ""
-
-#: configure.zcml
-msgid ""
+msgid "Fair"
 msgstr ""
 
 #: configure.zcml
 msgid "Uninstall profile for the collective.weather package."
 msgstr ""
-
