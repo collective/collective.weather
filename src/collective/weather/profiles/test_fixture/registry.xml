@@ -1,0 +1,35 @@
+<registry>
+  <record field="use_yahoo" interface="collective.weather.browser.interfaces.IYahooWeatherSchema" name="collective.weather.browser.interfaces.IYahooWeatherSchema.use_yahoo">
+    <field type="plone.registry.field.Bool">
+      <default>False</default>
+      <title>Use Yahoo! Weather service (XXX: not yet implemented)</title>
+    </field>
+    <value>True</value>
+  </record>
+  <record field="yahoo_location_ids" interface="collective.weather.browser.interfaces.IYahooWeatherSchema" name="collective.weather.browser.interfaces.IYahooWeatherSchema.yahoo_location_ids">
+    <field type="plone.registry.field.List">
+      <default />
+      <description>Enter here all available locations that will be shown in the locations drop down. Format: id|name|location_id. Check http://code.google.com/p/python-weather-api/#Yahoo!_Weather for further information.</description>
+      <required>False</required>
+      <title>Available options</title>
+      <value_type type="plone.registry.field.TextLine" />
+    </field>
+    <value>
+      <element>Cordoba|Cordoba, Argentina|ARCA0023</element>
+      <element>Los Angeles|Los Angeles, California|USCA0638</element>
+    </value>
+  </record>
+  <record field="yahoo_units" interface="collective.weather.browser.interfaces.IYahooWeatherSchema" name="collective.weather.browser.interfaces.IYahooWeatherSchema.yahoo_units">
+    <field type="plone.registry.field.Choice">
+      <default>metric</default>
+      <description>Units to show the results.</description>
+      <required>False</required>
+      <title>Units</title>
+      <values>
+        <element>metric</element>
+        <element>imperial</element>
+      </values>
+    </field>
+    <value>metric</value>
+  </record>
+</registry>

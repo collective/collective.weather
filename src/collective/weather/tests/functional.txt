@@ -1,0 +1,62 @@
+Functional test:
+
+    >>> app = layer['app']
+    >>> portal = layer['portal']
+    >>> request = layer['request']
+
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(app)
+    >>> portalURL = portal.absolute_url()
+
+    >>> from plone.app.testing import SITE_OWNER_NAME, SITE_OWNER_PASSWORD
+    >>> browser.open(portalURL + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = SITE_OWNER_NAME
+    >>> browser.getControl(name='__ac_password').value = SITE_OWNER_PASSWORD
+    >>> browser.getControl(name='submit').click()
+
+    >>> 'You are now logged in' in browser.contents
+    True
+
+At this point, we should see the viewlet and a message telling that there is no
+weather info yet
+
+    >>> browser.open(portalURL)
+    >>> "No weather information" in browser.contents
+    True
+    >>> "Cordoba, Argentina" in browser.contents
+    True
+    >>> "Los Angeles, California" in browser.contents
+    True
+
+Now, let's simulate the call made from Javascript to update weather info
+
+    >>> browser.open(portalURL+'/@@update-weather')
+
+And we check again
+
+    >>> browser.open(portalURL)
+    >>> "No weather information" in browser.contents
+    False
+    >>> "20ºC" in browser.contents
+    True
+    >>> "Windy" in browser.contents
+    True
+    >>> "Cordoba, Argentina" in browser.contents
+    True
+    >>> "Los Angeles, California" in browser.contents
+    True
+
+Now, change the city
+
+    >>> browser.open(portalURL+'/@@update-weather?city=Los Angeles')
+    >>> browser.open(portalURL+'?city=Los Angeles')
+    >>> "No weather information" in browser.contents
+    False
+    >>> "-8ºC" in browser.contents
+    True
+    >>> "Snowing" in browser.contents
+    True
+    >>> "Cordoba, Argentina" in browser.contents
+    True
+    >>> "Los Angeles, California" in browser.contents
+    True
