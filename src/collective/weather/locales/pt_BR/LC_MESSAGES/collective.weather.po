@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.weather\n"
-"POT-Creation-Date: 2012-09-13 20:14+0000\n"
+"POT-Creation-Date: 2012-09-17 16:17+0000\n"
 "PO-Revision-Date: 2012-08-01 21:32-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.weather\n"
 
-#: collective/weather/weather_utility.py:120
+#: collective/weather/weather_utility.py:165
 msgid "%sºC"
 msgstr "%sºC"
 
-#: collective/weather/weather_utility.py:118
+#: collective/weather/weather_utility.py:163
 msgid "%sºF"
 msgstr "%sºF"
 
@@ -47,6 +47,9 @@ msgstr "Digite o código do idioma para mostrar o conteúdo."
 msgid "Fair"
 msgstr ""
 
+msgid "Few Showers"
+msgstr ""
+
 #: collective/weather/browser/controlpanel.py:28
 msgid "Google"
 msgstr ""
@@ -67,6 +70,12 @@ msgstr ""
 msgid "Metric"
 msgstr "Métrico"
 
+msgid "Mostly Cloudy"
+msgstr ""
+
+msgid "Mostly Sunny"
+msgstr ""
+
 #: collective/weather/browser/controlpanel.py:39
 msgid "NOAA"
 msgstr ""
@@ -78,6 +87,18 @@ msgstr "Sem informação das condições meteorológicas"
 # Translations for weather conditions from Yahoo
 #. Default: "Parcialmente Nublado"
 msgid "Partly Cloudy"
+msgstr ""
+
+msgid "Rain"
+msgstr ""
+
+msgid "Scattered T-Storms"
+msgstr ""
+
+msgid "Showers"
+msgstr ""
+
+msgid "Sunny"
 msgstr ""
 
 #: configure.zcml
