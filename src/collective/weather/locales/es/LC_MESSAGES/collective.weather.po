@@ -33,13 +33,11 @@ msgstr "Liste aquí las ubicaciones que estarán disponibles. El formato es id|n
 
 #: collective/weather/browser/interfaces.py:82
 msgid "Enter here all available locations that will be shown in the locations drop down. Format: id|name|location_id. Check http://code.google.com/p/python-weather-api/#NOAA for further information."
-msgstr "Ingrese aquí todas las ubicaciones disponibles que se mostrarán en el drop down de ubicaciones. Formato: id|nombre|location_id.
-Acceda a http://code.google.com/p/python-weather-api/#NOAA para información adicional."
+msgstr "Ingrese aquí todas las ubicaciones disponibles que se mostrarán en el drop down de ubicaciones. Formato: id|nombre|location_id. Acceda a http://code.google.com/p/python-weather-api/#NOAA para información adicional."
 
 #: collective/weather/browser/interfaces.py:57
 msgid "Enter here all available locations that will be shown in the locations drop down. Format: id|name|location_id. Check http://code.google.com/p/python-weather-api/#Yahoo!_Weather for further information."
-msgstr "Ingrese aquí todas las ubicaciones disponibles que se mostrarán en el drop down de ubicaciones. Formato: id|nombre|location_id.
-Acceda a http://code.google.com/p/python-weather-api/#Yahoo!_Weather para información adicional."
+msgstr "Ingrese aquí todas las ubicaciones disponibles que se mostrarán en el drop down de ubicaciones. Formato: id|nombre|location_id. Acceda a http://code.google.com/p/python-weather-api/#Yahoo!_Weather para información adicional."
 
 #: collective/weather/browser/interfaces.py:36
 msgid "Enter the language code to show the content."
