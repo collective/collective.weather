@@ -22,6 +22,27 @@ msgstr ""
 msgid "Fair"
 msgstr ""
 
+msgid "Mostly Cloudy"
+msgstr ""
+
+msgid "Rain"
+msgstr ""
+
+msgid "Showers"
+msgstr ""
+
+msgid "Few Showers"
+msgstr ""
+
+msgid "Sunny"
+msgstr ""
+
+msgid "Mostly Sunny"
+msgstr ""
+
+msgid "Scattered T-Storms"
+msgstr ""
+
 #: configure.zcml
 msgid "Uninstall profile for the collective.weather package."
 msgstr ""
