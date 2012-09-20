@@ -7,9 +7,9 @@ the following people:
 - Franco Pellegrini
 - Héctor Velarde
 - Silvestre Huens
+- Gonzalo Almeida
 - `Tango Desktop Project`_ (icon)
 
 Development sponsored by Open Multimedia.
 
 .. _`Tango Desktop Project`: http://tango.freedesktop.org/
-

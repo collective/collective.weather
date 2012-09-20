@@ -3,18 +3,27 @@ Changelog
 
 Because you have to know where your towel is.
 
-1.0a2 (unreleased)
-------------------
+1.0a3 (unreleased)
+^^^^^^^^^^^^^^^^^^
 
-- Made the code to be more resistent to invalid data from the weather server [frapell]
+- Nothing changed yet.
 
-- Major refactoring to allow updates and city changes through AJAX calls [frapell]
 
-- Implemented Yahoo! weather [frapell]
+1.0a2 (2012-09-14)
+^^^^^^^^^^^^^^^^^^
+
+- Made the code to be more resistent to invalid data from the weather server.
+  [frapell]
+
+- Major refactoring to allow updates and city changes through AJAX calls.
+  (fixes `#6`_) [frapell]
+
+- Implemented Yahoo! weather. [frapell]
 
 
 1.0a1 (2012-08-01)
-------------------
+^^^^^^^^^^^^^^^^^^
 
 - Initial release.
 
+.. _`#6`: https://github.com/collective/collective.weather/issues/6
