@@ -2,10 +2,13 @@
      tal:omit-tag="">
   <div tal:condition="view/weather_info">
     <tal:block tal:define="current_weather python:view.weather_info['weather']">
-      <img class="weather-icon" tal:attributes="src python:current_weather['icon']"/>
-      <span class="weather-temp" tal:content="python:current_weather['temp']" />
-      <span class="condition" tal:content="python:current_weather['conditions']" 
-            i18n:translate=""/>
+      <img class="weather-icon" tal:attributes="src python:current_weather['icon'];
+                                title python:current_weather['conditions'];
+                                alt python:current_weather['conditions']"
+                                i18n:attributes="alt; title"/>
+      <span class="weather-temp" tal:content="python:current_weather['temp']"
+                                 tal:attributes="title python:current_weather['conditions'];"
+                                 i18n:attributes="title" />
     </tal:block>
   </div>
 

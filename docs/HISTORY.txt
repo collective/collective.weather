@@ -6,7 +6,7 @@ Because you have to know where your towel is.
 1.0a3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Weather conditions moved to title tag. [flecox]
 
 
 1.0a2 (2012-09-14)
