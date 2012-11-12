@@ -6,9 +6,7 @@
                                 title python:current_weather['conditions'];
                                 alt python:current_weather['conditions']"
                                 i18n:attributes="alt; title"/>
-      <span class="weather-temp" tal:content="python:current_weather['temp']"
-                                 tal:attributes="title python:current_weather['conditions'];"
-                                 i18n:attributes="title" />
+      <span class="weather-temp" tal:content="python:current_weather['temp']" />
     </tal:block>
   </div>
 
