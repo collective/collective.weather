@@ -8,32 +8,35 @@ function showCityWeather(cityId, cityName){
              url: '@@update-weather',
              async : true,
              data: data,
-             success: function(results){
+             success: function(results) {
                 $.ajax({type: 'POST',
                          url: '@@current-weather',
                          async : true,
                          data: data,
                          success: function(results){
-                                $("div#current-weather").empty().html(results);
-                                if (cityName !== undefined){
-                                    $("a#current-city > span").text(cityName);
-                                }
-                                
-                            }
-                        });
-
+                                $("div#current-weather").parent().html(results);
+                        }
+                    });
                 }
             });
 }
 
 function selectCity() {
-    $(".weather-choose-city").click(function(e) {
+    $("#current-city").parent().next('.actionMenuContent').mouseleave(function() {
+        $(this).toggle();
+    });
+
+    $("#current-city").live("click", function(e) {
+        $(this).parent().next('.actionMenuContent').toggle();
+    });
+
+    $(".weather-choose-city").live("click", function(e) {
         e.preventDefault();
         var cityId = $(this).parent().attr("data-city-id");
         var cityName = $(this).parent().attr("data-city-name");
 
         showCityWeather(cityId, cityName);
-    })
+    });
 }
 
 $(document).ready(function() {

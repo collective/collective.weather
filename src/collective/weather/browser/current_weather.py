@@ -17,13 +17,14 @@ class CurrentWeather(BrowserView):
             self.current_city = weather_utility.get_city(city)
         else:
             self.current_city = weather_utility.get_current_city()
-        
+
         if self.current_city:
             self.weather_info = weather_utility.get_weather_info(self.current_city)
         else:
             self.weather_info = None
 
         return super(CurrentWeather, self).__call__()
+
 
 class UpdateWeather(BrowserView):
 
@@ -33,8 +34,7 @@ class UpdateWeather(BrowserView):
         city = None
         if 'city' in self.request:
             city = self.request.get('city')
-        
-        weather_utility.update_weather_info(city)
-        
-        return True
 
+        weather_utility.update_weather_info(city)
+
+        return True

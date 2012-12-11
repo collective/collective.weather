@@ -1,16 +1,23 @@
 <div i18n:domain="collective.weather"
      tal:omit-tag="">
-  <div tal:condition="view/weather_info">
-    <tal:block tal:define="current_weather python:view.weather_info['weather']">
-      <img class="weather-icon" tal:attributes="src python:current_weather['icon'];
-                                title python:current_weather['conditions'];
-                                alt python:current_weather['conditions']"
-                                i18n:attributes="alt; title"/>
-      <span class="weather-temp" tal:content="python:current_weather['temp']" />
-    </tal:block>
-  </div>
+  <a id="current-city"
+       href="#"
+       tal:define="city_name view/current_city/name">
+        <span tal:content="city_name">Cordoba, Argentina</span>
+    </a>
+  <div id="current-weather">
+    <div tal:condition="view/weather_info">
+      <tal:block tal:define="current_weather python:view.weather_info['weather']">
+        <img class="weather-icon" tal:attributes="src python:current_weather['icon'];
+                                  title python:current_weather['conditions'];
+                                  alt python:current_weather['conditions']"
+                                  i18n:attributes="alt; title"/>
+        <span class="weather-temp" tal:content="python:current_weather['temp']" />
+      </tal:block>
+    </div>
 
-  <div tal:condition="not:view/weather_info">
-    <span class="no-weather-info" i18n:translate="">No weather information</span>
-  </div>
+    <div tal:condition="not:view/weather_info">
+      <span class="no-weather-info" i18n:translate="">No weather information</span>
+    </div>
+</div>
 </div>

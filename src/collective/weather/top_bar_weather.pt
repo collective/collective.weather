@@ -1,20 +1,12 @@
 <div id="collective-weather-wrapper"
      i18n:domain="collective.weather">
 
-<dl class="actionMenu deactivated" 
+<dl class="actionMenu deactivated"
     id="top-weather-viewlet"
     tal:condition="view/cities_list">
 
   <dt class="actionMenuHeader">
-    <a id="current-city"
-       href="#"
-       tal:define="city_name view/current_city/name">
-        <span tal:content="city_name">Cordoba, Argentina</span>
-    </a>
-
-    <div id="current-weather">
-      <div tal:replace="structure here/current-weather" />
-    </div>
+    <div tal:replace="structure here/current-weather" />
   </dt>
   <dd class="actionMenuContent">
     <ul>
