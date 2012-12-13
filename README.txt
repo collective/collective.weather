@@ -57,6 +57,38 @@ For example, in the case of `Caracas, Venezuela`_, the location id would be
 **VEXX0008**; for `Beijing, China`_ it would be **CHXX0008**, and for `Los
 Angeles, CA`_ it would be **USCA0638**.
 
+Internals
+---------
+
+The weather viewlet uses Javascript in order to change cities, so this will
+only work for Javascript enabled browsers.
+
+
+To render the city weather, there is a "current-weather" view that will
+render the latest info it has on weather conditions for a given city.
+A cookie is used to get the latest chosen city, and you can override it
+by passing a "city" argument to the view.
+
+
+To update the city weather, there is a "update-weather", that, when called
+without parameters, it will update all cities from the list.
+You can pass a "city" argument to the view, to only update the given city.
+
+There's an internal cache for each city (30 minutes), that if not enough
+time has passed, then it will assume the current weather is updated, and
+it will not do anything.
+
+
+The Javascript that changes the city, will call this "update-weather" for
+the chosen city to update it first. Thanks to this internal cache, this
+view will return fast, if not enough time has passed.
+
+
+In order to make it really fast for visitors of your site, you can set-up
+a clockserver job to call this "update-weather" view with no params, once
+every 30 minutes, so weather information for all your cities are ready for
+when the visitor changes it from the drop-down.
+
 Mostly Harmless
 ---------------
 
