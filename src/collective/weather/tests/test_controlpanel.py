@@ -37,7 +37,7 @@ class ControlPanelTestCase(unittest.TestCase):
         logout()
         self.assertRaises(Unauthorized,
                           self.portal.restrictedTraverse,
-                         '@@weather-controlpanel')
+                          '@@weather-controlpanel')
 
     def test_controlpanel_installed(self):
         actions = [a.getAction(self)['id']

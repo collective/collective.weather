@@ -22,25 +22,25 @@ class IGoogleWeatherSchema(form.Schema):
     """
 
     use_google = schema.Bool(title=_(u"Use Google Weather service"),
-        default=False,
-        )
+                             default=False,
+                             )
 
     form.widget(google_location_ids="collective.z3cform.widgets.enhancedtextlines.EnhancedTextLinesFieldWidget")
     google_location_ids = schema.List(title=_(u"Available options"),
-                                 description=_(u"Enter here all available locations that will be shown in the locations drop down. Format: id|name|location_id."),
-                                 value_type=schema.TextLine(),
-                                 default=[],
-                                 required=False)
+                                      description=_(u"Enter here all available locations that will be shown in the locations drop down. Format: id|name|location_id."),
+                                      value_type=schema.TextLine(),
+                                      default=[],
+                                      required=False)
 
     google_language = schema.TextLine(title=_(u"Language"),
-                           description=_(u"Enter the language code to show the content."),
-                           required=False)
+                                      description=_(u"Enter the language code to show the content."),
+                                      required=False)
 
     google_units = schema.Choice(title=_(u'Units'),
-                            description=_(u"Units to show the results."),
-                            default='metric',
-                            required=False,
-                            source=units_vocab)
+                                 description=_(u"Units to show the results."),
+                                 default='metric',
+                                 required=False,
+                                 source=units_vocab)
 
 
 class IYahooWeatherSchema(form.Schema):
@@ -49,23 +49,23 @@ class IYahooWeatherSchema(form.Schema):
     """
 
     use_yahoo = schema.Bool(title=_(u"Use Yahoo! Weather service"),
-        default=False,
-        )
+                            default=False,
+                            )
 
     form.widget(yahoo_location_ids="collective.z3cform.widgets.enhancedtextlines.EnhancedTextLinesFieldWidget")
     yahoo_location_ids = schema.List(title=_(u"Available options"),
-                                 description=_(u"Enter here all available locations that "
-                                                "will be shown in the locations drop down. Format: id|name|location_id. "
-                                                "Check http://code.google.com/p/python-weather-api/#Yahoo!_Weather for further information."),
-                                 value_type=schema.TextLine(),
-                                 default=[],
-                                 required=False)
+                                     description=_(u"Enter here all available locations that "
+                                                   "will be shown in the locations drop down. Format: id|name|location_id. "
+                                                   "Check http://code.google.com/p/python-weather-api/#Yahoo!_Weather for further information."),
+                                     value_type=schema.TextLine(),
+                                     default=[],
+                                     required=False)
 
     yahoo_units = schema.Choice(title=_(u'Units'),
-                            description=_(u"Units to show the results."),
-                            default='metric',
-                            required=False,
-                            source=units_vocab)
+                                description=_(u"Units to show the results."),
+                                default='metric',
+                                required=False,
+                                source=units_vocab)
 
 
 class INoaaWeatherSchema(form.Schema):
@@ -74,17 +74,17 @@ class INoaaWeatherSchema(form.Schema):
     """
 
     use_noaa = schema.Bool(title=_(u"Use NOAA weather service (XXX: not yet implemented)"),
-        default=False,
-        )
+                           default=False,
+                           )
 
     form.widget(noaa_location_ids="collective.z3cform.widgets.enhancedtextlines.EnhancedTextLinesFieldWidget")
     noaa_location_ids = schema.List(title=_(u"Available options"),
-                                 description=_(u"Enter here all available locations that "
-                                                "will be shown in the locations drop down. Format: id|name|location_id. "
-                                                "Check http://code.google.com/p/python-weather-api/#NOAA for further information."),
-                                 value_type=schema.TextLine(),
-                                 default=[],
-                                 required=False)
+                                    description=_(u"Enter here all available locations that "
+                                                  "will be shown in the locations drop down. Format: id|name|location_id. "
+                                                  "Check http://code.google.com/p/python-weather-api/#NOAA for further information."),
+                                    value_type=schema.TextLine(),
+                                    default=[],
+                                    required=False)
 
 
 class IWeatherSchema(IGoogleWeatherSchema, IYahooWeatherSchema, INoaaWeatherSchema):

@@ -1,24 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from datetime import timedelta
 
 from copy import deepcopy
 import unittest2 as unittest
 
-from zope.component import getMultiAdapter
 from zope.component import getUtility
 
 from plone.app.testing import TEST_USER_ID
-from plone.app.testing import logout
 from plone.app.testing import setRoles
 from plone.registry.interfaces import IRegistry
 
-from collective.weather.config import PROJECTNAME
-
 from collective.weather.interfaces import IWeatherUtility
 
-from collective.weather.browser.interfaces import IGoogleWeatherSchema
-from collective.weather.browser.interfaces import INoaaWeatherSchema
 from collective.weather.browser.interfaces import IYahooWeatherSchema
 from collective.weather.testing import INTEGRATION_TESTING
 
@@ -30,7 +23,7 @@ class UtilityTestCase(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
-        
+
         self.controlpanel = self.portal['portal_controlpanel']
         self.weather_utility = getUtility(IWeatherUtility)
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
@@ -69,14 +62,14 @@ class UtilityTestCase(unittest.TestCase):
                             'location_id': u'LALA1212',
                             'name': u'New city, Test',
                             'type': 'yahoo'}]
-                            
+
         actual_values = self.weather_utility.get_cities_list()
 
         self.assertEquals(actual_values, expected_values)
 
         # Finally, we add a malformed value to the list
         yahoo_settings.yahoo_location_ids.append("My city")
-        
+
         expected_values = [{'id': u'Cordoba',
                             'location_id': u'ARCA0023',
                             'name': u'Cordoba, Argentina',
@@ -89,7 +82,7 @@ class UtilityTestCase(unittest.TestCase):
                             'location_id': u'LALA1212',
                             'name': u'New city, Test',
                             'type': 'yahoo'}]
-                            
+
         actual_values = self.weather_utility.get_cities_list()
 
         self.assertEquals(actual_values, expected_values)
@@ -104,11 +97,11 @@ class UtilityTestCase(unittest.TestCase):
         # Update weather info
         self.weather_utility.update_weather_info()
 
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing', 
-                                            'temp': u'-8\xbaC', 
-                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}, 
-                           u'Cordoba': {'conditions': u'Windy', 
-                                        'temp': u'20\xbaC', 
+        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
+                                            'temp': u'-8\xbaC',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'},
+                           u'Cordoba': {'conditions': u'Windy',
+                                        'temp': u'20\xbaC',
                                         'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}}
 
         actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
@@ -121,11 +114,11 @@ class UtilityTestCase(unittest.TestCase):
 
         self.weather_utility.update_weather_info()
 
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing', 
-                                            'temp': u'-8\xbaC', 
-                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}, 
-                           u'Cordoba': {'conditions': u'Windy', 
-                                        'temp': u'20\xbaC', 
+        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
+                                            'temp': u'-8\xbaC',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'},
+                           u'Cordoba': {'conditions': u'Windy',
+                                        'temp': u'20\xbaC',
                                         'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'},
                            u'New weather': {'conditions': u'Snowing',
                                             'icon': u'http://l.yimg.com/a/i/us/we/52/.gif',
@@ -140,11 +133,11 @@ class UtilityTestCase(unittest.TestCase):
 
         self.weather_utility.update_weather_info()
 
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing', 
-                                            'temp': u'-8\xbaC', 
-                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}, 
-                           u'Cordoba': {'conditions': u'Windy', 
-                                        'temp': u'20\xbaC', 
+        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
+                                            'temp': u'-8\xbaC',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'},
+                           u'Cordoba': {'conditions': u'Windy',
+                                        'temp': u'20\xbaC',
                                         'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}}
 
         actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
@@ -152,8 +145,8 @@ class UtilityTestCase(unittest.TestCase):
         self.assertEquals(actual_values, expected_values)
 
         # We are going to forge weather info into the utility so we simulate invalid returned values and errors
-        self.weather_utility.weather_info['New weather'] = {'weather': {'conditions': u'Snowing', 
-                                                                        'temp': u'-8\xbaC', 
+        self.weather_utility.weather_info['New weather'] = {'weather': {'conditions': u'Snowing',
+                                                                        'temp': u'-8\xbaC',
                                                                         'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}}
 
         # We create a city with the same name but different location_id, so we can simulate
@@ -161,38 +154,38 @@ class UtilityTestCase(unittest.TestCase):
         yahoo_settings.yahoo_location_ids.append(u"New weather|New weather|NEW123-invalid")
         self.weather_utility.update_weather_info()
 
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing', 
-                                            'temp': u'-8\xbaC', 
-                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}, 
-                           u'Cordoba': {'conditions': u'Windy', 
-                                        'temp': u'20\xbaC', 
+        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
+                                            'temp': u'-8\xbaC',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'},
+                           u'Cordoba': {'conditions': u'Windy',
+                                        'temp': u'20\xbaC',
                                         'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}}
 
         actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
 
         self.assertEquals(actual_values, expected_values)
 
-        self.weather_utility.weather_info['Buenos Aires'] = {'weather': {'conditions': u'Snowing', 
-                                                                        'temp': u'-8\xbaC', 
-                                                                        'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}}
+        self.weather_utility.weather_info['Buenos Aires'] = {'weather': {'conditions': u'Snowing',
+                                                                         'temp': u'-8\xbaC',
+                                                                         'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}}
 
         # If we get a urllib exception, then also remove the existing value
         yahoo_settings.yahoo_location_ids.append(u"Buenos Aires|Buenos Aires, Argentina|ARBA0023-urllib-exception")
 
         self.weather_utility.update_weather_info()
 
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing', 
-                                            'temp': u'-8\xbaC', 
-                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}, 
-                           u'Cordoba': {'conditions': u'Windy', 
-                                        'temp': u'20\xbaC', 
+        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
+                                            'temp': u'-8\xbaC',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'},
+                           u'Cordoba': {'conditions': u'Windy',
+                                        'temp': u'20\xbaC',
                                         'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}}
 
         actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
         self.assertEquals(actual_values, expected_values)
 
-        self.weather_utility.weather_info['Los Angeles'] = {'weather': {'conditions': u'Snowing', 
-                                                                        'temp': u'-8\xbaC', 
+        self.weather_utility.weather_info['Los Angeles'] = {'weather': {'conditions': u'Snowing',
+                                                                        'temp': u'-8\xbaC',
                                                                         'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}}
 
         # If we get a urllib exception, then also remove the existing value
@@ -200,11 +193,11 @@ class UtilityTestCase(unittest.TestCase):
 
         self.weather_utility.update_weather_info()
 
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing', 
-                                            'temp': u'-8\xbaC', 
-                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}, 
-                           u'Cordoba': {'conditions': u'Windy', 
-                                        'temp': u'20\xbaC', 
+        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
+                                            'temp': u'-8\xbaC',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'},
+                           u'Cordoba': {'conditions': u'Windy',
+                                        'temp': u'20\xbaC',
                                         'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}}
 
         actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
@@ -216,17 +209,16 @@ class UtilityTestCase(unittest.TestCase):
         self.weather_utility.weather_info = {}
         self.weather_utility.update_weather_info()
 
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing', 
-                                            'temp': u'-8\xbaF', 
-                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}, 
-                           u'Cordoba': {'conditions': u'Windy', 
-                                        'temp': u'20\xbaF', 
+        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
+                                            'temp': u'-8\xbaF',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'},
+                           u'Cordoba': {'conditions': u'Windy',
+                                        'temp': u'20\xbaF',
                                         'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}}
 
         actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
 
         self.assertEquals(actual_values, expected_values)
-
 
     def test_get_city(self):
         city = self.weather_utility.get_city('Cordoba')

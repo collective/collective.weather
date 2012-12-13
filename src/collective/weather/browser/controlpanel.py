@@ -9,13 +9,8 @@ from z3c.form import group
 
 from plone.app.registry.browser import controlpanel
 
-from plone.fieldsets.fieldsets import FormFieldsets
-
 from plone.registry.interfaces import IRegistry
 
-from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
-
-from collective.weather.browser.interfaces import IWeatherControlPanelForm
 from collective.weather.browser.interfaces import IGoogleWeatherSchema
 from collective.weather.browser.interfaces import IYahooWeatherSchema
 from collective.weather.browser.interfaces import INoaaWeatherSchema
@@ -108,6 +103,5 @@ class AbstractRecordsProxy(object):
 
     def _get_proxy(self, interface):
         proxies = self.__proxies__
-        return proxies.get(interface) or \
-               proxies.setdefault(interface,
-                                  self.__registry__.forInterface(interface))
+        return proxies.get(interface) or proxies.setdefault(interface,
+                                                            self.__registry__.forInterface(interface))

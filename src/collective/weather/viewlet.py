@@ -21,6 +21,6 @@ class TopBarWeatherViewlet(ViewletBase):
 
     def update(self):
         super(TopBarWeatherViewlet, self).update()
-        
+
         self.cities_list = self.weather_utility.get_cities_list()
         self.weather_info = self.weather_utility.get_weather_info()

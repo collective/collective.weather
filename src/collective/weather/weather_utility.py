@@ -5,23 +5,16 @@ import urllib2
 
 from datetime import datetime
 
-from AccessControl import ClassSecurityInfo
-
 from zope.component import getUtility
 
 from zope.globalrequest import getRequest
 
-from zope.interface import classProvides
 from zope.interface import implements
-
-from zope.schema.fieldproperty import FieldProperty
 
 from plone.registry.interfaces import IRegistry
 
 from collective.weather.interfaces import IWeatherUtility
 
-from collective.weather.browser.interfaces import IWeatherSchema
-from collective.weather.browser.interfaces import IGoogleWeatherSchema
 from collective.weather.browser.interfaces import IYahooWeatherSchema
 
 from collective.weather.config import COOKIE_KEY
@@ -33,7 +26,7 @@ from collective.weather import _
 class WeatherUtility(object):
     implements(IWeatherUtility)
 
-    weather_info= {}
+    weather_info = {}
     cities_list = []
     current_city = ''
 
@@ -63,7 +56,7 @@ class WeatherUtility(object):
         if settings.yahoo_location_ids:
             for i in settings.yahoo_location_ids:
                 try:
-                    id,name,location_id = i.split('|')
+                    id, name, location_id = i.split('|')
                 except ValueError:
                     continue
 
@@ -85,10 +78,10 @@ class WeatherUtility(object):
 
     #     now = datetime.now()
     #     for city in self.cities_list:
-            
+
     #         if city_id and city['id'] != city_id:
     #             continue
-                
+
     #         if city['type'] != 'google':
     #             continue
 
