@@ -244,7 +244,7 @@ class UtilityTestCase(unittest.TestCase):
 
     def test_get_current_city(self):
 
-        COOKIE_KEY = 'collective.weather.top_weather'
+        COOKIE_KEY = 'collective.weather.current_city'
 
         city = self.weather_utility.get_current_city()
         expected_city = {'id': u'Cordoba',

@@ -1,8 +1,9 @@
 <div i18n:domain="collective.weather"
      tal:omit-tag="">
-  <a id="current-city"
-       href="#"
-       tal:define="city_name view/current_city/name">
+    <a id="current-city"
+       href=""
+       tal:define="city_name view/current_city/name"
+       tal:attributes="data-city-id view/current_city/id">
         <span tal:content="city_name">Cordoba, Argentina</span>
     </a>
   <div id="current-weather">
@@ -19,5 +20,5 @@
     <div tal:condition="not:view/weather_info">
       <span class="no-weather-info" i18n:translate="">No weather information</span>
     </div>
-</div>
+  </div>
 </div>

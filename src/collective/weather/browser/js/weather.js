@@ -1,45 +1,60 @@
-function showCityWeather(cityId, cityName){
-    var data = {};
-    if (cityId !== undefined){
-        data = {'city': cityId};
-    }
 
-    $.ajax({type: 'POST',
-             url: '@@update-weather',
-             async : true,
-             data: data,
-             success: function(results) {
-                $.ajax({type: 'POST',
-                         url: '@@current-weather',
-                         async : true,
-                         data: data,
-                         success: function(results){
-                                $("div#current-weather").parent().html(results);
-                        }
-                    });
-                }
-            });
+function showCityWeather(cityId){
+
+    var data = {'city': cityId};
+
+    if (cityId !== undefined){
+
+        $.ajax({type: 'GET',
+                url: '@@update-weather',
+                async : true,
+                data: data,
+                success: function(results) {
+                    $.ajax({type: 'GET',
+                             url: '@@current-weather',
+                             async : true,
+                             data: data,
+                             success: function(results){
+                                    $("div#current-weather").parent().html(results);
+                                    createCookie("collective.weather.current_city", cityId, 30);
+                            }
+                        });
+                    }
+                });
+    }
 }
 
-function selectCity() {
+function bindSelectCityEvents() {
     $("#current-city").parent().next('.actionMenuContent').mouseleave(function() {
-        $(this).toggle();
+        $(this).hide();
     });
 
     $("#current-city").live("click", function(e) {
+        e.preventDefault();
         $(this).parent().next('.actionMenuContent').toggle();
     });
 
     $(".weather-choose-city").live("click", function(e) {
         e.preventDefault();
-        var cityId = $(this).parent().attr("data-city-id");
-        var cityName = $(this).parent().attr("data-city-name");
-
-        showCityWeather(cityId, cityName);
+        var city = $(this).parent().attr('data-city-id');
+        showCityWeather(city);
+        $(this).parent().parent().parent().toggle();
     });
 }
 
+function getCurrentCityFromCookie() {
+    var cityId = readCookie("collective.weather.current_city");
+    return cityId;
+}
+
 $(document).ready(function() {
-    selectCity();
-    showCityWeather();
+    bindSelectCityEvents();
+    var cityId = getCurrentCityFromCookie();
+
+    if (cityId === undefined || cityId === null){
+        var elem = document.getElementById('current-city');
+        cityId = $(elem).attr('data-city-id');
+    }
+
+    showCityWeather(cityId);
 });

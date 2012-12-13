@@ -13,7 +13,6 @@ class CurrentWeather(BrowserView):
         weather_utility = getUtility(IWeatherUtility)
         if 'city' in self.request:
             city = self.request.get('city')
-            weather_utility.set_current_city(city)
             self.current_city = weather_utility.get_city(city)
         else:
             self.current_city = weather_utility.get_current_city()

@@ -221,7 +221,7 @@ class WeatherUtility(object):
         result = ''
         request = getRequest()
         if len(self.cities_list) > 0:
-            cookie = COOKIE_KEY % "top_weather"
+            cookie = COOKIE_KEY % "current_city"
             value = request.cookies.get(cookie, '')
             if not value:
                 result = self.cities_list[0]
@@ -233,16 +233,3 @@ class WeatherUtility(object):
                     result = self.cities_list[0]
 
         return result
-
-    def set_current_city(self, city=None):
-        if city:
-            # We should store the current city in a cookie
-            cookie = COOKIE_KEY % "top_weather"
-            expires = 'Wed, 19 Feb 2020 14:28:00 GMT'
-            city = str(city)
-            request = getRequest()
-            request.response[cookie] = city
-            request.response.setCookie(cookie,
-                                       city,
-                                       path='/',
-                                       expires=expires)

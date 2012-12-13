@@ -19,13 +19,8 @@ class TopBarWeatherViewlet(ViewletBase):
         super(TopBarWeatherViewlet, self).__init__(*args, **kw)
         self.weather_utility = getUtility(IWeatherUtility)
 
-    def get_current_city(self):
-        result = self.weather_utility.get_current_city()
-
-        return result
-
     def update(self):
         super(TopBarWeatherViewlet, self).update()
         
-        self.current_city = self.get_current_city()
         self.cities_list = self.weather_utility.get_cities_list()
+        self.weather_info = self.weather_utility.get_weather_info()
