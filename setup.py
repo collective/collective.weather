@@ -41,6 +41,7 @@ setup(name='collective.weather',
       install_requires=[
           'setuptools',
           'pywapi',
+          'Pillow',
           'Products.CMFPlone>=4.1',
           'plone.directives.form',
           'collective.z3cform.widgets',
