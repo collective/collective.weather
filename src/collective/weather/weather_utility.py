@@ -134,11 +134,24 @@ class WeatherUtility(object):
         units = settings.yahoo_units
 
         now = datetime.now()
-        logger.info("Update Yahoo Weather: %s" % city_id)
-        for city in self.cities_list:
-            if city_id and city['id'] != city_id:
-                continue
 
+        if city_id:
+            logger.info("Update Yahoo Weather: %s" % city_id)
+            cities_list = [city['id'] for city in self.cities_list]
+            if city_id in cities_list:
+                # If asked city exists in our list of cities, find it
+                match = [i for i in self.cities_list if city_id == i['id']]
+                to_update = [match[0]]
+            else:
+                logger.warning("Requested city '%s' is not a valid city, updating first one of the list" % city_id)
+                # If asked city does not exist, update first one
+                to_update = [self.cities_list[0]]
+        else:
+            # If no asked city, just update all of them
+            logger.info("Update Yahoo Weather for all cities")
+            to_update = self.cities_list
+
+        for city in to_update:
             if city['type'] != 'yahoo':
                 continue
 
@@ -146,6 +159,7 @@ class WeatherUtility(object):
 
             if old_data and old_data.get('date'):
                 if old_data.get('date') > now - TIME_THRESHOLD:
+                    logger.info("Last update was done %s. Not updating again" % old_data.get('date'))
                     continue
 
             try:

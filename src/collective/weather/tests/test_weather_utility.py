@@ -264,3 +264,92 @@ class UtilityTestCase(unittest.TestCase):
                          'type': 'yahoo'}
 
         self.assertEquals(city, expected_city)
+
+    def test_update_specific_weather_info(self):
+        registry = getUtility(IRegistry)
+        yahoo_settings = registry.forInterface(IYahooWeatherSchema)
+        yahoo_settings.yahoo_units = 'metric'
+
+        # What we first do is replace all locations created from the registry, with new values
+        old_locations = deepcopy(yahoo_settings.yahoo_location_ids)
+        yahoo_settings.yahoo_location_ids = [u"Cordoba|Cordoba, Argentina|ARCA0024",
+                                             u"Los Angeles|Los Angeles, California|USCA0639",
+                                             u"New weather|New weather|NEW124",
+                                             u"New weather2|New weather|NEW125"]
+        # And reset any existing weather info
+        self.weather_utility.weather_info = {}
+
+        # Update weather info for Los Angeles
+        self.weather_utility.update_weather_info("Los Angeles")
+
+        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
+                                            'temp': u'-10\xbaC',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'}}
+
+        wi = self.weather_utility.get_weather_info()
+
+        actual_values = dict([(i, wi[i]['weather']) for i in wi])
+
+        self.assertEquals(actual_values, expected_values)
+
+        # Now, for New weather2
+        self.weather_utility.update_weather_info("New weather2")
+
+        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
+                                            'temp': u'-10\xbaC',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'},
+                           u'New weather2': {'conditions': u'Snowing',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif',
+                                            'temp': u'-20\xbaC'}}
+
+        wi = self.weather_utility.get_weather_info()
+
+        actual_values = dict([(i, wi[i]['weather']) for i in wi])
+
+        self.assertEquals(actual_values, expected_values)
+
+        # Now, if i ask for an invalid city, i should get for the first one
+        self.weather_utility.update_weather_info("New weather3")
+
+        expected_values = {u'Cordoba': {'conditions': u'Windy',
+                                        'temp': u'10\xbaC',
+                                        'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'},
+                           u'Los Angeles': {'conditions': u'Snowing',
+                                            'temp': u'-10\xbaC',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'},
+                           u'New weather2': {'conditions': u'Snowing',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif',
+                                            'temp': u'-20\xbaC'}}
+
+        wi = self.weather_utility.get_weather_info()
+
+        actual_values = dict([(i, wi[i]['weather']) for i in wi])
+
+        self.assertEquals(actual_values, expected_values)
+
+        # Finally, ask for New weather
+        self.weather_utility.update_weather_info("New weather")
+
+        expected_values = {u'Cordoba': {'conditions': u'Windy',
+                                        'temp': u'10\xbaC',
+                                        'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'},
+                           u'Los Angeles': {'conditions': u'Snowing',
+                                            'temp': u'-10\xbaC',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'},
+                           u'New weather': {'conditions': u'Snowing',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif',
+                                            'temp': u'-20\xbaC'},
+                           u'New weather2': {'conditions': u'Snowing',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif',
+                                            'temp': u'-20\xbaC'}}
+
+        wi = self.weather_utility.get_weather_info()
+
+        actual_values = dict([(i, wi[i]['weather']) for i in wi])
+
+        self.assertEquals(actual_values, expected_values)
+
+        # Restore original values
+        yahoo_settings.yahoo_location_ids = old_locations
+        # And reset any existing weather info
+        self.weather_utility.weather_info = {}

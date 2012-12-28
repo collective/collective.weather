@@ -39,6 +39,29 @@ def get_weather_from_yahoo(location_id, units='metric'):
     if location_id == 'ARBA0023-exception':
         raise ValueError
 
+    if location_id == 'ARCA0024':
+        result = {'condition': {'text': u'Windy',
+                                'temp': u'10',
+                                'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}
+                  }
+
+    if location_id == 'USCA0639':
+        result = {'condition': {'text': u'Snowing',
+                                'temp': u'-10',
+                                'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}
+                  }
+
+    if location_id == 'NEW124':
+        result = {'condition': {'text': u'Snowing',
+                                'temp': u'-20',
+                                'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}
+                  }
+    if location_id == 'NEW125':
+        result = {'condition': {'text': u'Snowing',
+                                'temp': u'-20',
+                                'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}
+                  }
+                  
     return result
 
 
