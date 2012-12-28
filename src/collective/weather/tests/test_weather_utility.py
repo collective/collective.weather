@@ -299,8 +299,8 @@ class UtilityTestCase(unittest.TestCase):
                                             'temp': u'-10\xbaC',
                                             'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'},
                            u'New weather2': {'conditions': u'Snowing',
-                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif',
-                                            'temp': u'-20\xbaC'}}
+                                             'icon': u'http://l.yimg.com/a/i/us/we/52/.gif',
+                                             'temp': u'-20\xbaC'}}
 
         wi = self.weather_utility.get_weather_info()
 
@@ -318,8 +318,8 @@ class UtilityTestCase(unittest.TestCase):
                                             'temp': u'-10\xbaC',
                                             'icon': u'http://l.yimg.com/a/i/us/we/52/.gif'},
                            u'New weather2': {'conditions': u'Snowing',
-                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif',
-                                            'temp': u'-20\xbaC'}}
+                                             'icon': u'http://l.yimg.com/a/i/us/we/52/.gif',
+                                             'temp': u'-20\xbaC'}}
 
         wi = self.weather_utility.get_weather_info()
 
@@ -340,8 +340,8 @@ class UtilityTestCase(unittest.TestCase):
                                             'icon': u'http://l.yimg.com/a/i/us/we/52/.gif',
                                             'temp': u'-20\xbaC'},
                            u'New weather2': {'conditions': u'Snowing',
-                                            'icon': u'http://l.yimg.com/a/i/us/we/52/.gif',
-                                            'temp': u'-20\xbaC'}}
+                                             'icon': u'http://l.yimg.com/a/i/us/we/52/.gif',
+                                             'temp': u'-20\xbaC'}}
 
         wi = self.weather_utility.get_weather_info()
 

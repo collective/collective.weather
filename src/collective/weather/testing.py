@@ -9,7 +9,7 @@ from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
 
 
-def get_weather_from_yahoo(location_id, units='metric'):
+def get_weather_from_yahoo(location_id, units='metric'):  # flake8: noqa
     if location_id == 'ARCA0023':
         result = {'condition': {'text': u'Windy',
                                 'temp': u'20',
@@ -61,7 +61,7 @@ def get_weather_from_yahoo(location_id, units='metric'):
                                 'temp': u'-20',
                                 'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}
                   }
-                  
+
     return result
 
 
