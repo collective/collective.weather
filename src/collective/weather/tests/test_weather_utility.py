@@ -230,7 +230,6 @@ class UtilityTestCase(unittest.TestCase):
         self.assertEquals(city, expected_city)
 
         city = self.weather_utility.get_city('Cordoba2')
-        expected_city = {}
 
         self.assertEquals(city, expected_city)
 
