@@ -18,7 +18,10 @@
     </div>
 
     <div tal:condition="not:view/weather_info">
-      <span class="no-weather-info" i18n:translate="">No weather information</span>
+      <img class="weather-icon" title="No weather information" alt="No weather information"
+           tal:attributes="src string:++resource++collective.weather.icons/NA.png"
+                           i18n:attributes="alt; title"/>
+      
     </div>
   </div>
 </div>

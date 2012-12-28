@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.weather\n"
-"POT-Creation-Date: 2012-09-17 16:17+0000\n"
+"POT-Creation-Date: 2012-12-28 23:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.weather\n"
 
-#: collective/weather/weather_utility.py:165
+#: collective/weather/weather_utility.py:185
 msgid "%sºC"
 msgstr ""
 
-#: collective/weather/weather_utility.py:163
+#: collective/weather/weather_utility.py:183
 msgid "%sºF"
 msgstr ""
 
@@ -51,7 +51,7 @@ msgstr ""
 msgid "Few Showers"
 msgstr ""
 
-#: collective/weather/browser/controlpanel.py:28
+#: collective/weather/browser/controlpanel.py:23
 msgid "Google"
 msgstr ""
 
@@ -63,7 +63,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: collective/weather/browser/controlpanel.py:48
+#: collective/weather/browser/controlpanel.py:43
 msgid "Lets you configure several weather locations"
 msgstr ""
 
@@ -77,11 +77,11 @@ msgstr ""
 msgid "Mostly Sunny"
 msgstr ""
 
-#: collective/weather/browser/controlpanel.py:39
+#: collective/weather/browser/controlpanel.py:34
 msgid "NOAA"
 msgstr ""
 
-#: collective/weather/browser/templates/current_weather.pt:13
+#: collective/weather/browser/templates/current_weather.pt:21
 msgid "No weather information"
 msgstr ""
 
@@ -125,11 +125,11 @@ msgstr ""
 msgid "Use Yahoo! Weather service"
 msgstr ""
 
-#: collective/weather/browser/controlpanel.py:29
+#: collective/weather/browser/controlpanel.py:24
 msgid "WARNING: Google Weather is not working at the moment."
 msgstr ""
 
-#: collective/weather/browser/controlpanel.py:40
+#: collective/weather/browser/controlpanel.py:35
 msgid "WARNING: NOAA Weather is not working at the moment."
 msgstr ""
 
@@ -137,11 +137,11 @@ msgstr ""
 msgid "Weather"
 msgstr ""
 
-#: collective/weather/browser/controlpanel.py:47
+#: collective/weather/browser/controlpanel.py:42
 msgid "Weather Setup"
 msgstr ""
 
-#: collective/weather/browser/controlpanel.py:34
+#: collective/weather/browser/controlpanel.py:29
 msgid "Yahoo"
 msgstr ""
 

@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.weather\n"
-"POT-Creation-Date: 2012-09-17 16:17+0000\n"
+"POT-Creation-Date: 2012-12-28 23:26+0000\n"
 "PO-Revision-Date: 2012-08-01 21:08-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Spanish <>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.weather\n"
 
-#: collective/weather/weather_utility.py:165
+#: collective/weather/weather_utility.py:185
 msgid "%sºC"
 msgstr "%sºC"
 
-#: collective/weather/weather_utility.py:163
+#: collective/weather/weather_utility.py:183
 msgid "%sºF"
 msgstr "%sºF"
 
@@ -49,7 +49,7 @@ msgstr "Despejado"
 msgid "Few Showers"
 msgstr "Algunas lluvias"
 
-#: collective/weather/browser/controlpanel.py:28
+#: collective/weather/browser/controlpanel.py:23
 msgid "Google"
 msgstr ""
 
@@ -61,7 +61,7 @@ msgstr "Imperial"
 msgid "Language"
 msgstr "Idioma"
 
-#: collective/weather/browser/controlpanel.py:48
+#: collective/weather/browser/controlpanel.py:43
 msgid "Lets you configure several weather locations"
 msgstr "Le permite configurar varias ubicaciones para el clima"
 
@@ -75,11 +75,11 @@ msgstr "Mayormente nublado"
 msgid "Mostly Sunny"
 msgstr "Mayormente soleado"
 
-#: collective/weather/browser/controlpanel.py:39
+#: collective/weather/browser/controlpanel.py:34
 msgid "NOAA"
 msgstr ""
 
-#: collective/weather/browser/templates/current_weather.pt:13
+#: collective/weather/browser/templates/current_weather.pt:21
 msgid "No weather information"
 msgstr "No hay información de las condiciones meteorológicas"
 
@@ -123,11 +123,11 @@ msgstr "Usar el servicio climático de NOAA (XXX: No implementado todavía)"
 msgid "Use Yahoo! Weather service"
 msgstr "Usar el servicio de clima de Yahoo!"
 
-#: collective/weather/browser/controlpanel.py:29
+#: collective/weather/browser/controlpanel.py:24
 msgid "WARNING: Google Weather is not working at the moment."
 msgstr "PRECAUCION: El servicio de clima de Google no funciona actualmente."
 
-#: collective/weather/browser/controlpanel.py:40
+#: collective/weather/browser/controlpanel.py:35
 msgid "WARNING: NOAA Weather is not working at the moment."
 msgstr "PRECAUCION: El servicio de clima de NOAA no funciona actualmente."
 
@@ -135,11 +135,11 @@ msgstr "PRECAUCION: El servicio de clima de NOAA no funciona actualmente."
 msgid "Weather"
 msgstr "Condiciones meteorológicas"
 
-#: collective/weather/browser/controlpanel.py:47
+#: collective/weather/browser/controlpanel.py:42
 msgid "Weather Setup"
 msgstr "Configuración de collective.weather"
 
-#: collective/weather/browser/controlpanel.py:34
+#: collective/weather/browser/controlpanel.py:29
 msgid "Yahoo"
 msgstr ""
 
