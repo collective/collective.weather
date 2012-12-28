@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import logging
 import pywapi
+import sys
 import urllib2
 
 from datetime import datetime
@@ -18,9 +20,13 @@ from collective.weather.interfaces import IWeatherUtility
 from collective.weather.browser.interfaces import IYahooWeatherSchema
 
 from collective.weather.config import COOKIE_KEY
+from collective.weather.config import PROJECTNAME
 from collective.weather.config import TIME_THRESHOLD
 
 from collective.weather import _
+
+
+logger = logging.getLogger(PROJECTNAME)
 
 
 class WeatherUtility(object):
@@ -58,6 +64,7 @@ class WeatherUtility(object):
                 try:
                     id, name, location_id = i.split('|')
                 except ValueError:
+                    logger.warning("Malformed line: %s" % i)
                     continue
 
                 result = {'id': id,
@@ -127,6 +134,7 @@ class WeatherUtility(object):
         units = settings.yahoo_units
 
         now = datetime.now()
+        logger.info("Update Yahoo Weather: %s" % city_id)
         for city in self.cities_list:
             if city_id and city['id'] != city_id:
                 continue
@@ -141,10 +149,15 @@ class WeatherUtility(object):
                     continue
 
             try:
-                result = pywapi.get_weather_from_yahoo(city['location_id'].encode('utf-8'), units=units)
-            except urllib2.URLError:
+                cityid = city['location_id'].encode('utf-8')
+                logger.info("Getting data for city: %s" % cityid)
+                result = pywapi.get_weather_from_yahoo(cityid, units=units)
+                logger.info("Result: %s" % result)
+            except urllib2.URLError as e:
+                logger.warning("The server returned an error: %s" % e)
                 result = ""
             except:
+                logger.warning("There was an error when contacting the remote server: %s" % sys.exc_info()[0])
                 # Just avoid any error silently
                 result = ""
 
@@ -165,14 +178,17 @@ class WeatherUtility(object):
                                                      'weather': new_weather}
                 except:
                     if city['id'] in self.weather_info:
+                        logger.warning("Something went wrong, removing weather data for city: %s" % city['id'])
                         del self.weather_info[city['id']]
             else:
                 if city['id'] in self.weather_info:
+                    logger.warning("No 'condition' in result, removing weather data for city: %s" % city['id'])
                     del self.weather_info[city['id']]
 
         for city in self.weather_info.keys():
             match = [i for i in self.cities_list if city == i['id']]
             if not match:
+                logger.warning("The city %s is not listed in the list of cities. Removing weather data" % city)
                 del self.weather_info[city]
 
     def update_locations(self):
@@ -204,6 +220,7 @@ class WeatherUtility(object):
             result = match[0]
         else:
             result = self.cities_list[0]
+            logger.warning("Requested city '%s' is not a valid city, returning the first one of the list: %s" % (city, result['id']))
 
         return result
 
@@ -218,11 +235,9 @@ class WeatherUtility(object):
             value = request.cookies.get(cookie, '')
             if not value:
                 result = self.cities_list[0]
+                logger.info("No cookie was present, returning first available city: %s" % result)
             else:
-                match = [i for i in self.cities_list if i['id'] == value]
-                if match:
-                    result = match[0]
-                else:
-                    result = self.cities_list[0]
+                logger.info("Cookie present, getting city: %s" % value)
+                result = self.get_city(value)
 
         return result
