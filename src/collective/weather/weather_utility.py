@@ -203,7 +203,7 @@ class WeatherUtility(object):
         if match:
             result = match[0]
         else:
-            result = {}
+            result = self.cities_list[0]
 
         return result
 
