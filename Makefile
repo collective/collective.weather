@@ -13,7 +13,7 @@ options = -N -q -t 3
 src = src/collective/weather/
 minimum_coverage = 98
 pep8_ignores = E501
-max_complexity = 12
+max_complexity = 15
 css_ignores = ! -name jquery\*
 js_ignores = ! -name jquery\*
 
