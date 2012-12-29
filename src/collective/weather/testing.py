@@ -13,24 +13,24 @@ def get_weather_from_yahoo(location_id, units='metric'):  # flake8: noqa
     if location_id == 'ARCA0023':
         result = {'condition': {'text': u'Windy',
                                 'temp': u'20',
-                                'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}
+                                'code': u'34'}
                   }
 
     if location_id == 'USCA0638':
         result = {'condition': {'text': u'Snowing',
                                 'temp': u'-8',
-                                'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}
+                                'code': u'34'}
                   }
 
     if location_id == 'NEW123':
         result = {'condition': {'text': u'Snowing',
                                 'temp': u'-8',
-                                'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}
+                                'code': u'34'}
                   }
 
     if location_id == 'NEW123-invalid':
         result = {'condition': {'temp': u'-8',
-                                'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}
+                                'code': u'34'}
                   }
 
     if location_id == 'ARBA0023-urllib-exception':
@@ -42,24 +42,24 @@ def get_weather_from_yahoo(location_id, units='metric'):  # flake8: noqa
     if location_id == 'ARCA0024':
         result = {'condition': {'text': u'Windy',
                                 'temp': u'10',
-                                'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}
+                                'code': u'34'}
                   }
 
     if location_id == 'USCA0639':
         result = {'condition': {'text': u'Snowing',
                                 'temp': u'-10',
-                                'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}
+                                'code': u'34'}
                   }
 
     if location_id == 'NEW124':
         result = {'condition': {'text': u'Snowing',
                                 'temp': u'-20',
-                                'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}
+                                'code': u'34'}
                   }
     if location_id == 'NEW125':
         result = {'condition': {'text': u'Snowing',
                                 'temp': u'-20',
-                                'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}
+                                'code': u'34'}
                   }
 
     return result

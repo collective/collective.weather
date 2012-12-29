@@ -177,28 +177,27 @@ class WeatherUtility(object):
                 # Just avoid any error silently
                 result = ""
 
-            if result and 'condition' in result:
-                try:
-                    conditions = result['condition']
+            if result and 'condition' in result and\
+                ('temp' in result['condition'] and
+                 'text' in result['condition'] and
+                 'code' in result['condition']):
 
-                    if units == 'imperial':
-                        temp = _(u"%sºF") % conditions['temp']
-                    else:
-                        temp = _(u"%sºC") % conditions['temp']
+                conditions = result['condition']
 
-                    new_weather = {'temp': temp,
-                                   'conditions': conditions['text'],
-                                   'icon': u"http://l.yimg.com/a/i/us/we/52/%s.gif" % conditions.get('code', '')}
+                if units == 'imperial':
+                    temp = _(u"%sºF") % conditions['temp']
+                else:
+                    temp = _(u"%sºC") % conditions['temp']
 
-                    self.weather_info[city['id']] = {'date': now,
-                                                     'weather': new_weather}
-                except:
-                    if city['id'] in self.weather_info:
-                        logger.warning("Something went wrong, removing weather data for city: %s" % city['id'])
-                        del self.weather_info[city['id']]
+                new_weather = {'temp': temp,
+                               'conditions': conditions['text'],
+                               'icon': u"http://l.yimg.com/a/i/us/we/52/%s.gif" % conditions.get('code', '')}
+
+                self.weather_info[city['id']] = {'date': now,
+                                                 'weather': new_weather}
             else:
                 if city['id'] in self.weather_info:
-                    logger.warning("No 'condition' in result, removing weather data for city: %s" % city['id'])
+                    logger.warning("No 'condition' in result, or malformed response. Keeping old weather data for: %s" % city['id'])
                     del self.weather_info[city['id']]
 
         for city in self.weather_info.keys():
