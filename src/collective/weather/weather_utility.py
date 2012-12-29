@@ -129,11 +129,13 @@ class WeatherUtility(object):
     #                 del self.weather_info[city['id']]
 
     def _update_yahoo_weather_info(self, city_id=None):
+        start_update = datetime.now()
+
         registry = getUtility(IRegistry)
         settings = registry.forInterface(IYahooWeatherSchema)
         units = settings.yahoo_units
 
-        now = datetime.now()
+        now = start_update
 
         if city_id:
             logger.info("Update Yahoo Weather: %s" % city_id)
@@ -204,6 +206,10 @@ class WeatherUtility(object):
             if not match:
                 logger.warning("The city %s is not listed in the list of cities. Removing weather data" % city)
                 del self.weather_info[city]
+
+        end_update = datetime.now()
+        took = end_update - start_update
+        logger.info("Yahoo! update took: %s" % took)
 
     def update_locations(self):
         self.cities_list = []
