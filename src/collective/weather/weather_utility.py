@@ -197,7 +197,7 @@ class WeatherUtility(object):
                                                  'weather': new_weather}
             else:
                 if city['id'] in self.weather_info:
-                    logger.warning("No 'condition' in result, or malformed response. Keeping old weather data for: %s" % city['id'])
+                    logger.warning("No 'condition' in result, or malformed response. Removing old weather data for: %s" % city['id'])
                     del self.weather_info[city['id']]
 
         for city in self.weather_info.keys():
