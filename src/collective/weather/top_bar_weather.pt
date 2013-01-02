@@ -1,12 +1,13 @@
 <div id="collective-weather-wrapper"
-     i18n:domain="collective.weather">
+     i18n:domain="collective.weather"
+     tal:define="portal context/@@plone_portal_state/portal">
 
 <dl class="actionMenu deactivated"
     id="top-weather-viewlet"
     tal:condition="view/cities_list">
 
   <dt class="actionMenuHeader">
-    <div tal:replace="structure here/current-weather" />
+    <div tal:replace="structure portal/current-weather" />
   </dt>
   <dd class="actionMenuContent">
     <ul>

@@ -6,12 +6,12 @@ function showCityWeather(cityId){
     if (cityId !== undefined){
 
         $.ajax({type: 'GET',
-                url: '@@update-weather',
+                url: portal_url + '/@@update-weather',
                 async : true,
                 data: data,
                 success: function(results) {
                     $.ajax({type: 'GET',
-                             url: '@@current-weather',
+                             url: portal_url + '/@@current-weather',
                              async : true,
                              data: data,
                              success: function(results){

@@ -29,7 +29,7 @@
 
     <browser:page
         name="current-weather"
-        for="*"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         class=".current_weather.CurrentWeather"
         template="templates/current_weather.pt"
         permission="zope2.Public"
@@ -37,7 +37,7 @@
 
     <browser:page
         name="update-weather"
-        for="*"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         class=".current_weather.UpdateWeather"
         permission="zope2.Public"
         />
