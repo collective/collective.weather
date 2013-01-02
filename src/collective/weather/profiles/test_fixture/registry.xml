@@ -32,4 +32,16 @@
     </field>
     <value>metric</value>
   </record>
+
+  <record interface="plone.cachepurging.interfaces.ICachePurgingSettings"
+          field="cachingProxies">
+    <value purge="False">
+        <element key="http://localhost:1234">http://localhost:1234</element>
+    </value>
+  </record>
+  <record interface="plone.cachepurging.interfaces.ICachePurgingSettings"
+          field="enabled">
+    <value>True</value>
+  </record>
+
 </registry>

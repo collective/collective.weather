@@ -129,6 +129,7 @@ class WeatherUtility(object):
     #                 del self.weather_info[city['id']]
 
     def _update_yahoo_weather_info(self, city_id=None):
+        updated = True
         start_update = datetime.now()
 
         registry = getUtility(IRegistry)
@@ -196,6 +197,7 @@ class WeatherUtility(object):
                 self.weather_info[city['id']] = {'date': now,
                                                  'weather': new_weather}
             else:
+                updated = False
                 if city['id'] in self.weather_info:
                     logger.warning("No 'condition' in result, or malformed response. Removing old weather data for: %s" % city['id'])
                     del self.weather_info[city['id']]
@@ -210,6 +212,8 @@ class WeatherUtility(object):
         took = end_update - start_update
         logger.info("Yahoo! update took: %s" % took)
 
+        return updated
+
     def update_locations(self):
         self.cities_list = []
         #self._update_google_locations()
@@ -220,9 +224,11 @@ class WeatherUtility(object):
         return self.cities_list
 
     def update_weather_info(self, city=None):
+        updated = True
         self.update_locations()
         #self._update_google_weather_info(city)
-        self._update_yahoo_weather_info(city)
+        updated = self._update_yahoo_weather_info(city)
+        return updated
 
     def get_weather_info(self, city=None):
         if not city:

@@ -1,0 +1,61 @@
+This tests that the correct URL gets purged when invalid data is updated:
+
+    >>> app = layer['app']
+    >>> portal = layer['portal']
+    >>> request = layer['request']
+
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(app)
+    >>> portalURL = portal.absolute_url()
+
+    >>> from plone.cachepurging.interfaces import IPurger
+    >>> from zope.interface import implements
+    >>> class TestPurger(object):
+    ...     implements(IPurger)
+    ...
+    ...     def __init__(self):
+    ...         self.to_purge = []
+    ...
+    ...     def purgeAsync(self, url):
+    ...         self.to_purge.append(url)
+    
+    >>> from zope.component import getGlobalSiteManager
+    >>> gsm = getGlobalSiteManager()
+
+    >>> test_purger = TestPurger()
+    >>> gsm.registerUtility(test_purger)
+
+    >>> from plone.app.testing import SITE_OWNER_NAME, SITE_OWNER_PASSWORD
+    >>> browser.open(portalURL + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = SITE_OWNER_NAME
+    >>> browser.getControl(name='__ac_password').value = SITE_OWNER_PASSWORD
+    >>> browser.getControl(name='submit').click()
+
+    >>> 'You are now logged in' in browser.contents
+    True
+
+First, let's add a city that will make the request to fail
+
+    >>> from zope.component import queryUtility
+    >>> from plone.cachepurging.interfaces import IPurger
+    >>> purger = queryUtility(IPurger)
+
+    >>> len(purger.to_purge)
+    0
+    
+    >>> browser.getLink("Site Setup").click()
+    >>> browser.getLink("Weather").click()
+    >>> browser.getControl(name="form.widgets.yahoo_location_ids").value = u"Buenos Aires|Buenos Aires, Argentina|ARBA0023-urllib-exception\r\n"
+    >>> browser.getControl("Save").click()
+    
+    >>> browser.open(portalURL+'/@@update-weather?city=Buenos Aires')    
+
+Now, let's see that valid URLs are wating to be purged
+
+    >>> len(purger.to_purge)
+    2
+    
+    >>> 'http://localhost:1234/plone/@@update-weather?city=Buenos Aires' in purger.to_purge
+    True
+    >>> 'http://localhost:1234/plone/@@current-weather?city=Buenos Aires' in purger.to_purge
+    True
