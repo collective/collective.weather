@@ -72,10 +72,6 @@ class Fixture(PloneSandboxLayer):
     def setUpZope(self, app, configurationContext):
         # Load ZCML
         pywapi.get_weather_from_yahoo = get_weather_from_yahoo
-        import plone.app.caching
-        self.loadZCML(package=plone.app.caching)
-        import plone.cachepurging
-        self.loadZCML(package=plone.cachepurging)
         import collective.weather
         self.loadZCML(package=collective.weather)
 

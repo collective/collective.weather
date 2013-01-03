@@ -15,9 +15,4 @@ def test_suite():
                                      package='collective.weather'),
                 layer=FUNCTIONAL_TESTING),
     ])
-    suite.addTests([
-        layered(doctest.DocFileSuite('tests/cache_purges_valid_url.txt',
-                                     package='collective.weather'),
-                layer=FUNCTIONAL_TESTING),
-    ])
     return suite
