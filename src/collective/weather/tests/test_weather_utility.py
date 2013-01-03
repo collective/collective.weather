@@ -150,7 +150,7 @@ class UtilityTestCase(unittest.TestCase):
                                                                         'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}}
 
         # We create a city with the same name but different location_id, so we can simulate
-        # invalid results for an existing city. In this case, it should be removed
+        # invalid results for an existing city. In this case, we should still see old data
         yahoo_settings.yahoo_location_ids.append(u"New weather|New weather|NEW123-invalid")
         self.weather_utility.update_weather_info()
 
@@ -159,7 +159,10 @@ class UtilityTestCase(unittest.TestCase):
                                             'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'},
                            u'Cordoba': {'conditions': u'Windy',
                                         'temp': u'20\xbaC',
-                                        'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}}
+                                        'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'},
+                           u'New weather': {'conditions': u'Snowing',
+                                            'temp': u'-8\xbaC',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}}
 
         actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
 
@@ -169,7 +172,7 @@ class UtilityTestCase(unittest.TestCase):
                                                                          'temp': u'-8\xbaC',
                                                                          'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}}
 
-        # If we get a urllib exception, then also remove the existing value
+        # If we get a urllib exception, then also keep the existing value
         yahoo_settings.yahoo_location_ids.append(u"Buenos Aires|Buenos Aires, Argentina|ARBA0023-urllib-exception")
 
         self.weather_utility.update_weather_info()
@@ -179,16 +182,18 @@ class UtilityTestCase(unittest.TestCase):
                                             'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'},
                            u'Cordoba': {'conditions': u'Windy',
                                         'temp': u'20\xbaC',
-                                        'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}}
+                                        'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'},
+                           u'New weather': {'conditions': u'Snowing',
+                                            'temp': u'-8\xbaC',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'},
+                           u'Buenos Aires': {'conditions': u'Snowing',
+                                             'temp': u'-8\xbaC',
+                                             'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}}
 
         actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
         self.assertEquals(actual_values, expected_values)
 
-        self.weather_utility.weather_info['Los Angeles'] = {'weather': {'conditions': u'Snowing',
-                                                                        'temp': u'-8\xbaC',
-                                                                        'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}}
-
-        # If we get a urllib exception, then also remove the existing value
+        # If we get a any exception, then also keep the existing value
         yahoo_settings.yahoo_location_ids.append(u"Buenos Aires|Buenos Aires, Argentina|ARBA0023-exception")
 
         self.weather_utility.update_weather_info()
@@ -198,7 +203,13 @@ class UtilityTestCase(unittest.TestCase):
                                             'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'},
                            u'Cordoba': {'conditions': u'Windy',
                                         'temp': u'20\xbaC',
-                                        'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}}
+                                        'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'},
+                           u'New weather': {'conditions': u'Snowing',
+                                            'temp': u'-8\xbaC',
+                                            'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'},
+                           u'Buenos Aires': {'conditions': u'Snowing',
+                                             'temp': u'-8\xbaC',
+                                             'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}}
 
         actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
 
