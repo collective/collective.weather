@@ -1,6 +1,6 @@
-include *.txt
+include *.rst
 
-recursive-include src *
-recursive-include docs *
+graft src
+graft docs
 
 global-exclude *.pyc
