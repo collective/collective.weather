@@ -1,15 +1,16 @@
 Share and Enjoy
 ---------------
 
-collective.weather would not have been possible without the contribution of
-the following people:
+``collective.weather`` would not have been possible without the contribution
+of the following people:
 
-- Franco Pellegrini
+- Franco Pellegrini (original author)
 - Héctor Velarde
 - Silvestre Huens
 - Gonzalo Almeida
 - `Tango Desktop Project`_ (icon)
 
-Development sponsored by Open Multimedia.
+Development sponsored by `OpenMultimedia`_.
 
+.. _`OpenMultimedia`: http://www.openmultimedia.biz/
 .. _`Tango Desktop Project`: http://tango.freedesktop.org/
