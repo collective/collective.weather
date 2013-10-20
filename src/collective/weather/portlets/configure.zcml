@@ -13,7 +13,6 @@
       edit_permission="cmf.ManagePortal"
       renderer=".weather.Renderer"
       addview=".weather.AddForm"
-      editview=".weather.EditForm"
     />
 
 </configure>
