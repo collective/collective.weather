@@ -36,6 +36,21 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <genericsetup:registerProfile
+      name="upgrade_to_2"
+      title="collective.weather upgrade to version 2"
+      directory="profiles/upgrade_to_2"
+      description="Remove all google weather related code."
+      provides="Products.GenericSetup.interfaces.EXTENSION" />
+
+  <genericsetup:upgradeStep
+      title="collective.weather upgrade to version 2"
+      source="*"
+      destination="2"
+      description="Remove all google weather related code."
+      handler="collective.weather.setuphandlers.upgrade_to_2"
+      profile="collective.weather:default" />
+
     <!-- The weather viewlet -->
     <browser:viewlet
         name="collective.weather.top_bar_weather"

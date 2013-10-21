@@ -11,18 +11,11 @@ from plone.app.registry.browser import controlpanel
 
 from plone.registry.interfaces import IRegistry
 
-from collective.weather.browser.interfaces import IGoogleWeatherSchema
 from collective.weather.browser.interfaces import IYahooWeatherSchema
 from collective.weather.browser.interfaces import INoaaWeatherSchema
 from collective.weather.browser.interfaces import IWeatherSchema
 
 from collective.weather import _
-
-
-class GoogleGroup(group.Group):
-    label = _(u"Google")
-    description = _("""WARNING: Google Weather is not working at the moment.""")
-    fields = field.Fields(IGoogleWeatherSchema)
 
 
 class YahooGroup(group.Group):
@@ -44,14 +37,13 @@ class WeatherControlPanelEditForm(controlpanel.RegistryEditForm):
 
     fields = IYahooWeatherSchema
 
-    groups = NoaaGroup, GoogleGroup
+    groups = (NoaaGroup, )
 
     def getContent(self):
         return AbstractRecordsProxy(self.schema)
 
     # def updateFields(self):
     #     super(WeatherControlPanelEditForm, self).updateFields()
-    #     self.fields['google_location_ids'].widgetFactory = EnhancedTextLinesFieldWidget
     #     self.groups[0].fields['yahoo_location_ids'].widgetFactory = EnhancedTextLinesFieldWidget
     #     self.groups[1].fields['noaa_location_ids'].widgetFactory = EnhancedTextLinesFieldWidget
 

@@ -36,26 +36,6 @@ class WeatherUtility(object):
     cities_list = []
     current_city = ''
 
-    # def _update_google_locations(self):
-    #     # XXX: We are not going to be using Google Weather, seems the API is
-    #     # no longer supported.
-    #     # http://blog.programmableweb.com/2012/08/28/google-weather-api-never-supported-finally-disconnected/
-    #     registry = getUtility(IRegistry)
-    #     settings = registry.forInterface(IGoogleWeatherSchema)
-    #     if settings.google_location_ids:
-    #         for i in settings.google_location_ids:
-    #             try:
-    #                 id,name,location_id = i.split('|')
-    #             except ValueError:
-    #                 continue
-
-    #             result = {'id': id,
-    #                       'name': name,
-    #                       'location_id': location_id,
-    #                       'type': 'google'}
-
-    #             self.cities_list.append(result)
-
     def _update_yahoo_locations(self):
         registry = getUtility(IRegistry)
         settings = registry.forInterface(IYahooWeatherSchema)
@@ -73,60 +53,6 @@ class WeatherUtility(object):
                           'type': 'yahoo'}
 
                 self.cities_list.append(result)
-
-    # def _update_google_weather_info(self, city_id=None):
-    #     # XXX: We are not going to be using Google Weather, seems the API is
-    #     # no longer supported.
-    #     # http://blog.programmableweb.com/2012/08/28/google-weather-api-never-supported-finally-disconnected/
-    #     registry = getUtility(IRegistry)
-    #     settings = registry.forInterface(IGoogleWeatherSchema)
-    #     units = settings.google_units
-    #     lang = settings.google_language
-
-    #     now = datetime.now()
-    #     for city in self.cities_list:
-
-    #         if city_id and city['id'] != city_id:
-    #             continue
-
-    #         if city['type'] != 'google':
-    #             continue
-
-    #         old_data = self.get_weather_info(city)
-
-    #         if old_data and old_data.get('date'):
-    #             if old_data.get('date') > now - TIME_THRESHOLD:
-    #                 continue
-
-    #         try:
-    #             result = pywapi.get_weather_from_google(city['location_id'].encode('utf-8'), hl=lang)
-    #         except urllib2.URLError:
-    #             result = ""
-    #         except:
-    #             # Just avoid any error silently
-    #             result = ""
-
-    #         if result and 'current_conditions' in result:
-    #             try:
-    #                 conditions = result['current_conditions']
-
-    #                 if units == 'imperial':
-    #                     temp = _(u"%sºF") % conditions['temp_f']
-    #                 else:
-    #                     temp = _(u"%sºC") % conditions['temp_c']
-
-    #                 new_weather = {'temp': temp,
-    #                                'conditions': conditions['condition'],
-    #                                'icon': u"http://www.google.com%s" % conditions.get('icon', '')}
-
-    #                 self.weather_info[city['id']] = {'date': now,
-    #                                                  'weather': new_weather}
-    #             except:
-    #                 if city['id'] in self.weather_info:
-    #                     del self.weather_info[city['id']]
-    #         else:
-    #             if city['id'] in self.weather_info:
-    #                 del self.weather_info[city['id']]
 
     def _update_yahoo_weather_info(self, city_id=None):
         start_update = datetime.now()
@@ -210,7 +136,6 @@ class WeatherUtility(object):
 
     def update_locations(self):
         self.cities_list = []
-        #self._update_google_locations()
         self._update_yahoo_locations()
 
     def get_cities_list(self):
@@ -219,7 +144,6 @@ class WeatherUtility(object):
 
     def update_weather_info(self, city=None):
         self.update_locations()
-        #self._update_google_weather_info(city)
         self._update_yahoo_weather_info(city)
 
     def get_weather_info(self, city=None):
