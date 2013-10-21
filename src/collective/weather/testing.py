@@ -8,14 +8,6 @@ from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
 
-from Testing.ZopeTestCase import installPackage
-
-try:
-    from Zope2.App import zcml
-    zcml # pyflakes
-except ImportError:
-    from Products.Five import zcml
-
 
 def get_weather_from_yahoo(location_id, units='metric'):  # flake8: noqa
     if location_id == 'ARCA0023':
@@ -82,9 +74,6 @@ class Fixture(PloneSandboxLayer):
         pywapi.get_weather_from_yahoo = get_weather_from_yahoo
         import collective.weather
         self.loadZCML(package=collective.weather)
-        import plone.app.portlets
-        zcml.load_config('configure.zcml', plone.app.portlets)
-        installPackage('plone.app.portlets', quiet=True)
 
     def setUpPloneSite(self, portal):
         # Install into Plone site using portal_setup
