@@ -6,8 +6,10 @@ There's a frood who really knows where his towel is.
 1.0a3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Weather portlet displays weather conditions of current city
-  (closes `#9`_) [marcosfromero]
+- Add weather portlet that displays weather conditions of current city
+  (closes `#9`_). [marcosfromero]
+
+- Remove all Google Weather related code (closes `#2`_). [marcosfromero]
 
 - Weather conditions moved to title tag. [flecox]
 
