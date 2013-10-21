@@ -7,7 +7,7 @@ There's a frood who really knows where his towel is.
 ^^^^^^^^^^^^^^^^^^
 
 - Weather portlet displays weather conditions of current city
-  (closes `#9) [marcosfromero]
+  (closes `#9`_) [marcosfromero]
 
 - Weather conditions moved to title tag. [flecox]
 
