@@ -1,9 +1,5 @@
 <?xml version="1.0"?>
 <registry>
- <record name="collective.weather.browser.interfaces.IGoogleWeatherSchema.use_google" delete="true" />
- <record name="collective.weather.browser.interfaces.IGoogleWeatherSchema.google_location_ids" delete="true" />
- <record name="collective.weather.browser.interfaces.IGoogleWeatherSchema.google_language" delete="true" />
- <record name="collective.weather.browser.interfaces.IGoogleWeatherSchema.google_units" delete="true" />
  <record name="collective.weather.browser.interfaces.IYahooWeatherSchema.use_yahoo" delete="true" />
  <record name="collective.weather.browser.interfaces.IYahooWeatherSchema.yahoo_location_ids" delete="true" />
  <record name="collective.weather.browser.interfaces.IYahooWeatherSchema.yahoo_units" delete="true" />
