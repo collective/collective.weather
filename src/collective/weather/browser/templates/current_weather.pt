@@ -2,8 +2,10 @@
      tal:omit-tag="">
     <a id="current-city"
        href=""
-       tal:define="city_name view/current_city/name"
-       tal:attributes="data-city-id view/current_city/id">
+       tal:condition="view/weather_info"
+       tal:define="city_name view/current_city/name|nothing;
+                   city_id view/current_city/id|nothing""
+       tal:attributes="data-city-id city_id">
         <span tal:content="city_name">Cordoba, Argentina</span>
     </a>
   <div id="current-weather">
