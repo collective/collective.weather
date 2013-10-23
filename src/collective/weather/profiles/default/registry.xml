@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <registry>
-    <records interface="collective.weather.browser.interfaces.IYahooWeatherSchema" />
-    <records interface="collective.weather.browser.interfaces.INoaaWeatherSchema" />
+  <records interface="collective.weather.browser.interfaces.IYahooWeatherSchema" />
+  <records interface="collective.weather.browser.interfaces.INoaaWeatherSchema" />
 </registry>

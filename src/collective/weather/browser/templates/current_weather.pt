@@ -5,26 +5,26 @@
     <a id="current-city"
        href=""
        tal:define="city_name current_city/name|nothing;
-                   city_id current_city/id|nothing""
+                   city_id current_city/id|nothing"
        tal:attributes="data-city-id city_id">
-        <span tal:content="city_name">Cordoba, Argentina</span>
+        <span tal:content="city_name">Córdoba, Argentina</span>
     </a>
-  <div id="current-weather">
-    <div tal:condition="view/weather_info">
-      <tal:block tal:define="current_weather python:view.weather_info['weather']">
-        <img class="weather-icon" tal:attributes="src python:current_weather['icon'];
-                                  title python:current_weather['conditions'];
-                                  alt python:current_weather['conditions']"
-                                  i18n:attributes="alt; title"/>
-        <span class="weather-temp" tal:content="python:current_weather['temp']" />
-      </tal:block>
-    </div>
+    <div id="current-weather">
+        <div tal:condition="view/weather_info">
+            <tal:block tal:define="current_weather python:view.weather_info['weather']">
+            <img class="weather-icon"
+                tal:attributes="src python:current_weather['icon'];
+                                title python:current_weather['conditions'];
+                                alt python:current_weather['conditions']"
+                i18n:attributes="alt; title" />
+            <span class="weather-temp" tal:content="python:current_weather['temp']" />
+            </tal:block>
+        </div>
 
-    <div tal:condition="not:view/weather_info">
-      <img class="weather-icon" title="No weather information" alt="No weather information"
-           tal:attributes="src string:++resource++collective.weather.icons/NA.png"
-                           i18n:attributes="alt; title"/>
-      
+        <div tal:condition="not:view/weather_info">
+            <img class="weather-icon" title="No weather information" alt="No weather information"
+                tal:attributes="src string:++resource++collective.weather.icons/NA.png"
+                i18n:attributes="alt; title" />
+        </div>
     </div>
-  </div>
 </div>

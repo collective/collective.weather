@@ -69,12 +69,12 @@ class Upgrade1to2TestCase(UpgradeTestCaseBase):
 
         # simulate state on previous version
         registry = getUtility(IRegistry)
-        BASE_REGISTRY = 'collective.weather.browser.interfaces.IGoogleWeatherSchema.{0}'
+        prefix = 'collective.weather.browser.interfaces.IGoogleWeatherSchema.'
         records = [
-            BASE_REGISTRY.format('use_google'),
-            BASE_REGISTRY.format('google_location_ids'),
-            BASE_REGISTRY.format('google_language'),
-            BASE_REGISTRY.format('google_units'),
+            prefix + 'use_google',
+            prefix + 'google_location_ids',
+            prefix + 'google_language',
+            prefix + 'google_units',
         ]
 
         for r in records:

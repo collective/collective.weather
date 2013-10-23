@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
 
-import unittest2 as unittest
-
+from collective.weather.browser.interfaces import INoaaWeatherSchema
+from collective.weather.browser.interfaces import IYahooWeatherSchema
+from collective.weather.config import PROJECTNAME
+from collective.weather.testing import INTEGRATION_TESTING
+from plone.app.testing import logout
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.registry.interfaces import IRegistry
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import logout
-from plone.app.testing import setRoles
-from plone.registry.interfaces import IRegistry
-
-from collective.weather.config import PROJECTNAME
-from collective.weather.browser.interfaces import INoaaWeatherSchema
-from collective.weather.browser.interfaces import IYahooWeatherSchema
-from collective.weather.testing import INTEGRATION_TESTING
+import unittest2 as unittest
 
 
 class ControlPanelTestCase(unittest.TestCase):
@@ -26,31 +24,28 @@ class ControlPanelTestCase(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
     def test_controlpanel_has_view(self):
-        view = getMultiAdapter((self.portal, self.portal.REQUEST),
-                               name='weather-controlpanel')
+        view = getMultiAdapter(
+            (self.portal, self.portal.REQUEST), name='weather-controlpanel')
         view = view.__of__(self.portal)
         self.assertTrue(view())
 
     def test_controlpanel_view_is_protected(self):
         from AccessControl import Unauthorized
         logout()
-        self.assertRaises(Unauthorized,
-                          self.portal.restrictedTraverse,
-                          '@@weather-controlpanel')
+        with self.assertRaises(Unauthorized):
+            self.portal.restrictedTraverse('@@weather-controlpanel')
 
     def test_controlpanel_installed(self):
         actions = [a.getAction(self)['id']
                    for a in self.controlpanel.listActions()]
-        self.assertTrue('WeatherSettings' in actions,
-                        'control panel was not installed')
+        self.assertIn('WeatherSettings', actions)
 
     def test_controlpanel_removed_on_uninstall(self):
         qi = self.portal['portal_quickinstaller']
         qi.uninstallProducts(products=[PROJECTNAME])
         actions = [a.getAction(self)['id']
                    for a in self.controlpanel.listActions()]
-        self.assertTrue('WeatherSettings' not in actions,
-                        'control panel was not removed')
+        self.assertNotIn('WeatherSettings', actions)
 
 
 class YahooRegistryTestCase(unittest.TestCase):
@@ -78,20 +73,19 @@ class YahooRegistryTestCase(unittest.TestCase):
         self.assertTrue(hasattr(self.settings, 'yahoo_units'))
         self.assertEqual(self.settings.yahoo_units, u'metric')
 
-    def get_record(self, record):
-        """ Helper function; it raises KeyError if the record is not in the
-        registry.
-        """
-        prefix = 'collective.weather.browser.interfaces.IYahooWeatherSchema.'
-        return self.registry[prefix + record]
-
     def test_records_removed_on_uninstall(self):
-        # XXX: I haven't found a better way to test this; anyone?
         qi = self.portal['portal_quickinstaller']
         qi.uninstallProducts(products=[PROJECTNAME])
-        self.assertRaises(KeyError, self.get_record, 'use_yahoo')
-        self.assertRaises(KeyError, self.get_record, 'yahoo_location_ids')
-        self.assertRaises(KeyError, self.get_record, 'yahoo_units')
+
+        prefix = 'collective.weather.browser.interfaces.IYahooWeatherSchema.'
+        records = [
+            prefix + 'use_yahoo',
+            prefix + 'yahoo_location_ids',
+            prefix + 'yahoo_units',
+        ]
+
+        for r in records:
+            self.assertNotIn(r, self.registry)
 
 
 class NoaaRegistryTestCase(unittest.TestCase):
@@ -112,16 +106,15 @@ class NoaaRegistryTestCase(unittest.TestCase):
         self.assertTrue(hasattr(self.settings, 'noaa_location_ids'))
         self.assertEqual(self.settings.noaa_location_ids, [])
 
-    def get_record(self, record):
-        """ Helper function; it raises KeyError if the record is not in the
-        registry.
-        """
-        prefix = 'collective.weather.browser.interfaces.INoaaWeatherSchema.'
-        return self.registry[prefix + record]
-
     def test_records_removed_on_uninstall(self):
-        # XXX: I haven't found a better way to test this; anyone?
         qi = self.portal['portal_quickinstaller']
         qi.uninstallProducts(products=[PROJECTNAME])
-        self.assertRaises(KeyError, self.get_record, 'use_noaa')
-        self.assertRaises(KeyError, self.get_record, 'noaa_location_ids')
+
+        prefix = 'collective.weather.browser.interfaces.INoaaWeatherSchema.'
+        records = [
+            prefix + 'use_noaa',
+            prefix + 'noaa_location_ids',
+        ]
+
+        for r in records:
+            self.assertNotIn(r, self.registry)

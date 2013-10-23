@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from zope.component import getUtility
-
-from Products.Five.browser import BrowserView
-
 from collective.weather.interfaces import IWeatherUtility
+from Products.Five.browser import BrowserView
+from zope.component import getUtility
 
 
 class CurrentWeather(BrowserView):

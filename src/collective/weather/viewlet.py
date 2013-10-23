@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from zope.component import getUtility
-
-from plone.app.layout.viewlets.common import ViewletBase
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
 from collective.weather.interfaces import IWeatherUtility
+from plone.app.layout.viewlets.common import ViewletBase
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from zope.component import getUtility
 
 
 class TopBarWeatherViewlet(ViewletBase):

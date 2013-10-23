@@ -1,29 +1,21 @@
 # -*- coding: utf-8 -*-
 
+from collective.weather import _
+from collective.weather.browser.interfaces import IYahooWeatherSchema
+from collective.weather.config import COOKIE_KEY
+from collective.weather.config import PROJECTNAME
+from collective.weather.config import TIME_THRESHOLD
+from collective.weather.interfaces import IWeatherUtility
+from datetime import datetime
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
+from zope.globalrequest import getRequest
+from zope.interface import implements
+
 import logging
 import pywapi
 import sys
 import urllib2
-
-from datetime import datetime
-
-from zope.component import getUtility
-
-from zope.globalrequest import getRequest
-
-from zope.interface import implements
-
-from plone.registry.interfaces import IRegistry
-
-from collective.weather.interfaces import IWeatherUtility
-
-from collective.weather.browser.interfaces import IYahooWeatherSchema
-
-from collective.weather.config import COOKIE_KEY
-from collective.weather.config import PROJECTNAME
-from collective.weather.config import TIME_THRESHOLD
-
-from collective.weather import _
 
 
 logger = logging.getLogger(PROJECTNAME)
@@ -44,7 +36,7 @@ class WeatherUtility(object):
                 try:
                     id, name, location_id = i.split('|')
                 except ValueError:
-                    logger.warning("Malformed line: %s" % i)
+                    logger.warning(u'Malformed line: %s' % i)
                     continue
 
                 result = {'id': id,
@@ -64,19 +56,21 @@ class WeatherUtility(object):
         now = start_update
 
         if city_id:
-            logger.info("Update Yahoo Weather: %s" % city_id)
+            logger.info(u'Update Yahoo Weather: {0}'.format(city_id))
             cities_list = [city['id'] for city in self.cities_list]
             if city_id in cities_list:
                 # If asked city exists in our list of cities, find it
                 match = [i for i in self.cities_list if city_id == i['id']]
                 to_update = [match[0]]
             else:
-                logger.warning("Requested city '%s' is not a valid city, updating first one of the list" % city_id)
+                logger.warning(
+                    u'Requested city "{0}" is not a valid city, '
+                    u'updating first one of the list'.format(city_id))
                 # If asked city does not exist, update first one
                 to_update = [self.cities_list[0]]
         else:
             # If no asked city, just update all of them
-            logger.info("Update Yahoo Weather for all cities")
+            logger.info(u'Update Yahoo Weather for all cities')
             to_update = self.cities_list
 
         for city in to_update:
@@ -87,21 +81,23 @@ class WeatherUtility(object):
 
             if old_data and old_data.get('date'):
                 if old_data.get('date') > now - TIME_THRESHOLD:
-                    logger.info("Last update was done %s. Not updating again" % old_data.get('date'))
+                    logger.info(u'Last update was done %s. Not updating again' % old_data.get('date'))
                     continue
 
             try:
                 cityid = city['location_id'].encode('utf-8')
-                logger.info("Getting data for city: %s" % cityid)
+                logger.info(u'Getting data for city: ' + cityid)
                 result = pywapi.get_weather_from_yahoo(cityid, units=units)
-                logger.info("Result: %s" % result)
+                logger.info(u'Result: {0}'.format(result))
             except urllib2.URLError as e:
-                logger.warning("The server returned an error: %s" % e)
-                result = ""
+                logger.warning(u'The server returned an error: %s' % e)
+                result = ''
             except:
-                logger.warning("There was an error when contacting the remote server: %s" % sys.exc_info()[0])
+                logger.warning(
+                    u'There was an error when contacting the remote '
+                    u'server: {0}'.format(sys.exc_info()[0]))
                 # Just avoid any error silently
-                result = ""
+                result = ''
 
             if result and 'condition' in result and\
                 ('temp' in result['condition'] and
@@ -111,28 +107,28 @@ class WeatherUtility(object):
                 conditions = result['condition']
 
                 if units == 'imperial':
-                    temp = _(u"%sºF") % conditions['temp']
+                    temp = _(u'%sºF') % conditions['temp']
                 else:
-                    temp = _(u"%sºC") % conditions['temp']
+                    temp = _(u'%sºC') % conditions['temp']
 
                 new_weather = {'temp': temp,
                                'conditions': conditions['text'],
-                               'icon': u"http://l.yimg.com/a/i/us/we/52/%s.gif" % conditions.get('code', '')}
+                               'icon': u'http://l.yimg.com/a/i/us/we/52/%s.gif' % conditions.get('code', '')}
 
                 self.weather_info[city['id']] = {'date': now,
                                                  'weather': new_weather}
             else:
-                logger.warning("No 'condition' in result, or malformed response.")
+                logger.warning(u'No "condition" in result, or malformed response.')
 
         for city in self.weather_info.keys():
             match = [i for i in self.cities_list if city == i['id']]
             if not match:
-                logger.warning("The city %s is not listed in the list of cities. Removing weather data" % city)
+                logger.warning('The city %s is not listed in the list of cities. Removing weather data' % city)
                 del self.weather_info[city]
 
         end_update = datetime.now()
         took = end_update - start_update
-        logger.info("Yahoo! update took: %s" % took)
+        logger.info('Yahoo! update took: %s' % took)
 
     def update_locations(self):
         self.cities_list = []
@@ -161,7 +157,9 @@ class WeatherUtility(object):
             result = match[0]
         else:
             result = self.cities_list[0]
-            logger.warning("Requested city '%s' is not a valid city, returning the first one of the list: %s" % (city, result['id']))
+            logger.warning(
+                u'Requested city "{0}" is not a valid city, returning the '
+                u'first one of the list: {1}'.format(city, result['id']))
 
         return result
 
@@ -172,13 +170,13 @@ class WeatherUtility(object):
         result = ''
         request = getRequest()
         if len(self.cities_list) > 0:
-            cookie = COOKIE_KEY % "current_city"
+            cookie = COOKIE_KEY % 'current_city'
             value = request.cookies.get(cookie, '')
             if not value:
                 result = self.cities_list[0]
-                logger.info("No cookie was present, returning first available city: %s" % result)
+                logger.info(u'No cookie was present, returning first available city: %s' % result)
             else:
-                logger.info("Cookie present, getting city: %s" % value)
+                logger.info(u'Cookie present, getting city: %s' % value)
                 result = self.get_city(value)
 
         return result

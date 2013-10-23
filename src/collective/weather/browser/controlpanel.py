@@ -1,39 +1,33 @@
 # -*- coding: utf-8 -*-
 
-from zope.component import getUtility
-
-from zope.interface import alsoProvides
-
-from z3c.form import field
-from z3c.form import group
-
-from plone.app.registry.browser import controlpanel
-
-from plone.registry.interfaces import IRegistry
-
-from collective.weather.browser.interfaces import IYahooWeatherSchema
+from collective.weather import _
 from collective.weather.browser.interfaces import INoaaWeatherSchema
 from collective.weather.browser.interfaces import IWeatherSchema
-
-from collective.weather import _
+from collective.weather.browser.interfaces import IYahooWeatherSchema
+from plone.app.registry.browser import controlpanel
+from plone.registry.interfaces import IRegistry
+from z3c.form import field
+from z3c.form import group
+from zope.component import getUtility
+from zope.interface import alsoProvides
 
 
 class YahooGroup(group.Group):
-    label = _(u"Yahoo")
+    label = _(u'Yahoo')
     fields = field.Fields(IYahooWeatherSchema)
 
 
 class NoaaGroup(group.Group):
-    label = _(u"NOAA")
-    description = _("""WARNING: NOAA Weather is not working at the moment.""")
+    label = _(u'NOAA')
+    description = _('WARNING: NOAA Weather is not working at the moment.')
     fields = field.Fields(INoaaWeatherSchema)
 
 
 class WeatherControlPanelEditForm(controlpanel.RegistryEditForm):
     schema = IWeatherSchema
 
-    label = _("Weather Setup")
-    description = _("""Lets you configure several weather locations""")
+    label = _('Weather Setup')
+    description = _('Lets you configure several weather locations')
 
     fields = IYahooWeatherSchema
 
@@ -67,9 +61,9 @@ class AbstractRecordsProxy(object):
 
     def __init__(self, schema):
         state = self.__dict__
-        state["__registry__"] = getUtility(IRegistry)
-        state["__proxies__"] = {}
-        state["__schema__"] = schema
+        state['__registry__'] = getUtility(IRegistry)
+        state['__proxies__'] = {}
+        state['__schema__'] = schema
         alsoProvides(self, schema)
 
     def __getattr__(self, name):
@@ -91,7 +85,7 @@ class AbstractRecordsProxy(object):
             return setattr(proxy, name, value)
 
     def __repr__(self):
-        return "<AbstractRecordsProxy for %s>" % self.__schema__.__identifier__
+        return '<AbstractRecordsProxy for %s>' % self.__schema__.__identifier__
 
     def _get_proxy(self, interface):
         proxies = self.__proxies__

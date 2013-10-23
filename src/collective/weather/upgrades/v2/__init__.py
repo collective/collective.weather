@@ -1,4 +1,4 @@
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from collective.weather.config import PROJECTNAME
 from Products.CMFCore.utils import getToolByName

@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
+from plone.app.testing import FunctionalTesting
+from plone.app.testing import IntegrationTesting
+from plone.app.testing import PLONE_FIXTURE
+from plone.app.testing import PloneSandboxLayer
+
 import pywapi
 import urllib2
 
-from plone.app.testing import PloneSandboxLayer
-from plone.app.testing import PLONE_FIXTURE
-from plone.app.testing import IntegrationTesting
-from plone.app.testing import FunctionalTesting
 
-
-def get_weather_from_yahoo(location_id, units='metric'):  # flake8: noqa
+def get_weather_from_yahoo(location_id, units='metric'):
     if location_id == 'ARCA0023':
         result = {'condition': {'text': u'Windy',
                                 'temp': u'20',
@@ -34,7 +34,7 @@ def get_weather_from_yahoo(location_id, units='metric'):  # flake8: noqa
                   }
 
     if location_id == 'ARBA0023-urllib-exception':
-        raise urllib2.URLError("")
+        raise urllib2.URLError('')
 
     if location_id == 'ARBA0023-exception':
         raise ValueError

@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import unittest2 as unittest
-import doctest
-
+from collective.weather.testing import FUNCTIONAL_TESTING
 from plone.testing import layered
 
-from collective.weather.testing import FUNCTIONAL_TESTING
+import doctest
+import unittest2 as unittest
 
 
 def test_suite():
