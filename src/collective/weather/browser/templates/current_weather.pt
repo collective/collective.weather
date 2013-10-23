@@ -1,10 +1,11 @@
 <div i18n:domain="collective.weather"
-     tal:omit-tag="">
+     tal:omit-tag=""
+     tal:define="current_city view/current_city|nothing"
+     tal:condition="current_city">
     <a id="current-city"
        href=""
-       tal:condition="view/weather_info"
-       tal:define="city_name view/current_city/name|nothing;
-                   city_id view/current_city/id|nothing""
+       tal:define="city_name current_city/name|nothing;
+                   city_id current_city/id|nothing""
        tal:attributes="data-city-id city_id">
         <span tal:content="city_name">Cordoba, Argentina</span>
     </a>
