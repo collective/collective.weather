@@ -6,13 +6,12 @@ from Products.CMFCore.utils import getToolByName
 import logging
 
 
-def upgrade_to_2(context, logger=None):
-    """
+def code_clean_up(context, logger=None):
+    """Remove all Google Weather related code.
     """
     if logger is None:
-        # Called as upgrade step: define our own logger
         logger = logging.getLogger(PROJECTNAME)
 
-    profile = 'profile-collective.weather:upgrade_to_2'
+    profile = 'profile-collective.weather.upgrades.v2:default'
     setup = getToolByName(context, 'portal_setup')
     setup.runAllImportStepsFromProfile(profile)

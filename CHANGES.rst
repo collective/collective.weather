@@ -6,7 +6,7 @@ There's a frood who really knows where his towel is.
 1.0a3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Remove all Google Weather related code (closes `#2`_). [marcosfromero]
+- Remove all Google Weather related code. [marcosfromero]
 
 - Weather conditions moved to title tag. [flecox]
 
@@ -17,8 +17,8 @@ There's a frood who really knows where his towel is.
 - Made the code to be more resistent to invalid data from the weather server.
   [frapell]
 
-- Major refactoring to allow updates and city changes through AJAX calls.
-  (fixes `#6`_) [frapell]
+- Major refactoring to allow updates and city changes through AJAX calls
+  (fixes `#6`_). [frapell]
 
 - Implemented Yahoo! weather. [frapell]
 
