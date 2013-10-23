@@ -11,12 +11,12 @@ from zope.interface import implements
 
 
 class IWeatherPortlet(IPortletDataProvider):
-    """ A weather portlet
+    """A weather portlet.
     """
 
 
 class Assignment(base.Assignment):
-    """ Portlet assignment.
+    """Portlet assignment.
     """
 
     implements(IWeatherPortlet)
