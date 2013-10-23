@@ -22,7 +22,6 @@ class IYahooWeatherSchema(form.Schema):
         default=False,
     )
 
-    form.widget(yahoo_location_ids='collective.z3cform.widgets.enhancedtextlines.EnhancedTextLinesFieldWidget')
     yahoo_location_ids = schema.List(
         title=_(u'Available options'),
         description=_(u'Enter here all available locations that will be '
@@ -52,7 +51,6 @@ class INoaaWeatherSchema(form.Schema):
         default=False,
     )
 
-    form.widget(noaa_location_ids='collective.z3cform.widgets.enhancedtextlines.EnhancedTextLinesFieldWidget')
     noaa_location_ids = schema.List(
         title=_(u'Available options'),
         description=_(u'Enter here all available locations that will be '
