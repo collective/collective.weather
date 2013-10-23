@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.0a3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Add weather portlet that displays weather conditions of current city
+  (closes `#9`_). [marcosfromero]
+
 - Remove all Google Weather related code. [marcosfromero]
 
 - Weather conditions moved to title tag. [flecox]
@@ -29,3 +32,4 @@ There's a frood who really knows where his towel is.
 - Initial release.
 
 .. _`#6`: https://github.com/collective/collective.weather/issues/6
+.. _`#9`: https://github.com/collective/collective.weather/issues/9
