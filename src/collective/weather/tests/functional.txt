@@ -23,7 +23,7 @@ weather info yet
     >>> browser.open(portalURL)
     >>> "No weather information" in browser.contents
     True
-    >>> "Cordoba, Argentina" in browser.contents
+    >>> "Córdoba, Argentina" in browser.contents
     True
     >>> "Los Angeles, California" in browser.contents
     True
@@ -41,7 +41,7 @@ And we check again
     True
     >>> "Windy" in browser.contents
     True
-    >>> "Cordoba, Argentina" in browser.contents
+    >>> "Córdoba, Argentina" in browser.contents
     True
     >>> "Los Angeles, California" in browser.contents
     True
@@ -56,7 +56,7 @@ Now, change the city
     True
     >>> "Snowing" in browser.contents
     True
-    >>> "Cordoba, Argentina" in browser.contents
+    >>> "Córdoba, Argentina" in browser.contents
     True
     >>> "Los Angeles, California" in browser.contents
     True

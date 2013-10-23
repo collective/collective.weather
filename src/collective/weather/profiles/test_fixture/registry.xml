@@ -15,7 +15,7 @@
       <value_type type="plone.registry.field.TextLine" />
     </field>
     <value>
-      <element>Cordoba|Cordoba, Argentina|ARCA0023</element>
+      <element>Cordoba|Córdoba, Argentina|ARCA0023</element>
       <element>Los Angeles|Los Angeles, California|USCA0638</element>
     </value>
   </record>

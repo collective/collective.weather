@@ -64,7 +64,7 @@ class YahooRegistryTestCase(unittest.TestCase):
 
     def test_yahoo_location_ids_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'yahoo_location_ids'))
-        existing_data = [u'Cordoba|Cordoba, Argentina|ARCA0023',
+        existing_data = [u'Cordoba|Córdoba, Argentina|ARCA0023',
                          u'Los Angeles|Los Angeles, California|USCA0638']
 
         self.assertEqual(self.settings.yahoo_location_ids, existing_data)

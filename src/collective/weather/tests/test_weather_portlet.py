@@ -117,4 +117,4 @@ class RenderTestCase(unittest.TestCase):
         #self.portal.unrestrictedTraverse('@@update-weather')()
         self.assertIn(u'Cordoba, Argentina', r.render())
         self.assertIn(u'Windy', r.render())
-        self.assertIn(u'20\xbaC', r.render())
+        self.assertIn(u'20ºC', r.render())
