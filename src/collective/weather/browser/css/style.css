@@ -42,3 +42,21 @@ dl.actionMenu div.not-selected-weather,
 dl.actionMenu a.city-not-selected {
     display: none !important;
 }
+
+/* portlet */
+.portletweather #current-city {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.portletweather .weather-temp {
+    font-size:3.5em;
+    font-weight: bold;
+    color: #666;
+}
+.portletweather .weather-icon {
+    vertical-align: top;
+}
+.portletweather dd {
+    text-align: right;
+    padding: 1em 0;
+}
