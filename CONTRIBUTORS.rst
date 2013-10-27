@@ -8,6 +8,7 @@ of the following people:
 - Héctor Velarde
 - Silvestre Huens
 - Gonzalo Almeida
+- Marcos F. Romero
 - `Tango Desktop Project`_ (icon)
 
 Development sponsored by `OpenMultimedia`_.

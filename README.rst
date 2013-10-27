@@ -7,7 +7,8 @@ collective.weather
 Life, the Universe, and Everything
 ----------------------------------
 
-A Plone package to display the weather at selected locations.
+A Plone package to display the weather at selected locations inside a portlet
+or viewlet.
 
 Mostly Harmless
 ---------------
@@ -20,20 +21,13 @@ Mostly Harmless
 
 Got an idea? Found a bug? Let us know by `opening a support ticket`_.
 
-Current Status
-^^^^^^^^^^^^^^
-
-Currently, `Yahoo! Weather`_ is the only service working. As per 2012/09/14
-`Google`_ Weather has stopped working and `NOAA`_'s `National Weather
-Service`_ has not being implemented yet.
-
 Don't Panic
 -----------
 
 Installation
 ^^^^^^^^^^^^
 
-To enable this product in a buildout-based installation:
+To enable this package on a buildout-based installation:
 
 #. Edit your buildout.cfg and add ``collective.weather`` to the list of eggs
    to install::
@@ -50,7 +44,7 @@ To enable this product in a buildout-based installation:
     [buildout]
     ...
     extends =
-        http://good-py.appspot.com/release/dexterity/1.2.1
+        https://good-py.appspot.com/release/dexterity/1.2.1?plone=4.1.6
 
 After updating the configuration you need to run ''bin/buildout'', which will
 take care of updating your system.
@@ -84,25 +78,41 @@ the viewlet.
 
     The Weather viewlet.
 
-Yahoo Weather
-^^^^^^^^^^^^^
+Finding locations
+^^^^^^^^^^^^^^^^^
 
-In order to load locations to be used with the Yahoo! Weather service, you
-need to enter each one in the following format:
+In order to define locations to be used with collective.weather, you need to
+enter each one in the following format::
 
-id|name|location_id
+    id|name|location_id
 
 Where *id* should be a unique value and not repeated among any of the cities;
-*name* is the name to be shown in the drop down, this doesn't need to be
-unique; *location_id* is the id used by `Yahoo! Weather`_ to get the forecast
-information.
+*name* is the name to be shown in the drop down (this doesn't need to be
+unique); *location_id* is the id used by `The Weather Channel`_ to get the
+forecast information.
 
-To know the location id for specific places, go to `The Weather Channel`_,
-search for that location and get the id from the url.
+Finding out locations is currently the most difficult part of using this
+package. First, you have to make a search like this in your favorite web
+search engine::
 
-For example, in the case of `Caracas, Venezuela`_, the location id would be
-**VEXX0008**; for `Beijing, China`_ it would be **CHXX0008**, and for `Los
-Angeles, CA`_ it would be **USCA0638**.
+    joao pessoa brazil weather
+
+.. figure:: https://raw.github.com/collective/collective.weather/master/search.png
+    :align: center
+    :height: 460px
+    :width: 750px
+
+    Searching for a location.
+
+Then, you will have identify the *location_id* on the URL::
+
+    http://www.weather.com/weather/today/Joao+Pessoa+Brazil+BRXX0128
+
+Other examples:
+
+* `Caracas, Venezuela`_, **VEXX0008**
+* `Beijing, China`_, **CHXX0008**
+* `Los Angeles, CA`_, **USCA0638**
 
 Internals
 ^^^^^^^^^
@@ -132,13 +142,9 @@ a clockserver job to call this "update-weather" view with no params, once
 every 30 minutes, so weather information for all your cities are ready for
 when the visitor changes it from the drop-down.
 
-
+.. _`Beijing, China`: http://www.weather.com/weather/today/Beijing+China+CHXX0008
+.. _`Caracas, Venezuela`: http://www.weather.com/weather/today/Caracas+Venezuela+VEXX0008
+.. _`Los Angeles, CA`: http://www.weather.com/weather/today/Los+Angeles+CA+USCA0638
 .. _`opening a support ticket`: https://github.com/collective/collective.weather/issues
-.. _`Yahoo! Weather`: http://weather.yahoo.com/
-.. _`Google`: http://www.google.com/
-.. _`NOAA`: http://www.noaa.gov/
-.. _`National Weather Service`: http://www.weather.gov/
 .. _`The Weather Channel`: http://www.weather.com/
-.. _`Caracas, Venezuela`: http://www.weather.com/weather/right-now/Caracas+Venezuela+VEXX0008
-.. _`Beijing, China`: http://www.weather.com/weather/right-now/CHXX0008:1
-.. _`Los Angeles, CA`: http://www.weather.com/weather/right-now/Los+Angeles+CA+USCA0638
+.. _`Yahoo! Weather`: http://weather.yahoo.com/

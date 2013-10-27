@@ -26,8 +26,8 @@ class IYahooWeatherSchema(form.Schema):
         title=_(u'Available options'),
         description=_(u'Enter here all available locations that will be '
                       u'shown in the locations drop down. Format: id|name|location_id. '
-                      u'Check http://code.google.com/p/python-weather-api/#Yahoo!_Weather '
-                      u'for further information.'),
+                      u'Check the <a href="https://github.com/collective/collective.weather#id9">package documentation</a> '
+                      u'for further information on how to find the location_id.'),
         value_type=schema.TextLine(),
         default=[],
         required=False,
