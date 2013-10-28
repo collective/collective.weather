@@ -38,6 +38,11 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <utility
+      provides="collective.weather.interfaces.IWeatherUtility"
+      factory="collective.weather.weather_utility.WeatherUtility"
+      />
+
   <!-- The weather viewlet -->
   <browser:viewlet
       name="collective.weather.top_bar_weather"
