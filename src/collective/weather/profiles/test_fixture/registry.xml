@@ -12,4 +12,7 @@
   <record name="collective.weather.interfaces.IWeatherSettings.units">
     <value>metric</value>
   </record>
+  <record name="collective.weather.interfaces.IWeatherSettings.show_viewlet">
+    <value>True</value>
+  </record>
 </registry>
