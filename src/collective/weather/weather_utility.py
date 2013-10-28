@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from collective.weather import _
-from collective.weather.browser.interfaces import IYahooWeatherSchema
+from collective.weather.interfaces import IWeatherSettings
 from collective.weather.config import COOKIE_KEY
 from collective.weather.config import PROJECTNAME
 from collective.weather.config import TIME_THRESHOLD
@@ -30,9 +30,9 @@ class WeatherUtility(object):
 
     def _update_yahoo_locations(self):
         registry = getUtility(IRegistry)
-        settings = registry.forInterface(IYahooWeatherSchema)
-        if settings.yahoo_location_ids:
-            for i in settings.yahoo_location_ids:
+        settings = registry.forInterface(IWeatherSettings)
+        if settings.location_ids:
+            for i in settings.location_ids:
                 try:
                     id, name, location_id = i.split('|')
                 except ValueError:
@@ -50,8 +50,8 @@ class WeatherUtility(object):
         start_update = datetime.now()
 
         registry = getUtility(IRegistry)
-        settings = registry.forInterface(IYahooWeatherSchema)
-        units = settings.yahoo_units
+        settings = registry.forInterface(IWeatherSettings)
+        units = settings.units
 
         now = start_update
 

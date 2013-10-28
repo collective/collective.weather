@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from collective.weather.browser.interfaces import IYahooWeatherSchema
+from collective.weather.interfaces import IWeatherSettings
 from collective.weather.interfaces import IWeatherUtility
 from collective.weather.testing import INTEGRATION_TESTING
 from copy import deepcopy
@@ -27,8 +27,8 @@ class UtilityTestCase(unittest.TestCase):
     def test_update_locations(self):
         self.weather_utility.update_locations()
         registry = getUtility(IRegistry)
-        yahoo_settings = registry.forInterface(IYahooWeatherSchema)
-        old_ids = deepcopy(yahoo_settings.yahoo_location_ids)
+        settings = registry.forInterface(IWeatherSettings)
+        old_ids = deepcopy(settings.location_ids)
 
         expected_values = [{'id': u'Cordoba',
                             'location_id': u'ARCA0023',
@@ -44,7 +44,7 @@ class UtilityTestCase(unittest.TestCase):
         self.assertEqual(actual_values, expected_values)
 
         # We add a new city to the registry
-        yahoo_settings.yahoo_location_ids.append(u'New city|New city, Test|LALA1212')
+        settings.location_ids.append(u'New city|New city, Test|LALA1212')
 
         expected_values = [{'id': u'Cordoba',
                             'location_id': u'ARCA0023',
@@ -64,7 +64,7 @@ class UtilityTestCase(unittest.TestCase):
         self.assertEqual(actual_values, expected_values)
 
         # Finally, we add a malformed value to the list
-        yahoo_settings.yahoo_location_ids.append('My city')
+        settings.location_ids.append('My city')
 
         expected_values = [{'id': u'Cordoba',
                             'location_id': u'ARCA0023',
@@ -84,11 +84,11 @@ class UtilityTestCase(unittest.TestCase):
         self.assertEqual(actual_values, expected_values)
 
         #restore old values
-        yahoo_settings.yahoo_location_ids = old_ids
+        settings.location_ids = old_ids
 
     def test_update_weather_info(self):
         registry = getUtility(IRegistry)
-        yahoo_settings = registry.forInterface(IYahooWeatherSchema)
+        settings = registry.forInterface(IWeatherSettings)
 
         # Update weather info
         self.weather_utility.update_weather_info()
@@ -105,8 +105,8 @@ class UtilityTestCase(unittest.TestCase):
         self.assertEqual(actual_values, expected_values)
 
         # Now, we add a new city
-        old_locations = deepcopy(yahoo_settings.yahoo_location_ids)
-        yahoo_settings.yahoo_location_ids.append(u'New weather|New weather|NEW123')
+        old_locations = deepcopy(settings.location_ids)
+        settings.location_ids.append(u'New weather|New weather|NEW123')
 
         self.weather_utility.update_weather_info()
 
@@ -125,7 +125,7 @@ class UtilityTestCase(unittest.TestCase):
         self.assertEqual(actual_values, expected_values)
 
         # If we remove the new city, then we should no longer get it
-        yahoo_settings.yahoo_location_ids = old_locations
+        settings.location_ids = old_locations
 
         self.weather_utility.update_weather_info()
 
@@ -147,7 +147,7 @@ class UtilityTestCase(unittest.TestCase):
 
         # We create a city with the same name but different location_id, so we can simulate
         # invalid results for an existing city. In this case, we should still see old data
-        yahoo_settings.yahoo_location_ids.append(u'New weather|New weather|NEW123-invalid')
+        settings.location_ids.append(u'New weather|New weather|NEW123-invalid')
         self.weather_utility.update_weather_info()
 
         expected_values = {u'Los Angeles': {'conditions': u'Snowing',
@@ -169,7 +169,7 @@ class UtilityTestCase(unittest.TestCase):
                                                                          'icon': u'http://l.yimg.com/a/i/us/we/52/34.gif'}}
 
         # If we get a urllib exception, then also keep the existing value
-        yahoo_settings.yahoo_location_ids.append(u'Buenos Aires|Buenos Aires, Argentina|ARBA0023-urllib-exception')
+        settings.location_ids.append(u'Buenos Aires|Buenos Aires, Argentina|ARBA0023-urllib-exception')
 
         self.weather_utility.update_weather_info()
 
@@ -190,7 +190,7 @@ class UtilityTestCase(unittest.TestCase):
         self.assertEqual(actual_values, expected_values)
 
         # If we get a any exception, then also keep the existing value
-        yahoo_settings.yahoo_location_ids.append(u'Buenos Aires|Buenos Aires, Argentina|ARBA0023-exception')
+        settings.location_ids.append(u'Buenos Aires|Buenos Aires, Argentina|ARBA0023-exception')
 
         self.weather_utility.update_weather_info()
 
@@ -212,7 +212,7 @@ class UtilityTestCase(unittest.TestCase):
         self.assertEqual(actual_values, expected_values)
 
         # Test imperial units
-        yahoo_settings.yahoo_units = 'imperial'
+        settings.units = 'imperial'
         self.weather_utility.weather_info = {}
         self.weather_utility.update_weather_info()
 
@@ -274,15 +274,17 @@ class UtilityTestCase(unittest.TestCase):
 
     def test_update_specific_weather_info(self):
         registry = getUtility(IRegistry)
-        yahoo_settings = registry.forInterface(IYahooWeatherSchema)
-        yahoo_settings.yahoo_units = 'metric'
+        settings = registry.forInterface(IWeatherSettings)
+        settings.units = 'metric'
 
         # What we first do is replace all locations created from the registry, with new values
-        old_locations = deepcopy(yahoo_settings.yahoo_location_ids)
-        yahoo_settings.yahoo_location_ids = [u'Cordoba|Cordoba, Argentina|ARCA0024',
-                                             u'Los Angeles|Los Angeles, California|USCA0639',
-                                             u'New weather|New weather|NEW124',
-                                             u'New weather2|New weather|NEW125']
+        old_locations = deepcopy(settings.location_ids)
+        settings.location_ids = [
+            u'Cordoba|Cordoba, Argentina|ARCA0024',
+            u'Los Angeles|Los Angeles, California|USCA0639',
+            u'New weather|New weather|NEW124',
+            u'New weather2|New weather|NEW125',
+        ]
         # And reset any existing weather info
         self.weather_utility.weather_info = {}
 
@@ -357,6 +359,6 @@ class UtilityTestCase(unittest.TestCase):
         self.assertEqual(actual_values, expected_values)
 
         # Restore original values
-        yahoo_settings.yahoo_location_ids = old_locations
+        settings.location_ids = old_locations
         # And reset any existing weather info
         self.weather_utility.weather_info = {}
