@@ -47,3 +47,10 @@ class IWeatherSettings(form.Schema):
         default='metric',
         vocabulary=UNIT_SYSTEMS,
     )
+
+    show_viewlet = schema.Bool(
+        title=_(u'Show weather viewlet?'),
+        description=_(u'Defines if the weather viewlet will be shown or not.'),
+        required=True,
+        default=False,
+    )

@@ -74,6 +74,11 @@ class RegistryTestCase(unittest.TestCase):
         self.assertTrue(hasattr(self.settings, 'units'))
         self.assertEqual(self.settings.units, u'metric')
 
+    def test_show_viewlet_record_in_registry(self):
+        self.assertTrue(hasattr(self.settings, 'show_viewlet'))
+        # as defined in the test fixture
+        self.assertEqual(self.settings.show_viewlet, True)
+
     def test_records_removed_on_uninstall(self):
         qi = self.portal['portal_quickinstaller']
         qi.uninstallProducts(products=[PROJECTNAME])
@@ -83,6 +88,7 @@ class RegistryTestCase(unittest.TestCase):
             prefix + 'weather_api',
             prefix + 'location_ids',
             prefix + 'units',
+            prefix + 'show_viewlet',
         ]
 
         for r in records:
