@@ -21,13 +21,6 @@
         />
 
     <browser:page
-        name="weather-controlpanel"
-        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-        class=".controlpanel.WeatherControlPanel"
-        permission="cmf.ManagePortal"
-        />
-
-    <browser:page
         name="current-weather"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         class=".current_weather.CurrentWeather"
