@@ -6,6 +6,13 @@ There's a frood who really knows where his towel is.
 1.0a3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+.. Warning::
+    This release includes many changes in the package structure and is no
+    backwards compatible.
+
+- Control panel configlet was simplified; now all package settings are defined
+  in one screen (closes `#19`_). [hvelarde]
+
 - WeatherUtility is now registered as a global utility as we have no data to
   persist on it (closes `#7`_). If you're still stock with a
   ``TypeError: ('object.new(WeatherUtility) is not safe...``
@@ -41,4 +48,5 @@ There's a frood who really knows where his towel is.
 .. _`#6`: https://github.com/collective/collective.weather/issues/6
 .. _`#7`: https://github.com/collective/collective.weather/issues/7
 .. _`#9`: https://github.com/collective/collective.weather/issues/9
+.. _`#19`: https://github.com/collective/collective.weather/issues/19
 .. _`How to make your Plone add-on products uninstall cleanly`: http://blog.keul.it/2013/05/how-to-make-your-plone-add-on-products.html

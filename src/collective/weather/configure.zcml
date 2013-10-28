@@ -43,6 +43,13 @@
       factory="collective.weather.weather_utility.WeatherUtility"
       />
 
+  <browser:page
+      name="weather-settings"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".controlpanel.WeatherSettingsControlPanel"
+      permission="cmf.ManagePortal"
+      />
+
   <!-- The weather viewlet -->
   <browser:viewlet
       name="collective.weather.top_bar_weather"

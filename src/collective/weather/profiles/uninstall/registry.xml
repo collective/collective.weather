@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <registry>
- <record name="collective.weather.browser.interfaces.IYahooWeatherSchema.use_yahoo" delete="true" />
- <record name="collective.weather.browser.interfaces.IYahooWeatherSchema.yahoo_location_ids" delete="true" />
- <record name="collective.weather.browser.interfaces.IYahooWeatherSchema.yahoo_units" delete="true" />
- <record name="collective.weather.browser.interfaces.INoaaWeatherSchema.use_noaa" delete="true" />
- <record name="collective.weather.browser.interfaces.INoaaWeatherSchema.noaa_location_ids" delete="true" />
+  <record name="collective.weather.interfaces.IWeatherSettings.weather_api" delete="true" />
+  <record name="collective.weather.interfaces.IWeatherSettings.location_ids" delete="true" />
+  <record name="collective.weather.interfaces.IWeatherSettings.units" delete="true" />
 </registry>
