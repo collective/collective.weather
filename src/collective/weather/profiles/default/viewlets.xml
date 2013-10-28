@@ -3,4 +3,7 @@
   <order manager="plone.portalheader" skinname="Plone Default">
     <viewlet name="collective.weather.top_bar_weather" insert-after="plone.personal_bar"/>
   </order>
+  <hidden manager="plone.portalheader" skinname="Plone Default">
+    <viewlet name="collective.weather.top_bar_weather" />
+  </hidden>
 </object>
