@@ -9,7 +9,7 @@
        tal:attributes="data-city-id city_id">
         <span tal:content="city_name">Córdoba, Argentina</span>
     </a>
-    <div id="current-weather">
+    <div class="current-weather">
         <div tal:condition="view/weather_info">
             <tal:block tal:define="current_weather python:view.weather_info['weather']">
             <img class="weather-icon"

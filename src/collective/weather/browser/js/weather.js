@@ -15,7 +15,7 @@ function showCityWeather(cityId){
                              async : true,
                              data: data,
                              success: function(results){
-                                    $("div#current-weather").parent().html(results);
+                                    $("#top-weather-viewlet .current-weather").parent().html(results);
                                     createCookie("collective.weather.current_city", cityId, 30);
                             }
                         });

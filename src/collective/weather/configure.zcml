@@ -59,4 +59,11 @@
       layer="collective.weather.interfaces.IWeatherLayer"
       />
 
+  <!-- Vocabularies -->
+  <utility
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      component=".vocabularies.CitiesVocabulary"
+      name="collective.weather.Cities"
+      />
+
 </configure>
