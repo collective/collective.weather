@@ -14,6 +14,6 @@ def CitiesVocabulary(context):
     items = []
     for city in cities_list:
         items.append(SimpleVocabulary.createTerm(
-                     city['name'], city['location_id'], city['name']))
+                     city['id'], city['location_id'], city['name']))
 
     return SimpleVocabulary(items)

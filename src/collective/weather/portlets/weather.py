@@ -9,6 +9,7 @@ from zope import schema
 from zope.component import getUtility
 from zope.formlib import form
 from zope.interface import implements
+from zope.schema.interfaces import IVocabularyFactory
 
 
 class IWeatherPortlet(IPortletDataProvider):
@@ -56,7 +57,19 @@ class Renderer(base.Renderer):
 
     def update(self):
         weather_utility = getUtility(IWeatherUtility)
-        self.weather_info = weather_utility.get_weather_info()
+        factory = getUtility(IVocabularyFactory, name='collective.weather.Cities')
+        vocab = factory(self.context)
+        self.current_city = None
+        if self.data.city in vocab:
+            city = vocab.by_value[self.data.city]
+            self.current_city = {'id': city.value, 'name': city.title}
+
+        self.weather_info = None
+        try:
+            weather_utility.update_weather_info(self.current_city['id'])
+            self.weather_info = weather_utility.get_weather_info(self.current_city)
+        except:
+            pass
 
 
 class AddForm(base.AddForm):
