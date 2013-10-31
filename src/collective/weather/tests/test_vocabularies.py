@@ -4,7 +4,7 @@ from collective.weather.testing import INTEGRATION_TESTING
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 
-import unittest
+import unittest2 as unittest
 
 
 class VocabulariesTestCase(unittest.TestCase):
