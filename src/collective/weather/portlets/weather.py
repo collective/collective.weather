@@ -13,8 +13,8 @@ from zope.schema.interfaces import IVocabularyFactory
 
 
 class IWeatherPortlet(IPortletDataProvider):
-    """A weather portlet.
-    """
+    '''A weather portlet.
+    '''
 
     header = schema.TextLine(
         title=_(u'Portlet header'),
@@ -31,8 +31,8 @@ class IWeatherPortlet(IPortletDataProvider):
 
 
 class Assignment(base.Assignment):
-    """Portlet assignment.
-    """
+    '''Portlet assignment.
+    '''
 
     implements(IWeatherPortlet)
 
@@ -45,15 +45,15 @@ class Assignment(base.Assignment):
 
     @property
     def title(self):
-        """This property is used to give the title of the portlet in the
+        '''This property is used to give the title of the portlet in the
         'manage portlets' screen.
-        """
+        '''
         return self.header
 
 
 class Renderer(base.Renderer):
-    """Portlet renderer.
-    """
+    '''Portlet renderer.
+    '''
 
     render = ViewPageTemplateFile('weather.pt')
 
@@ -76,8 +76,8 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-    """Portlet add form.
-    """
+    '''Portlet add form.
+    '''
 
     form_fields = form.Fields(IWeatherPortlet)
 
@@ -88,8 +88,8 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
-    """Portlet edit form.
-    """
+    '''Portlet edit form.
+    '''
 
     form_fields = form.Fields(IWeatherPortlet)
 
