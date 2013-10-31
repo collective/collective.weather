@@ -1,7 +1,6 @@
-<dl  class="portlet portletweather"
+<dl  class="portlet portletWeather"
      i18n:domain="collective.weather"
      tal:define="portal context/@@plone_portal_state/portal">
-
 
     <dt class="portletHeader">
         <span tal:content="view/data/header">Weather</span>

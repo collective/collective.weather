@@ -44,19 +44,19 @@ dl.actionMenu a.city-not-selected {
 }
 
 /* portlet */
-.portletweather #current-city {
+.portletWeather #current-city {
     font-size: 1.2em;
     font-weight: bold;
 }
-.portletweather .weather-temp {
+.portletWeather .weather-temp {
     font-size:3.5em;
     font-weight: bold;
     color: #666;
 }
-.portletweather .weather-icon {
+.portletWeather .weather-icon {
     vertical-align: top;
 }
-.portletweather dd {
+.portletWeather dd {
     text-align: right;
     padding: 1em 0;
 }

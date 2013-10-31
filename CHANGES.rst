@@ -3,12 +3,22 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-1.0a3 (unreleased)
+1.0a4 (unreleased)
+^^^^^^^^^^^^^^^^^^
+
+- Nothing changed yet.
+
+
+1.0a3 (2013-10-29)
 ^^^^^^^^^^^^^^^^^^
 
 .. Warning::
     This release includes many changes in the package structure and is no
     backwards compatible.
+
+- Spanish and Brazilian Portuguese translations were updated. [hvelarde]
+
+- Package documentation was updated. [hvelarde]
 
 - A new option to define whether or not the weather viewlet is visible was
   added; by default the viewlet is hidden (closes `#14`_). [hvelarde]

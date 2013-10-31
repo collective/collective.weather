@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.weather\n"
-"POT-Creation-Date: 2012-12-28 23:26+0000\n"
-"PO-Revision-Date: 2012-08-01 21:08-0300\n"
+"POT-Creation-Date: 2013-10-28 23:00+0000\n"
+"PO-Revision-Date: 2013-10-28 21:02-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Spanish <>\n"
 "MIME-Version: 1.0\n"
@@ -15,33 +15,21 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.weather\n"
 
-#: collective/weather/weather_utility.py:185
+#: collective/weather/weather_utility.py:112
 msgid "%sºC"
 msgstr "%sºC"
 
-#: collective/weather/weather_utility.py:183
+#: collective/weather/weather_utility.py:110
 msgid "%sºF"
 msgstr "%sºF"
 
-#: collective/weather/browser/interfaces.py:29
-msgid "Available options"
-msgstr "Opciones disponibles"
+#: collective/weather/profiles/default/portlets.xml
+msgid "A portlet that shows the weather forecast for selected cities."
+msgstr "Un portlet que muestra el estado del tiempo en localidades seleccionadas."
 
-#: collective/weather/browser/interfaces.py:30
-msgid "Enter here all available locations that will be shown in the locations drop down. Format: id|name|location_id."
-msgstr "Liste aquí las ubicaciones que estarán disponibles. El formato es id|nombre|id_de_ubicación"
-
-#: collective/weather/browser/interfaces.py:82
-msgid "Enter here all available locations that will be shown in the locations drop down. Format: id|name|location_id. Check http://code.google.com/p/python-weather-api/#NOAA for further information."
-msgstr "Ingrese aquí todas las ubicaciones disponibles que se mostrarán en el drop down de ubicaciones. Formato: id|nombre|location_id. Acceda a http://code.google.com/p/python-weather-api/#NOAA para información adicional."
-
-#: collective/weather/browser/interfaces.py:57
-msgid "Enter here all available locations that will be shown in the locations drop down. Format: id|name|location_id. Check http://code.google.com/p/python-weather-api/#Yahoo!_Weather for further information."
-msgstr "Ingrese aquí todas las ubicaciones disponibles que se mostrarán en el drop down de ubicaciones. Formato: id|nombre|location_id. Acceda a http://code.google.com/p/python-weather-api/#Yahoo!_Weather para información adicional."
-
-#: collective/weather/browser/interfaces.py:36
-msgid "Enter the language code to show the content."
-msgstr "Defina el idioma que se utilizará para mostrar el contenido."
+#: collective/weather/interfaces.py:36
+msgid "Available locations"
+msgstr "Localidades disponibles"
 
 msgid "Fair"
 msgstr "Despejado"
@@ -49,23 +37,11 @@ msgstr "Despejado"
 msgid "Few Showers"
 msgstr "Algunas lluvias"
 
-#: collective/weather/browser/controlpanel.py:23
-msgid "Google"
-msgstr ""
-
-#: collective/weather/browser/interfaces.py:16
+#: collective/weather/config.py:20
 msgid "Imperial"
 msgstr "Imperial"
 
-#: collective/weather/browser/interfaces.py:35
-msgid "Language"
-msgstr "Idioma"
-
-#: collective/weather/browser/controlpanel.py:43
-msgid "Lets you configure several weather locations"
-msgstr "Le permite configurar varias ubicaciones para el clima"
-
-#: collective/weather/browser/interfaces.py:15
+#: collective/weather/config.py:19
 msgid "Metric"
 msgstr "Métrico"
 
@@ -75,23 +51,27 @@ msgstr "Mayormente nublado"
 msgid "Mostly Sunny"
 msgstr "Mayormente soleado"
 
-#: collective/weather/browser/controlpanel.py:34
-msgid "NOAA"
-msgstr ""
-
-#: collective/weather/browser/templates/current_weather.pt:21
+#: collective/weather/browser/templates/current_weather.pt:25
 msgid "No weather information"
-msgstr "No hay información de las condiciones meteorológicas"
+msgstr "No hay información sobre el estado del tiempo"
 
 # Translations for weather conditions from Yahoo
 msgid "Partly Cloudy"
-msgstr "Parcialmente Nublado"
+msgstr "Parcialmente nublado"
 
 msgid "Rain"
 msgstr "Lluvia"
 
 msgid "Scattered T-Storms"
 msgstr "Tormentas aisladas"
+
+#: collective/weather/controlpanel.py:12
+msgid "Settings for the collective.weather package"
+msgstr "Configuración del paquete collective.weather"
+
+#: collective/weather/interfaces.py:61
+msgid "Show weather viewlet?"
+msgstr "¿Mostrar el viewlet del estado del tiempo?"
 
 msgid "Showers"
 msgstr "Lluvias"
@@ -103,43 +83,48 @@ msgstr "Soleado"
 msgid "Uninstall profile for the collective.weather package."
 msgstr "Desinstalar el paquete collective.weather."
 
-#: collective/weather/browser/interfaces.py:39
+#: collective/weather/interfaces.py:49
 msgid "Units"
 msgstr "Unidades"
 
-#: collective/weather/browser/interfaces.py:40
-msgid "Units to show the results."
-msgstr "Las unidades utilizadas para mostrar los resultados"
-
-#: collective/weather/browser/interfaces.py:24
-msgid "Use Google Weather service"
-msgstr "Utilizar el servicio Google Weather"
-
-#: collective/weather/browser/interfaces.py:76
-msgid "Use NOAA weather service (XXX: not yet implemented)"
-msgstr "Usar el servicio climático de NOAA (XXX: No implementado todavía)"
-
-#: collective/weather/browser/interfaces.py:51
-msgid "Use Yahoo! Weather service"
-msgstr "Usar el servicio de clima de Yahoo!"
-
-#: collective/weather/browser/controlpanel.py:24
-msgid "WARNING: Google Weather is not working at the moment."
-msgstr "PRECAUCION: El servicio de clima de Google no funciona actualmente."
-
-#: collective/weather/browser/controlpanel.py:35
-msgid "WARNING: NOAA Weather is not working at the moment."
-msgstr "PRECAUCION: El servicio de clima de NOAA no funciona actualmente."
-
+#: collective/weather/portlets/weather.pt:6
 #: collective/weather/profiles/default/controlpanel.xml
 msgid "Weather"
-msgstr "Condiciones meteorológicas"
+msgstr "Estado del tiempo"
 
-#: collective/weather/browser/controlpanel.py:42
+#: collective/weather/controlpanel.py:11
 msgid "Weather Setup"
 msgstr "Configuración de collective.weather"
 
-#: collective/weather/browser/controlpanel.py:29
-msgid "Yahoo"
+#: collective/weather/portlets/weather.py:29
+#: collective/weather/profiles/default/portlets.xml
+msgid "Weather portlet"
+msgstr "Portlet de estado del tiempo"
+
+#: collective/weather/interfaces.py:26
+msgid "Weather service to be used"
+msgstr "Servicio meteorológico a ser utilizado"
+
+#: collective/weather/config.py:15
+msgid "Yahoo! Weather"
+msgstr "Yahoo! Weather"
+
+#. Default: "Enter here all available locations that will be available. Format: id|name|location_id. Check the <a href=\"https://github.com/collective/collective.weather#finding-locations\">package documentation</a> for further information on how to find ids."
+#: collective/weather/interfaces.py:37
+msgid "help_location_ids"
+msgstr "Introduzca aquí las localidades disponibles. El formato es: id|name|location_id. Revise la <a href=\"https://github.com/collective/collective.weather#finding-locations\">documentación del paquete</a> para mayor información sobre cómo encontrar los identificadores."
+
+#. Default: "Defines whether or not the weather viewlet will be shown site wide."
+#: collective/weather/interfaces.py:62
+msgid "help_show_viewlet"
+msgstr "Define si el viewlet del estado del tiempo se mostrará en el sitio o no."
+
+#. Default: "System of units to be used: metric or imperial. Metric system uses degrees Celsius. Imperial system uses degrees Fahrenheit."
+#: collective/weather/interfaces.py:50
+msgid "help_units"
+msgstr "Sistema de unidades a ser utilizado: métrico o imperial. El sistema métrico usa grados Celsius. El sistema imperial usa grados Fahrenheit."
+
+#: collective/weather/interfaces.py:27
+msgid "help_weather_api"
 msgstr ""
 

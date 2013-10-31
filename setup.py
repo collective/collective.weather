@@ -4,8 +4,8 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-version = '1.0a3.dev0'
-description = 'A Plone package to display the weather at selected locations inside a portlet or viewlet.'
+version = '1.0a4.dev0'
+description = 'A Plone package to display the current weather at selected locations inside a portlet or viewlet.'
 long_description = (
     open('README.rst').read() + '\n' +
     open('CONTRIBUTORS.rst').read() + '\n' +
