@@ -1,13 +1,14 @@
 <dl  class="portlet portletWeather"
      i18n:domain="collective.weather"
-     tal:define="portal context/@@plone_portal_state/portal">
+     tal:define="portal context/@@plone_portal_state/portal;
+                 current_city view/current_city|nothing"
+     tal:condition="current_city">
 
     <dt class="portletHeader">
         <span tal:content="view/data/header">Weather</span>
     </dt>
 
     <dd i18n:domain="collective.weather"
-        tal:define="current_city view/current_city|nothing"
         tal:condition="current_city">
 
         <span tal:define="city_name current_city/name|nothing"

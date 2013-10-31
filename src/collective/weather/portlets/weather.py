@@ -68,11 +68,9 @@ class Renderer(base.Renderer):
             self.current_city = {'id': location.value, 'name': location.title}
 
         self.weather_info = None
-        try:
+        if not self.current_city is None:
             weather_utility.update_weather_info(self.current_city['id'])
             self.weather_info = weather_utility.get_weather_info(self.current_city)
-        except:
-            pass
 
 
 class AddForm(base.AddForm):
