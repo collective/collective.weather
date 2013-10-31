@@ -46,7 +46,7 @@ class PortletTestCase(unittest.TestCase):
         self.assertTrue(IPortletAssignment.providedBy(portlet))
         self.assertTrue(IPortletDataProvider.providedBy(portlet.data))
 
-    @unittest.skip('Portlet has no add view... yet')
+    #@unittest.skip('Portlet has no add view... yet')
     def test_invoke_add_view(self):
         portlet = getUtility(IPortletType, name=self.name)
         mapping = self.portal.restrictedTraverse('++contextportlets++plone.leftcolumn')
@@ -55,12 +55,12 @@ class PortletTestCase(unittest.TestCase):
             del mapping[m]
 
         addview = mapping.restrictedTraverse('+/' + portlet.addview)
-        addview.createAndAdd(data={})
+        addview.createAndAdd(data={'header': u'Weather', 'city': u'Cordoba'})
 
         self.assertEqual(len(mapping), 1)
         self.assertTrue(isinstance(mapping.values()[0], weather.Assignment))
 
-    @unittest.skip('Portlet has no edit view... yet')
+    #@unittest.skip('Portlet has no edit view... yet')
     def test_invoke_edit_view(self):
         mapping = PortletAssignmentMapping()
 
@@ -101,7 +101,7 @@ class RenderTestCase(unittest.TestCase):
             (context, request, view, manager, assignment), IPortletRenderer)
 
     def test_render(self):
-        assignment = weather.Assignment()
+        assignment = weather.Assignment(header=u'Weather', city=u'Cordoba')
 
         r = self.renderer(assignment=assignment)
         r = r.__of__(self.portal)
