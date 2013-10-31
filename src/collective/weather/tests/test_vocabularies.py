@@ -15,7 +15,7 @@ class VocabulariesTestCase(unittest.TestCase):
         self.portal = self.layer['portal']
 
     def test_locations_vocabulary(self):
-        name = 'collective.weather.Cities'
+        name = 'collective.weather.Locations'
         util = queryUtility(IVocabularyFactory, name)
         self.assertIsNotNone(util)
         locations = util(self.portal)

@@ -5,15 +5,15 @@ from zope.component import getUtility
 from zope.schema.vocabulary import SimpleVocabulary
 
 
-def CitiesVocabulary(context):
-    """ Creates a vocabulary to expose configured cities.
+def LocationsVocabulary(context):
+    """Creates a vocabulary to expose configured locations.
     """
 
     weather_utility = getUtility(IWeatherUtility)
-    cities_list = weather_utility.get_cities_list()
+    locations = weather_utility.get_cities_list()
     items = []
-    for city in cities_list:
-        items.append(SimpleVocabulary.createTerm(
-                     city['id'], city['location_id'], city['name']))
+    for l in locations:
+        items.append(
+            SimpleVocabulary.createTerm(l['id'], l['location_id'], l['name']))
 
     return SimpleVocabulary(items)

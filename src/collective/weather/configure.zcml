@@ -61,8 +61,8 @@
   <!-- Vocabularies -->
   <utility
       provides="zope.schema.interfaces.IVocabularyFactory"
-      component=".vocabularies.CitiesVocabulary"
-      name="collective.weather.Cities"
+      component=".vocabularies.LocationsVocabulary"
+      name="collective.weather.Locations"
       />
 
 </configure>

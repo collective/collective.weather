@@ -13,56 +13,59 @@ from zope.schema.interfaces import IVocabularyFactory
 
 
 class IWeatherPortlet(IPortletDataProvider):
-    '''A weather portlet.
-    '''
+    """A weather portlet.
+    """
 
     header = schema.TextLine(
         title=_(u'Portlet header'),
-        description=_(u'Title of the rendered portlet'),
-        required=True)
-
-    city = schema.Choice(
-        title=_(u'City'),
-        description=_(u'Choose one of the preconfigured cities'),
+        description=_(u'Title of the rendered portlet.'),
         required=True,
-        vocabulary='collective.weather.Cities')
+    )
+
+    location = schema.Choice(
+        title=_(u'Location'),
+        description=_(u'Choose one of the preconfigured locations.'),
+        required=True,
+        vocabulary='collective.weather.Locations',
+    )
 
 
 class Assignment(base.Assignment):
-    '''Portlet assignment.
-    '''
+    """Portlet assignment.
+    """
 
     implements(IWeatherPortlet)
 
     header = u''
-    city = u''
+    location = u''
 
-    def __init__(self, header=u'', city=u''):
+    def __init__(self, header=u'', location=u''):
         self.header = header
-        self.city = city
+        self.location = location
 
     @property
     def title(self):
-        '''This property is used to give the title of the portlet in the
+        """This property is used to give the title of the portlet in the
         'manage portlets' screen.
-        '''
+        """
         return self.header
 
 
 class Renderer(base.Renderer):
-    '''Portlet renderer.
-    '''
+    """Portlet renderer.
+    """
 
     render = ViewPageTemplateFile('weather.pt')
 
     def update(self):
         weather_utility = getUtility(IWeatherUtility)
-        factory = getUtility(IVocabularyFactory, name='collective.weather.Cities')
+        factory = getUtility(
+            IVocabularyFactory, name='collective.weather.Locations')
         vocab = factory(self.context)
         self.current_city = None
-        if self.data.city in vocab:
-            city = vocab.by_value[self.data.city]
-            self.current_city = {'id': city.value, 'name': city.title}
+        if self.data.location in vocab:
+            location = vocab.by_value[self.data.location]
+            self.current_city = {'id': location.value, 'name': location.title}
 
         self.weather_info = None
         try:
@@ -73,8 +76,8 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-    '''Portlet add form.
-    '''
+    """Portlet add form.
+    """
 
     form_fields = form.Fields(IWeatherPortlet)
 
@@ -85,9 +88,9 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
-    '''Portlet edit form.
-    '''
+    """Portlet edit form.
+    """
 
     form_fields = form.Fields(IWeatherPortlet)
 
-    label = _(u'Add Weather Portlet')
+    label = _(u'Edit Weather Portlet')
