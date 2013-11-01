@@ -1,11 +1,39 @@
 <dl  class="portlet portletWeather"
      i18n:domain="collective.weather"
-     tal:define="portal context/@@plone_portal_state/portal">
+     tal:define="portal context/@@plone_portal_state/portal;
+                 current_city view/current_city|nothing"
+     tal:condition="current_city">
 
     <dt class="portletHeader">
-        <span i18n:translate="">Weather</span>
+        <span tal:content="view/data/header">Weather</span>
     </dt>
 
-    <dd tal:content="structure portal/current-weather" />
+    <dd i18n:domain="collective.weather"
+        tal:condition="current_city">
+
+        <span tal:define="city_name current_city/name|nothing"
+              tal:content="city_name">Cordoba, Argentina
+        </span>
+        <div class="current-weather"
+             tal:define="weather_info view/weather_info|nothing">
+            <div tal:condition="weather_info">
+                <tal:block tal:define="current_weather python:weather_info['weather']">
+                <img class="weather-icon"
+                    tal:attributes="src python:current_weather['icon'];
+                                    title python:current_weather['conditions'];
+                                    alt python:current_weather['conditions']"
+                    i18n:attributes="alt; title" />
+                <span class="weather-temp" tal:content="python:current_weather['temp']" />
+                </tal:block>
+            </div>
+
+            <div tal:condition="not:weather_info">
+                <img class="weather-icon" title="No weather information" alt="No weather information"
+                    tal:attributes="src string:++resource++collective.weather.icons/NA.png"
+                    i18n:attributes="alt; title" />
+            </div>
+        </div>
+
+    </dd>
 
 </dl>

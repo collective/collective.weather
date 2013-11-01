@@ -33,7 +33,7 @@ dl.actionMenu a#current-city{
     right: 0;
 }
 
-#top-weather-viewlet #current-weather {
+#top-weather-viewlet .current-weather {
     float: right;
     padding-right: 0.5em;
 }
