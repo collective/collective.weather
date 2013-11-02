@@ -12,6 +12,7 @@
 
   <include package=".browser" />
   <include package=".portlets" />
+  <include package=".utilities" />
 
   <genericsetup:registerProfile
       name="default"
