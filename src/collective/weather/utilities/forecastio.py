@@ -29,8 +29,6 @@ class ForecastIO(object):
 
     Monkey patch _getWeatherInfo to avoid actual web service call
 
-
-
     >>> def _getWeatherInfo(lat, long, units):
     ...    weather_infos = {
     ...        '25,20,si': {'temperature': 18.84,
@@ -52,8 +50,8 @@ class ForecastIO(object):
 
     >>> lat_lang = (25, 20,)
     >>> info = forecastio.getWeatherInfo(lat_lang, units='C')
-    >>> info['temperature']
-    18.84
+    >>> '%.2f' % info['temperature']  # For Python 2.6
+    '18.84'
     >>> info['summary']
     'Sunny'
     >>> info['icon']
@@ -62,8 +60,8 @@ class ForecastIO(object):
     Test with a lat_lang string and a different unit
 
     >>> info = forecastio.getWeatherInfo('25,20', units='F')
-    >>> info['temperature']
-    65.91
+    >>> '%.2f' % info['temperature']  # For Python 2.6
+    '65.91'
 
     Test a non lat_lang location
 
