@@ -16,7 +16,10 @@ class ForecastIO(object):
 
     implements(IWeatherInfo)
 
-    def getWeatherInfo(self, key, location, units='F', lang=None):
+    def __init__(self, key=None):
+        self.key = key
+
+    def getWeatherInfo(self, location, units='F', lang=None):
         """location must be a tuplish (lat, lang)
            unfortunately lang is not configurable for forecast.io
         """
@@ -25,7 +28,7 @@ class ForecastIO(object):
 
         BASE_ICON_URL = '++resource++collective.weather/{0}-icon.png'
 
-        if key.strip() == '':
+        if self.key.strip() == '':
             # TODO: Give a friendly message
             return None
 
@@ -47,7 +50,7 @@ class ForecastIO(object):
         else:
             units = 'us'
 
-        response = urllib2.urlopen(BASE_URL.format(key, lat, long, units))
+        response = urllib2.urlopen(BASE_URL.format(self.key, lat, long, units))
         forecast_info = json.loads(response.read())
         if 'currently' in forecast_info:
             forecast_info = forecast_info['currently']

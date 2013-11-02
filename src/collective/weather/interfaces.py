@@ -23,7 +23,7 @@ class IWeatherInfo(Interface):
        current weather information of a given location
     """
 
-    def getWeatherInfo(key, location, units, lang):
+    def getWeatherInfo(location, units, lang):
         """Gets weather information of given location
            returns temperature in given units,
            a short summary in given lang
