@@ -34,7 +34,7 @@ class ForecastIO(object):
 
     Get the utility
 
-    >>> utility = getUtility(IWeatherInfo, name='forecastio')
+    >>> utility = getUtility(IWeatherInfo, name='forecast.io')
 
     Test the utility with a blank key (log output)
 

@@ -5,7 +5,14 @@
   <utility
       provides="collective.weather.interfaces.IWeatherInfo"
       component=".forecastio.ForecastIO"
-      name="forecastio"
+      name="forecast.io"
       />
+
+  <utility
+      provides="collective.weather.interfaces.IWeatherInfo"
+      component=".yahoo.Yahoo"
+      name="yahoo"
+      />
+
 
 </configure>

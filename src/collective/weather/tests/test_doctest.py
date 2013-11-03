@@ -18,4 +18,8 @@ def test_suite():
         layered(doctest.DocTestSuite('collective.weather.utilities.forecastio'),
                 layer=FUNCTIONAL_TESTING),
     ])
+    suite.addTests([
+        layered(doctest.DocTestSuite('collective.weather.utilities.yahoo'),
+                layer=FUNCTIONAL_TESTING),
+    ])
     return suite
