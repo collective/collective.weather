@@ -128,7 +128,7 @@ class Yahoo(object):
         weather_info = self._getWeatherInfo(location, units)
 
         if 'error' in weather_info:
-            warning = 'forecast.io api returned this {0} error: {1}'
+            warning = 'Yahoo! weather  api returned this {0} error: {1}'
             logger.warning(warning.format(weather_info['error'],
                                           weather_info['text']))
 
