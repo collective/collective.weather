@@ -4,10 +4,16 @@ try:
     import json
 except ImportError:
     import simplejson as json
-import urllib2
 
-from zope.interface import implements
+import logging
+
+from collective.weather.config import PROJECTNAME
 from collective.weather.interfaces import IWeatherInfo
+from urllib2 import HTTPError
+from urllib2 import urlopen
+from zope.interface import implements
+
+logger = logging.getLogger(PROJECTNAME)
 
 
 class ForecastIO(object):
@@ -16,11 +22,27 @@ class ForecastIO(object):
     >>> from zope.component import getUtility
     >>> from collective.weather.interfaces import IWeatherInfo
 
+    Modify logger output for testing purposes
+
+    >>> import sys, logging
+    >>> root_logger = logging.getLogger()
+    >>> handler = logging.StreamHandler(sys.stdout)
+    >>> formatter = logging.Formatter("%(name)s - %(levelname)s - %(message)s")
+    >>> handler.setFormatter(formatter)
+    >>> root_logger.addHandler(handler)
+
+
     Get the utility
 
     >>> utility = getUtility(IWeatherInfo, name='forecastio')
 
-    And initialize it with the provider's key
+    Test the utility with a blank key (log output)
+
+    >>> forecastio = utility('')
+    >>> forecastio.getWeatherInfo('25,20')
+    collective.weather - WARNING - Missing forecast.io api key
+
+    Initialize the utility with the provider's key
 
     >>> key = 'my-secret-key'
     >>> forecastio = utility(key)
@@ -63,9 +85,10 @@ class ForecastIO(object):
     >>> '%.2f' % info['temperature']  # For Python 2.6
     '65.91'
 
-    Test a non lat_lang location
+    Test a non lat_lang location (log output)
 
     >>> info = forecastio.getWeatherInfo('Buenos Aires')
+    collective.weather - WARNING - Not a valid (lat, lang) location
     >>> info is None
     True
 
@@ -93,7 +116,11 @@ class ForecastIO(object):
 
         url = self.BASE_URL
         icon_url = self.BASE_ICON_URL
-        response = urllib2.urlopen(url.format(self.key, lat, long, units))
+        try:
+            response = urlopen(url.format(self.key, lat, long, units))
+        except HTTPError, error:
+            return {'error': error.code, 'text': error.reason}
+
         forecast_info = json.loads(response.read())
         if 'currently' in forecast_info:
             forecast_info = forecast_info['currently']
@@ -117,7 +144,7 @@ class ForecastIO(object):
         """
 
         if self.key.strip() == '':
-            # TODO: Give a friendly message
+            logger.warning(u'Missing forecast.io api key')
             return None
 
         if isinstance(location, basestring):
@@ -127,10 +154,10 @@ class ForecastIO(object):
             try:
                 lat, long = location
             except ValueError:  # Too many values to unpack
-                # TODO: Give a friendly message
+                logger.warning('Not a valid (lat, lang) location')
                 return None
         else:
-            # TODO: Give a friendly message
+            logger.warning('Not a valid (lat, lang) location')
             return None
 
         if units == 'C':
@@ -139,5 +166,10 @@ class ForecastIO(object):
             units = 'us'
 
         weather_info = self._getWeatherInfo(lat, long, units)
+
+        if 'error' in weather_info:
+            warning = 'forecast.io api returned this {0} error: {1}'
+            logger.warning(warning.format(weather_info['error'],
+                                          weather_info['text']))
 
         return weather_info
