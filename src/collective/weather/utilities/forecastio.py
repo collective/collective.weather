@@ -114,7 +114,7 @@ class ForecastIO(object):
     BASE_URL = 'https://api.forecast.io/forecast/{0}/{1},{2}?' \
                'units={3}&exclude=minutely,hourly,daily,alerts,flags'
 
-    BASE_ICON_URL = '++resource++collective.weather/{0}-icon.png'
+    BASE_ICON_URL = '++resource++collective.weather.icons/{0}-icon.png'
 
     def __init__(self, key=None):
         self.key = key
