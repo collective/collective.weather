@@ -1,5 +1,15 @@
 # -*- coding: utf-8 -*-
 
+###################################################################
+#
+# forecast.io API documentation
+# https://developer.forecast.io/docs/v2
+#
+# Create a free account and you'll get an api key
+# https://developer.forecast.io/register
+#
+###################################################################
+
 try:
     import json
 except ImportError:

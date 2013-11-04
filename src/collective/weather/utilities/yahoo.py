@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 
+###################################################################
+#
+# Yahoo! Weather api documentation
+# http://developer.yahoo.com/weather/
+#
+###################################################################
+
 import logging
 
 from xml.dom import minidom

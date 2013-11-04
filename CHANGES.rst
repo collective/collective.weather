@@ -8,8 +8,8 @@ There's a frood who really knows where his towel is.
 
 - Configurable weather portlet (header and location). [marcosfromero]
 
-- New API for named utilities and forecast.io and yahoo utility. 
-  [marcosfromero]
+- New API for named utilities, weather underground, forecast.io and 
+  yahoo utilities. [marcosfromero]
 
 
 1.0a3 (2013-10-29)
