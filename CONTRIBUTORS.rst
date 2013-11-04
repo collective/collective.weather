@@ -16,4 +16,4 @@ Development sponsored by `OpenMultimedia`_.
 
 .. _`OpenMultimedia`: http://www.openmultimedia.biz/
 .. _`Tango Desktop Project`: http://tango.freedesktop.org/
-.. _`Climacons icon set`: http://adamwhitcroft.com/climacons/
+.. _`Adam Whitcroft's Climacons`: http://adamwhitcroft.com/climacons/
