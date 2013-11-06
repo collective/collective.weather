@@ -78,6 +78,12 @@ class Yahoo(object):
     >>> '%.2f' % info['temperature']  # For Python 2.6
     '65.00'
 
+    Test with a unknown location (log output)
+    >>> info = yahoo.getWeatherInfo('4444444')
+    collective.weather - WARNING - Yahoo! weather api returned no information for location 4444444
+    >>> info
+    {}
+
     """
 
     implements(IWeatherInfo)
@@ -125,8 +131,8 @@ class Yahoo(object):
 
         return weather_info
 
-    def getWeatherInfo(self, location, units='F', lang=None):
-        """location must be a tuplish Yahoo weather location code
+    def getWeatherInfo(self, location, units='C', lang='en'):
+        """location must be a Yahoo weather location code
            unfortunately lang is not configurable for Yahoo weather
         """
 
@@ -135,8 +141,11 @@ class Yahoo(object):
         weather_info = self._getWeatherInfo(location, units)
 
         if 'error' in weather_info:
-            warning = 'Yahoo! weather  api returned this {0} error: {1}'
+            warning = 'Yahoo! weather api returned this {0} error: {1}'
             logger.warning(warning.format(weather_info['error'],
                                           weather_info['text']))
+        elif weather_info == {}:
+            warning = 'Yahoo! weather api returned no information for location {0}'
+            logger.warning(warning.format(location))
 
         return weather_info

@@ -75,7 +75,7 @@ class Wunderground(object):
 
     Get the utility
 
-    >>> utility = getUtility(IWeatherInfo, name='forecast.io')
+    >>> utility = getUtility(IWeatherInfo, name='wunderground')
 
     Test the utility with a blank key (log output)
 
@@ -129,10 +129,11 @@ class Wunderground(object):
     >>> info['summary']
     'Sunny'
 
-    Test a non existing (not registered) location
+    Test a non existing (not registered) location (log output)
 
     >>> info = wunderground.getWeatherInfo('Hogwarts/The Kitchen', \
                                            units='C')
+    collective.weather - WARNING - Weather Underground api returned no information for location Hogwarts/The Kitchen
     >>> info
     {}
     """
@@ -183,7 +184,7 @@ class Wunderground(object):
 
         return weather_info
 
-    def getWeatherInfo(self, location, units='F', lang=None):
+    def getWeatherInfo(self, location, units='C', lang='en'):
         """location can be a:
            - tuplish (lat, lang)
            - US state/city
@@ -209,5 +210,8 @@ class Wunderground(object):
             warning = 'Weather Underground api returned this {0} error: {1}'
             logger.warning(warning.format(weather_info['error'],
                                           weather_info['text']))
+        elif weather_info == {}:
+            warning = 'Weather Underground api returned no information for location {0}'
+            logger.warning(warning.format(location))
 
         return weather_info

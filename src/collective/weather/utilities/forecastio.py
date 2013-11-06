@@ -102,9 +102,10 @@ class ForecastIO(object):
     >>> info is None
     True
 
-    Test a non existing (not registered) location
+    Test a non existing (not registered) location (log output)
 
     >>> info = forecastio.getWeatherInfo('45,10', units='C')
+    collective.weather - WARNING - forecast.io returned no information for coordinates 45, 10
     >>> info
     {}
     """
@@ -148,7 +149,7 @@ class ForecastIO(object):
 
         return weather_info
 
-    def getWeatherInfo(self, location, units='F', lang=None):
+    def getWeatherInfo(self, location, units='C', lang='en'):
         """location must be a tuplish (lat, lang)
            unfortunately lang is not configurable for forecast.io
         """
@@ -181,5 +182,8 @@ class ForecastIO(object):
             warning = 'forecast.io api returned this {0} error: {1}'
             logger.warning(warning.format(weather_info['error'],
                                           weather_info['text']))
+        elif weather_info == {}:
+            warning = 'forecast.io returned no information for coordinates {0}, {1}'
+            logger.warning(warning.format(lat, long))
 
         return weather_info
