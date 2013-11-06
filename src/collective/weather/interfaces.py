@@ -24,10 +24,23 @@ class IWeatherInfo(Interface):
     """
 
     def getWeatherInfo(location, units, lang):
-        """Gets weather information of given location
-           returns temperature in given units,
-           a short summary in given lang
-           and an icon url to display current conditions
+        """Gets weather information of given location.
+
+           :param location: [required] The location from we want to get weather info.
+                Depending on the weather provider api it can represent different things:
+                a code, a city, latitude and longitude.
+           :type location: As far as the utility treats it OK it can be a string, a
+                tuple or whatever
+           :param units: Units for the returned data. F/C imperial/metric are sensible
+                options.
+           :type units: string
+           :param lang: An ISO 639-1 lang code of 2 characters.
+           :type lang: string
+           :returns: a dictionary with these data:
+               temperature: float, expressed in the passed units.
+               summary: string with a short description of the current conditions,
+                   expressed in the passed lang.
+               icon: string with the URL of an icon representing the current conditions.
         """
 
 
