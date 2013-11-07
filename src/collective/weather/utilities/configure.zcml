@@ -4,8 +4,21 @@
 
   <utility
       provides="collective.weather.interfaces.IWeatherInfo"
+      component=".forecastio.ForecastIO"
+      name="forecast.io"
+      />
+
+  <utility
+      provides="collective.weather.interfaces.IWeatherInfo"
       component=".yahoo.Yahoo"
       name="yahoo"
       />
+
+  <utility
+      provides="collective.weather.interfaces.IWeatherInfo"
+      component=".wunderground.Wunderground"
+      name="wunderground"
+      />
+
 
 </configure>
