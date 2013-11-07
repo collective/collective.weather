@@ -6,6 +6,8 @@ There's a frood who really knows where his towel is.
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- New API for named utilities and yahoo implementation. [marcosfromero]
+
 - Configurable weather portlet (header and location). [marcosfromero]
 
 
