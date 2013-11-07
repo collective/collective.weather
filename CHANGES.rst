@@ -5,6 +5,8 @@ There's a frood who really knows where his towel is.
 
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
+- forecast.io and weather underground named utilities. (closes `#18`_).
+  [marcosfromero]
 
 - New API for named utilities and yahoo implementation. [marcosfromero]
 
@@ -64,5 +66,6 @@ There's a frood who really knows where his towel is.
 .. _`#7`: https://github.com/collective/collective.weather/issues/7
 .. _`#9`: https://github.com/collective/collective.weather/issues/9
 .. _`#14`: https://github.com/collective/collective.weather/issues/14
+.. _`#18`: https://github.com/collective/collective.weather/issues/18
 .. _`#19`: https://github.com/collective/collective.weather/issues/19
 .. _`How to make your Plone add-on products uninstall cleanly`: http://blog.keul.it/2013/05/how-to-make-your-plone-add-on-products.html

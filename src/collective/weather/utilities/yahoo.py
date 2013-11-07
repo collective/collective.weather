@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
 
-###################################################################
-#
-# Yahoo! Weather api documentation
-# http://developer.yahoo.com/weather/
-#
-###################################################################
+""" Yahoo! Weather api documentation
+    http://developer.yahoo.com/weather/
+"""
 
-import logging
-
-from xml.dom import minidom
 from collective.weather.config import PROJECTNAME
 from collective.weather.interfaces import IWeatherInfo
 from urllib2 import HTTPError
 from urllib2 import urlopen
+from xml.dom import minidom
 from zope.interface import implements
+
+import logging
 
 logger = logging.getLogger(PROJECTNAME)
 
