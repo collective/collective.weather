@@ -1,31 +1,25 @@
 # -*- coding: utf-8 -*-
 
-###################################################################
-#
-# Weather Underground API documentation
-# http://www.wunderground.com/weather/api/d/docs?d=data/index&MR=1
-#
-# Create a free account
-# http://www.wunderground.com/weather/api/d/login.html
-#
-# Create your api key
-# http://www.wunderground.com/weather/api/d/questionnaire.html?
-# plan=a&level=0&history=0
-#
-###################################################################
+""" Weather Underground API documentation
+    http://www.wunderground.com/weather/api/d/docs?d=data/index&MR=1
 
-try:
-    import json
-except ImportError:
-    import simplejson as json
+    Create a free account
+    http://www.wunderground.com/weather/api/d/login.html
 
-import logging
+    Create your api key
+    http://www.wunderground.com/weather/api/d/questionnaire.html?
+    plan=a&level=0&history=0
+"""
+
 
 from collective.weather.config import PROJECTNAME
 from collective.weather.interfaces import IWeatherInfo
 from urllib2 import HTTPError
 from urllib2 import urlopen
 from zope.interface import implements
+
+import json
+import logging
 
 logger = logging.getLogger(PROJECTNAME)
 

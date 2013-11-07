@@ -1,27 +1,21 @@
 # -*- coding: utf-8 -*-
 
-###################################################################
-#
-# forecast.io API documentation
-# https://developer.forecast.io/docs/v2
-#
-# Create a free account and you'll get an api key
-# https://developer.forecast.io/register
-#
-###################################################################
+""" forecast.io API documentation
+    https://developer.forecast.io/docs/v2
 
-try:
-    import json
-except ImportError:
-    import simplejson as json
+    Create a free account and you'll get an api key
+    https://developer.forecast.io/register
+"""
 
-import logging
 
 from collective.weather.config import PROJECTNAME
 from collective.weather.interfaces import IWeatherInfo
 from urllib2 import HTTPError
 from urllib2 import urlopen
 from zope.interface import implements
+
+import json
+import logging
 
 logger = logging.getLogger(PROJECTNAME)
 
