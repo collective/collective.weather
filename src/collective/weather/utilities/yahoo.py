@@ -64,7 +64,7 @@ class Yahoo(object):
 
     Test with a known location
 
-    >>> info = yahoo.getWeatherInfo('2502265', units='C')
+    >>> info = yahoo.getWeatherInfo('2502265', units='metric')
     >>> '%.2f' % info['temperature']  # For Python 2.6
     '18.00'
     >>> info['summary']
@@ -74,7 +74,7 @@ class Yahoo(object):
 
     Test with a different unit
 
-    >>> info = yahoo.getWeatherInfo('2502265', units='F')
+    >>> info = yahoo.getWeatherInfo('2502265', units='imperial')
     >>> '%.2f' % info['temperature']  # For Python 2.6
     '65.00'
 
@@ -131,12 +131,15 @@ class Yahoo(object):
 
         return weather_info
 
-    def getWeatherInfo(self, location, units='C', lang='en'):
+    def getWeatherInfo(self, location, units='metric', lang='en'):
         """location must be a Yahoo weather location code
            unfortunately lang is not configurable for Yahoo weather
         """
 
-        units = units.lower()
+        if units == 'metric':
+            units = 'c'
+        else:
+            units = 'f'
 
         weather_info = self._getWeatherInfo(location, units)
 

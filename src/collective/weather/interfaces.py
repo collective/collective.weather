@@ -31,9 +31,8 @@ class IWeatherInfo(Interface):
                 a code, a city, latitude and longitude.
            :type location: As far as the utility treats it OK it can be a string, a
                 tuple or whatever
-           :param units: Units for the returned data. F/C imperial/metric are sensible
-                options.
-           :type units: string
+           :param units: Units for the returned data.
+           :type units: string, imperial/metric are the only accepted values.
            :param lang: An ISO 639-1 lang code of 2 characters.
            :type lang: string
            :returns: a dictionary with these data:
