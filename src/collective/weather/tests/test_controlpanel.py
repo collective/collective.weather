@@ -59,7 +59,11 @@ class RegistryTestCase(unittest.TestCase):
 
     def test_weather_api_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'weather_api'))
-        self.assertEqual(self.settings.weather_api, 'yahoo')
+        self.assertEqual(self.settings.weather_api, 'testprovider')
+
+    def test_weather_api_key_record_in_registry(self):
+        self.assertTrue(hasattr(self.settings, 'weather_api_key'))
+        self.assertFalse(self.settings.weather_api_key)
 
     def test_location_ids_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'location_ids'))
@@ -86,6 +90,7 @@ class RegistryTestCase(unittest.TestCase):
         prefix = 'collective.weather.interfaces.IWeatherSettings.'
         records = [
             prefix + 'weather_api',
+            prefix + 'weather_api_key',
             prefix + 'location_ids',
             prefix + 'units',
             prefix + 'show_viewlet',

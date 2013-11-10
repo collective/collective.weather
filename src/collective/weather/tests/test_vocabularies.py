@@ -23,3 +23,14 @@ class VocabulariesTestCase(unittest.TestCase):
         self.assertEqual(len(locations), 2)
         self.assertIn('Cordoba', locations)
         self.assertIn(u'Los Angeles', locations)
+
+    def test_providers_vocabulary(self):
+        name = 'collective.weather.Providers'
+        util = queryUtility(IVocabularyFactory, name)
+        self.assertIsNotNone(util)
+        providers = util(self.portal)
+        # collective.weather already comes with 3 providers
+        self.assertTrue(len(providers) >= 3)
+        self.assertIn(u'forecast.io', providers)
+        self.assertIn(u'yahoo', providers)
+        self.assertIn(u'wunderground', providers)

@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <registry>
   <record name="collective.weather.interfaces.IWeatherSettings.weather_api">
-    <value>yahoo</value>
+    <value>testprovider</value>
+  </record>
+  <record name="collective.weather.interfaces.IWeatherSettings.weather_api_key">
+    <value></value>
   </record>
   <record name="collective.weather.interfaces.IWeatherSettings.location_ids">
     <value>

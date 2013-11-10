@@ -1,22 +1,19 @@
 # -*- coding: utf-8 -*-
 
-from collective.weather import _
 from collective.weather.interfaces import IWeatherSettings
 from collective.weather.config import COOKIE_KEY
 from collective.weather.config import PROJECTNAME
 from collective.weather.config import TIME_THRESHOLD
+from collective.weather.interfaces import IWeatherInfo
 from collective.weather.interfaces import IWeatherUtility
 from datetime import datetime
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
+from zope.component import queryUtility
 from zope.globalrequest import getRequest
 from zope.interface import implements
 
 import logging
-import pywapi
-import sys
-import urllib2
-
 
 logger = logging.getLogger(PROJECTNAME)
 
@@ -28,35 +25,23 @@ class WeatherUtility(object):
     cities_list = []
     current_city = ''
 
-    def _update_yahoo_locations(self):
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(IWeatherSettings)
-        if settings.location_ids:
-            for i in settings.location_ids:
-                try:
-                    id, name, location_id = i.split('|')
-                except ValueError:
-                    logger.warning(u'Malformed line: %s' % i)
-                    continue
-
-                result = {'id': id,
-                          'name': name,
-                          'location_id': location_id,
-                          'type': 'yahoo'}
-
-                self.cities_list.append(result)
-
-    def _update_yahoo_weather_info(self, city_id=None):
+    def _update_weather_info(self, city_id=None):
         start_update = datetime.now()
 
         registry = getUtility(IRegistry)
         settings = registry.forInterface(IWeatherSettings)
         units = settings.units
+        degrees = 'C'
+        if units == 'imperial':
+            degrees = 'F'
+
+        provider = settings.weather_api
+        api_key = settings.weather_api_key
 
         now = start_update
 
         if city_id:
-            logger.info(u'Update Yahoo Weather: {0}'.format(city_id))
+            logger.info(u'Update Weather: {0}'.format(city_id))
             cities_list = [city['id'] for city in self.cities_list]
             if city_id in cities_list:
                 # If asked city exists in our list of cities, find it
@@ -70,12 +55,10 @@ class WeatherUtility(object):
                 to_update = [self.cities_list[0]]
         else:
             # If no asked city, just update all of them
-            logger.info(u'Update Yahoo Weather for all cities')
+            logger.info(u'Update Weather for all cities')
             to_update = self.cities_list
 
         for city in to_update:
-            if city['type'] != 'yahoo':
-                continue
 
             old_data = self.get_weather_info(city)
 
@@ -84,36 +67,28 @@ class WeatherUtility(object):
                     logger.info(u'Last update was done %s. Not updating again' % old_data.get('date'))
                     continue
 
-            try:
-                cityid = city['location_id'].encode('utf-8')
-                logger.info(u'Getting data for city: ' + cityid)
-                result = pywapi.get_weather_from_yahoo(cityid, units=units)
-                logger.info(u'Result: {0}'.format(result))
-            except urllib2.URLError as e:
-                logger.warning(u'The server returned an error: %s' % e)
-                result = ''
-            except:
-                logger.warning(
-                    u'There was an error when contacting the remote '
-                    u'server: {0}'.format(sys.exc_info()[0]))
-                # Just avoid any error silently
-                result = ''
+            cityid = city['location_id'].encode('utf-8')
+            logger.info(u'Getting data for city: ' + cityid)
+            utility = queryUtility(IWeatherInfo, name=provider)
+            if utility:
+                weather_api = utility(api_key)
+                try:
+                    result = weather_api.getWeatherInfo(cityid, units=units, lang='en')
+                except Exception, msg:
+                    result = {'error': msg}
+            logger.info(u'Result: {0}'.format(result))
 
-            if result and 'condition' in result and\
-                ('temp' in result['condition'] and
-                 'text' in result['condition'] and
-                 'code' in result['condition']):
-
-                conditions = result['condition']
-
-                if units == 'imperial':
-                    temp = _(u'%sºF') % conditions['temp']
-                else:
-                    temp = _(u'%sºC') % conditions['temp']
+            if not result == {} and not 'error' in result and \
+               'temperature' in result and \
+               'summary' in result and \
+               'icon' in result:
+                temp = result.get('temperature', None)
+                if temp:
+                    temp = u'{0}\xb0{1}'.format(temp, degrees)
 
                 new_weather = {'temp': temp,
-                               'conditions': conditions['text'],
-                               'icon': u'http://l.yimg.com/a/i/us/we/52/%s.gif' % conditions.get('code', '')}
+                               'conditions': result.get('summary', None),
+                               'icon': result.get('icon', None)}
 
                 self.weather_info[city['id']] = {'date': now,
                                                  'weather': new_weather}
@@ -128,11 +103,26 @@ class WeatherUtility(object):
 
         end_update = datetime.now()
         took = end_update - start_update
-        logger.info('Yahoo! update took: %s' % took)
+        logger.info('Weather update took: %s' % took)
 
     def update_locations(self):
         self.cities_list = []
-        self._update_yahoo_locations()
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(IWeatherSettings)
+        if settings.location_ids:
+            for i in settings.location_ids:
+                try:
+                    id, name, location_id = i.split('|')
+                except ValueError:
+                    logger.warning(u'Malformed line: %s' % i)
+                    continue
+
+                result = {'id': id,
+                          'name': name,
+                          'location_id': location_id,
+                          'type': settings.weather_api}
+
+                self.cities_list.append(result)
 
     def get_cities_list(self):
         self.update_locations()
@@ -140,7 +130,7 @@ class WeatherUtility(object):
 
     def update_weather_info(self, city=None):
         self.update_locations()
-        self._update_yahoo_weather_info(city)
+        self._update_weather_info(city)
 
     def get_weather_info(self, city=None):
         if not city:

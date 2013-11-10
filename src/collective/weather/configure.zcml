@@ -66,4 +66,10 @@
       name="collective.weather.Locations"
       />
 
+  <utility
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      component=".vocabularies.WeatherInfoProviders"
+      name="collective.weather.Providers"
+      />
+
 </configure>

@@ -1,0 +1,11 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="collective.weather">
+
+  <utility
+      provides="collective.weather.interfaces.IWeatherInfo"
+      component=".named_utility.TestProvider"
+      name="testprovider"
+      />
+
+</configure>
