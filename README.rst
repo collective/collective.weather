@@ -81,26 +81,17 @@ Celsius. Imperial system uses degrees Fahrenheit.
 Finding locations
 ^^^^^^^^^^^^^^^^^
 
-Finding out locations is currently the most difficult part of using this
-package. First, you have to make a search like this in your favorite web
-search engine::
+Different weather service providers need different location ids to get
+weather conditions.
 
-    joao pessoa brazil weather
+You'll have to change the **Available locations** setting depending on your
+selection. Please, refer to providers documentation for more information:
 
-.. image:: https://raw.github.com/collective/collective.weather/master/search.png
-    :align: center
-    :alt: Searching for a location
-
-Then, you will have identify the *location_id* on the URL (BRXX0128 in this
-case)::
-
-    http://www.weather.com/weather/today/Joao+Pessoa+Brazil+BRXX0128
-
-Other examples:
-
-* `Caracas, Venezuela`_: VEXX0008
-* `Beijing, China`_: CHXX0008
-* `Los Angeles, CA`_: USCA0638
+-   `Yahoo`_ needs a `WOEID`_. There's a `convenient online tool`_ to get
+    WOEIDs.
+-   `Forecast.io`_ just needs a ``latitude, longitude`` coordinates.
+-   `Weather Underground`_ accepts many options (check the ``query``
+    option).
 
 Portlet
 ^^^^^^^
@@ -180,7 +171,7 @@ idea of how to create yours:
 
 -   `yahoo`_
 -   `forecast.io`_
--   `underground`_
+-   `wunderground`_
 
 `The API for this utility`_ is very simple.
 
@@ -219,9 +210,13 @@ Not entirely unlike
     A very old an unmaintained product, Weather Forecast is a portlet that
     will display the observation of the weather. Compatible with Plone 2.5.
 
-.. _`Beijing, China`: http://www.weather.com/weather/today/Beijing+China+CHXX0008
-.. _`Caracas, Venezuela`: http://www.weather.com/weather/today/Caracas+Venezuela+VEXX0008
-.. _`Los Angeles, CA`: http://www.weather.com/weather/today/Los+Angeles+CA+USCA0638
+.. _Yahoo: http://developer.yahoo.com/weather/
+.. _WOEID: http://developer.yahoo.com/geo/geoplanet/guide/concepts.html#w
+    oeids>WOEID</a>. There's a <a href=
+.. _convenient online tool: http://woeid.rosselliot.co.nz/lookup
+.. _Forecast.io: https://developer.forecast.io/docs/v2
+.. _Weather Underground:
+    http://www.wunderground.com/weather/api/d/docs?d=data/index&MR=1
 .. _`opening a support ticket`: https://github.com/collective/collective.weather/issues
 .. _`The Weather Channel`: http://www.weather.com/
 .. _`Weather Forecast`: http://plone.org/products/ploneweatherforecast
@@ -230,7 +225,7 @@ Not entirely unlike
     rc/collective/weather/utilities/yahoo.py
 .. _forecast.io: https://github.com/collective/collective.weather/blob/ma
     ster/src/collective/weather/utilities/forecastio.py
-.. _underground: https://github.com/collective/collective.weather/blob/ma
+.. _wunderground: https://github.com/collective/collective.weather/blob/ma
     ster/src/collective/weather/utilities/wunderground.pyweather
 .. _The API for this utility: https://github.com/collective/collective.we
     ather/blob/master/src/collective/weather/interfaces.py#L21
