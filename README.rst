@@ -89,7 +89,7 @@ selection. Please, refer to providers documentation for more information:
 
 -   `Yahoo Weather`_ needs a `WOEID`_. There's a `convenient online tool`_ to
     get WOEIDs.
--   `Forecast.io API`_ just needs a ``latitude, longitude`` coordinates.
+-   `Forecast.io API`_ just needs a ``latitude, longitude`` coordinate.
 -   `Weather Underground`_ accepts many options (check the ``query``
     option).
 
