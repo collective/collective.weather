@@ -87,9 +87,9 @@ weather conditions.
 You'll have to change the **Available locations** setting depending on your
 selection. Please, refer to providers documentation for more information:
 
--   `Yahoo`_ needs a `WOEID`_. There's a `convenient online tool`_ to get
-    WOEIDs.
--   `Forecast.io`_ just needs a ``latitude, longitude`` coordinates.
+-   `Yahoo Weather`_ needs a `WOEID`_. There's a `convenient online tool`_ to
+    get WOEIDs.
+-   `Forecast.io API`_ just needs a ``latitude, longitude`` coordinates.
 -   `Weather Underground`_ accepts many options (check the ``query``
     option).
 
@@ -210,11 +210,11 @@ Not entirely unlike
     A very old an unmaintained product, Weather Forecast is a portlet that
     will display the observation of the weather. Compatible with Plone 2.5.
 
-.. _Yahoo: http://developer.yahoo.com/weather/
+.. _`Yahoo Weather`: http://developer.yahoo.com/weather/
 .. _WOEID: http://developer.yahoo.com/geo/geoplanet/guide/concepts.html#w
     oeids>WOEID</a>. There's a <a href=
 .. _convenient online tool: http://woeid.rosselliot.co.nz/lookup
-.. _Forecast.io: https://developer.forecast.io/docs/v2
+.. _`Forecast.io API`: https://developer.forecast.io/docs/v2
 .. _Weather Underground:
     http://www.wunderground.com/weather/api/d/docs?d=data/index&MR=1
 .. _`opening a support ticket`: https://github.com/collective/collective.weather/issues
