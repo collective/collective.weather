@@ -164,6 +164,28 @@ a clockserver job to call this "update-weather" view with no params, once
 every 30 minutes, so weather information for all your cities are ready for
 when the visitor changes it from the drop-down.
 
+Extending the package with new weather providers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In case you want to contribute with new weather providers for this package or
+if you want to add a new one in a custom package for your site you'll just
+need to create a new named utility that should implement
+``collective.weather.interfaces.IWeatherInfo``.
+
+**Weather** control panel will automatically learn about the new utility and
+it will be listed as an option in the provider's drop-down.
+
+This package already comes with some utilities you can check to get a quick
+idea of how to create yours:
+
+-   `yahoo`_
+-   `forecast.io`_
+-   `underground`_
+
+`The API for this utility`_ is very simple.
+
+In case your utility needs ` an API key you can pass it on initialization`_.
+
 Not entirely unlike
 -------------------
 
@@ -178,3 +200,14 @@ Not entirely unlike
 .. _`The Weather Channel`: http://www.weather.com/
 .. _`Weather Forecast`: http://plone.org/products/ploneweatherforecast
 .. _`Yahoo! Weather`: http://weather.yahoo.com/
+.. _yahoo: https://github.com/collective/collective.weather/blob/master/s
+    rc/collective/weather/utilities/yahoo.py
+.. _forecast.io: https://github.com/collective/collective.weather/blob/ma
+    ster/src/collective/weather/utilities/forecastio.py
+.. _underground: https://github.com/collective/collective.weather/blob/ma
+    ster/src/collective/weather/utilities/wunderground.pyweather
+.. _The API for this utility: https://github.com/collective/collective.we
+    ather/blob/master/src/collective/weather/interfaces.py#L21
+.. _ an API key you can pass it on initialization: https://github.com/col
+    lective/collective.weather/blob/master/src/collective/weather/utilities/f
+    orecastio.py#L114
