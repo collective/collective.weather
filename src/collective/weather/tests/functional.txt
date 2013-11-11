@@ -37,7 +37,7 @@ And we check again
     >>> browser.open(portalURL)
     >>> "No weather information" in browser.contents
     False
-    >>> "20ºC" in browser.contents
+    >>> "20°C" in browser.contents
     True
     >>> "Windy" in browser.contents
     True
@@ -52,7 +52,7 @@ Now, change the city
     >>> browser.open(portalURL+'?city=Los Angeles')
     >>> "No weather information" in browser.contents
     False
-    >>> "-8ºC" in browser.contents
+    >>> "-8°C" in browser.contents
     True
     >>> "Snowing" in browser.contents
     True

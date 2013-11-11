@@ -2,7 +2,6 @@
 
 from collective.weather import _
 from collective.weather.config import UNIT_SYSTEMS
-from collective.weather.config import WEATHER_APIS
 from plone.directives import form
 from zope import schema
 from zope.interface import Interface
@@ -54,7 +53,16 @@ class IWeatherSettings(form.Schema):
             default=u''),
         default='yahoo',
         required=True,
-        vocabulary=WEATHER_APIS,
+        vocabulary='collective.weather.Providers',
+    )
+
+    weather_api_key = schema.TextLine(
+        title=_(u'API key'),
+        description=_(
+            u'help_weather_api_key',
+            default=u'Enter API key if chosen weather service requires it.'),
+        default=u'',
+        required=False,
     )
 
     location_ids = schema.List(
