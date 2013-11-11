@@ -188,7 +188,7 @@ In case your utility needs `an API key you can pass it on initialization`_.
 
 Here's and example you can copy and paste to start your custom utility:
 
-```python
+```
 """ Example of a named utility for IWeatherInfo
 """
 
