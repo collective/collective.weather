@@ -184,7 +184,7 @@ idea of how to create yours:
 
 `The API for this utility`_ is very simple.
 
-In case your utility needs ` an API key you can pass it on initialization`_.
+In case your utility needs `an API key you can pass it on initialization`_.
 
 Not entirely unlike
 -------------------
@@ -208,6 +208,6 @@ Not entirely unlike
     ster/src/collective/weather/utilities/wunderground.pyweather
 .. _The API for this utility: https://github.com/collective/collective.we
     ather/blob/master/src/collective/weather/interfaces.py#L21
-.. _ an API key you can pass it on initialization: https://github.com/col
+.. _an API key you can pass it on initialization: https://github.com/col
     lective/collective.weather/blob/master/src/collective/weather/utilities/f
     orecastio.py#L114
