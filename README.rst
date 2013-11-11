@@ -186,33 +186,31 @@ idea of how to create yours:
 
 In case your utility needs `an API key you can pass it on initialization`_.
 
-Here's and example you can copy and paste to start your custom utility:
+Here's and example you can copy and paste to start your custom utility::
 
-```
-""" Example of a named utility for IWeatherInfo
-"""
-
-from collective.weather.interfaces import IWeatherInfo
-from zope.interface import implements
-
-
-class DummyProvider(object):
-    """Dummy weather implementation of IWeatherInfo
+    """ Example of a named utility for IWeatherInfo
     """
 
-    implements(IWeatherInfo)
+    from collective.weather.interfaces import IWeatherInfo
+    from zope.interface import implements
 
-    def __init__(self, key=None):
-        self.key = key
 
-    def getWeatherInfo(self, location, units='metric', lang='en'):
-        """Dummy implementation of getWeatherInfo as an example
+    class DummyProvider(object):
+        """Dummy weather implementation of IWeatherInfo
         """
 
-        return {'summary': u'What a lovely day!',
-                'temperature': 22,
-                'icon': u'lovely-day-icon.png'}
-```
+        implements(IWeatherInfo)
+
+        def __init__(self, key=None):
+            self.key = key
+
+        def getWeatherInfo(self, location, units='metric', lang='en'):
+            """Dummy implementation of getWeatherInfo as an example
+            """
+
+            return {'summary': u'What a lovely day!',
+                    'temperature': 20,
+                    'icon': u'lovely-day-icon.png'}
 
 Not entirely unlike
 -------------------
