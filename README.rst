@@ -81,26 +81,17 @@ Celsius. Imperial system uses degrees Fahrenheit.
 Finding locations
 ^^^^^^^^^^^^^^^^^
 
-Finding out locations is currently the most difficult part of using this
-package. First, you have to make a search like this in your favorite web
-search engine::
+Different weather service providers need different location ids to get
+weather conditions.
 
-    joao pessoa brazil weather
+You'll have to change the **Available locations** setting depending on your
+selection. Please, refer to providers documentation for more information:
 
-.. image:: https://raw.github.com/collective/collective.weather/master/search.png
-    :align: center
-    :alt: Searching for a location
-
-Then, you will have identify the *location_id* on the URL (BRXX0128 in this
-case)::
-
-    http://www.weather.com/weather/today/Joao+Pessoa+Brazil+BRXX0128
-
-Other examples:
-
-* `Caracas, Venezuela`_: VEXX0008
-* `Beijing, China`_: CHXX0008
-* `Los Angeles, CA`_: USCA0638
+-   `Yahoo Weather`_ needs a `WOEID`_. There's a `convenient online tool`_ to
+    get WOEIDs.
+-   `Forecast.io API`_ just needs a ``latitude, longitude`` coordinate.
+-   `Weather Underground`_ accepts many options (check the ``query``
+    option).
 
 Portlet
 ^^^^^^^
@@ -164,6 +155,54 @@ a clockserver job to call this "update-weather" view with no params, once
 every 30 minutes, so weather information for all your cities are ready for
 when the visitor changes it from the drop-down.
 
+Extending the package with new weather providers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In case you want to contribute with new weather providers for this package or
+if you want to add a new one in a custom package for your site you'll just
+need to create a new named utility that should implement
+``collective.weather.interfaces.IWeatherInfo``.
+
+**Weather** control panel will automatically learn about the new utility and
+it will be listed as an option in the provider's drop-down.
+
+This package already comes with some utilities you can check to get a quick
+idea of how to create yours:
+
+-   `yahoo`_
+-   `forecast.io`_
+-   `wunderground`_
+
+`The API for this utility`_ is very simple.
+
+In case your utility needs `an API key you can pass it on initialization`_.
+
+Here's and example you can copy and paste to start your custom utility::
+
+    """ Example of a named utility for IWeatherInfo
+    """
+
+    from collective.weather.interfaces import IWeatherInfo
+    from zope.interface import implements
+
+
+    class DummyProvider(object):
+        """Dummy weather implementation of IWeatherInfo
+        """
+
+        implements(IWeatherInfo)
+
+        def __init__(self, key=None):
+            self.key = key
+
+        def getWeatherInfo(self, location, units='metric', lang='en'):
+            """Dummy implementation of getWeatherInfo as an example
+            """
+
+            return {'summary': u'What a lovely day!',
+                    'temperature': 20,
+                    'icon': u'lovely-day-icon.png'}
+
 Not entirely unlike
 -------------------
 
@@ -171,10 +210,25 @@ Not entirely unlike
     A very old an unmaintained product, Weather Forecast is a portlet that
     will display the observation of the weather. Compatible with Plone 2.5.
 
-.. _`Beijing, China`: http://www.weather.com/weather/today/Beijing+China+CHXX0008
-.. _`Caracas, Venezuela`: http://www.weather.com/weather/today/Caracas+Venezuela+VEXX0008
-.. _`Los Angeles, CA`: http://www.weather.com/weather/today/Los+Angeles+CA+USCA0638
+.. _`Yahoo Weather`: http://developer.yahoo.com/weather/
+.. _WOEID: http://developer.yahoo.com/geo/geoplanet/guide/concepts.html#w
+    oeids>WOEID</a>. There's a <a href=
+.. _convenient online tool: http://woeid.rosselliot.co.nz/lookup
+.. _`Forecast.io API`: https://developer.forecast.io/docs/v2
+.. _Weather Underground:
+    http://www.wunderground.com/weather/api/d/docs?d=data/index&MR=1
 .. _`opening a support ticket`: https://github.com/collective/collective.weather/issues
 .. _`The Weather Channel`: http://www.weather.com/
 .. _`Weather Forecast`: http://plone.org/products/ploneweatherforecast
 .. _`Yahoo! Weather`: http://weather.yahoo.com/
+.. _yahoo: https://github.com/collective/collective.weather/blob/master/s
+    rc/collective/weather/utilities/yahoo.py
+.. _forecast.io: https://github.com/collective/collective.weather/blob/ma
+    ster/src/collective/weather/utilities/forecastio.py
+.. _wunderground: https://github.com/collective/collective.weather/blob/ma
+    ster/src/collective/weather/utilities/wunderground.pyweather
+.. _The API for this utility: https://github.com/collective/collective.we
+    ather/blob/master/src/collective/weather/interfaces.py#L21
+.. _an API key you can pass it on initialization: https://github.com/col
+    lective/collective.weather/blob/master/src/collective/weather/utilities/f
+    orecastio.py#L114
