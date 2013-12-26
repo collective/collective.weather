@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.weather\n"
-"POT-Creation-Date: 2013-10-28 23:00+0000\n"
+"POT-Creation-Date: 2013-12-26 14:52+0000\n"
 "PO-Revision-Date: 2013-10-28 21:02-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Spanish <>\n"
@@ -15,116 +15,273 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.weather\n"
 
-#: collective/weather/weather_utility.py:112
-msgid "%sºC"
-msgstr "%sºC"
-
-#: collective/weather/weather_utility.py:110
-msgid "%sºF"
-msgstr "%sºF"
-
-#: collective/weather/profiles/default/portlets.xml
+#: ./profiles/default/portlets.xml
 msgid "A portlet that shows the weather forecast for selected cities."
 msgstr "Un portlet que muestra el estado del tiempo en localidades seleccionadas."
 
-#: collective/weather/interfaces.py:36
+#: ./interfaces.py:60
+msgid "API key"
+msgstr "Clave de la API"
+
+#: ./portlets/weather.py:82
+msgid "Add Weather Portlet"
+msgstr "Añadir un portlet de clima"
+
+#: ./interfaces.py:69
 msgid "Available locations"
 msgstr "Localidades disponibles"
 
+# Translations for weather conditions from Yahoo
+msgid "Blowing Snow"
+msgstr "Chubascos de nieve"
+
+msgid "Blustery"
+msgstr "Tempestuoso"
+
+#: ./portlets/weather.py:27
+msgid "Choose one of the preconfigured locations."
+msgstr "Seleccione una de las ubicaciones preconfiguradas."
+
+msgid "Clear (Night)"
+msgstr "Despejado"
+
+msgid "Cloudy"
+msgstr "Nublado"
+
+msgid "Cold"
+msgstr "Frío"
+
+msgid "Drizzle"
+msgstr "Lloviznas"
+
+msgid "Dust"
+msgstr "Polvo"
+
+#: ./portlets/weather.py:94
+msgid "Edit Weather Portlet"
+msgstr "Modificar portlet de clima"
+
 msgid "Fair"
+msgstr "Despejado"
+
+msgid "Fair (Day)"
+msgstr "Despejado"
+
+msgid "Fair (Night)"
 msgstr "Despejado"
 
 msgid "Few Showers"
 msgstr "Algunas lluvias"
 
-#: collective/weather/config.py:20
+msgid "Foggy"
+msgstr "Nublado"
+
+msgid "Freezing Drizzle"
+msgstr "Lloviznas heladas"
+
+msgid "Freezing Rain"
+msgstr "Lluvia helada"
+
+msgid "Hail"
+msgstr "Granizo"
+
+msgid "Haze"
+msgstr "Niebla"
+
+msgid "Heavy Snow"
+msgstr "Fuertes nevadas"
+
+msgid "Hot"
+msgstr "Caluroso"
+
+msgid "Hurricane"
+msgstr "Huracán"
+
+#: ./config.py:20
 msgid "Imperial"
 msgstr "Imperial"
 
-#: collective/weather/config.py:19
+msgid "Isolated Thundershowers"
+msgstr "Tormentas aisladas"
+
+msgid "Isolated Thunderstorms"
+msgstr "Tormentas eléctricas aisladas"
+
+msgid "Light Rain Shower"
+msgstr "Llovizna"
+
+msgid "Light Snow Showers"
+msgstr "Llovizna de nieve"
+
+#: ./portlets/weather.py:26
+msgid "Location"
+msgstr "Ubicación"
+
+#: ./config.py:19
 msgid "Metric"
 msgstr "Métrico"
 
+msgid "Mixed Rain And Hail"
+msgstr "Lluvia y granizo"
+
+msgid "Mixed Rain And Sleet"
+msgstr "Lluvia y aguanieve"
+
+msgid "Mixed Rain And Snow"
+msgstr "Lluvia y nieve"
+
+msgid "Mixed Snow And Sleet"
+msgstr "Nieve y aguanieve"
+
 msgid "Mostly Cloudy"
+msgstr "Mayormente nublado"
+
+msgid "Mostly Cloudy (Day)"
+msgstr "Mayormente nublado"
+
+msgid "Mostly Cloudy (Night)"
 msgstr "Mayormente nublado"
 
 msgid "Mostly Sunny"
 msgstr "Mayormente soleado"
 
-#: collective/weather/browser/templates/current_weather.pt:25
+#: ./browser/templates/current_weather.pt:25
+#: ./portlets/weather.pt:31
 msgid "No weather information"
+msgstr "No hay información sobre el estado del tiempo"
+
+msgid "Not Available"
 msgstr "No hay información sobre el estado del tiempo"
 
 # Translations for weather conditions from Yahoo
 msgid "Partly Cloudy"
 msgstr "Parcialmente nublado"
 
+msgid "Partly Cloudy (Day)"
+msgstr "Parcialmente nublado"
+
+msgid "Partly Cloudy (Night)"
+msgstr "Parcialmente nublado"
+
+#: ./portlets/weather.py:20
+msgid "Portlet header"
+msgstr "Título del portlet"
+
 msgid "Rain"
 msgstr "Lluvia"
 
-msgid "Scattered T-Storms"
-msgstr "Tormentas aisladas"
+msgid "Scattered Showers"
+msgstr "Lluvias aisladas"
 
-#: collective/weather/controlpanel.py:12
+msgid "Scattered Snow Showers"
+msgstr "Chubascos de nieve aislados"
+
+msgid "Scattered T-Storms"
+msgstr "Tormentas eléctricas aisladas"
+
+msgid "Scattered Thunderstorms"
+msgstr "Tormentas eléctricas aisladas"
+
+#: ./controlpanel.py:12
 msgid "Settings for the collective.weather package"
 msgstr "Configuración del paquete collective.weather"
 
-#: collective/weather/interfaces.py:61
+msgid "Severe Thunderstorms"
+msgstr "Tormentas eléctricas severas"
+
+#: ./interfaces.py:94
 msgid "Show weather viewlet?"
 msgstr "¿Mostrar el viewlet del estado del tiempo?"
 
 msgid "Showers"
 msgstr "Lluvias"
 
+msgid "Sleet"
+msgstr "Aguanieve"
+
+msgid "Smoky"
+msgstr "Nublado"
+
+msgid "Snow"
+msgstr "Nieve"
+
+msgid "Snow Flurries"
+msgstr "Ráfagas de nieve"
+
+msgid "Snow Showers"
+msgstr "Precipitaciones de nieve"
+
 msgid "Sunny"
 msgstr "Soleado"
+
+msgid "Thundershowers"
+msgstr "Tormentas"
+
+msgid "Thunderstorms"
+msgstr "Tormentas eléctricas"
+
+#: ./portlets/weather.py:21
+msgid "Title of the rendered portlet."
+msgstr "Título del portlet."
+
+msgid "Tornado"
+msgstr "Tornado"
+
+msgid "Tropical storm"
+msgstr "Tormenta tropical"
 
 #: configure.zcml
 msgid "Uninstall profile for the collective.weather package."
 msgstr "Desinstalar el paquete collective.weather."
 
-#: collective/weather/interfaces.py:49
+#: ./interfaces.py:82
 msgid "Units"
 msgstr "Unidades"
 
-#: collective/weather/portlets/weather.pt:6
-#: collective/weather/profiles/default/controlpanel.xml
+#: ./profiles/default/controlpanel.xml
 msgid "Weather"
 msgstr "Estado del tiempo"
 
-#: collective/weather/controlpanel.py:11
+#: ./controlpanel.py:11
 msgid "Weather Setup"
 msgstr "Configuración de collective.weather"
 
-#: collective/weather/portlets/weather.py:29
-#: collective/weather/profiles/default/portlets.xml
+#: ./profiles/default/portlets.xml
 msgid "Weather portlet"
 msgstr "Portlet de estado del tiempo"
 
-#: collective/weather/interfaces.py:26
+#: ./interfaces.py:50
 msgid "Weather service to be used"
 msgstr "Servicio meteorológico a ser utilizado"
 
-#: collective/weather/config.py:15
+msgid "Windy"
+msgstr "Ventoso"
+
+#: ./config.py:15
 msgid "Yahoo! Weather"
 msgstr "Yahoo! Weather"
 
 #. Default: "Enter here all available locations that will be available. Format: id|name|location_id. Check the <a href=\"https://github.com/collective/collective.weather#finding-locations\">package documentation</a> for further information on how to find ids."
-#: collective/weather/interfaces.py:37
+#: ./interfaces.py:70
 msgid "help_location_ids"
 msgstr "Introduzca aquí las localidades disponibles. El formato es: id|name|location_id. Revise la <a href=\"https://github.com/collective/collective.weather#finding-locations\">documentación del paquete</a> para mayor información sobre cómo encontrar los identificadores."
 
 #. Default: "Defines whether or not the weather viewlet will be shown site wide."
-#: collective/weather/interfaces.py:62
+#: ./interfaces.py:95
 msgid "help_show_viewlet"
 msgstr "Define si el viewlet del estado del tiempo se mostrará en el sitio o no."
 
 #. Default: "System of units to be used: metric or imperial. Metric system uses degrees Celsius. Imperial system uses degrees Fahrenheit."
-#: collective/weather/interfaces.py:50
+#: ./interfaces.py:83
 msgid "help_units"
 msgstr "Sistema de unidades a ser utilizado: métrico o imperial. El sistema métrico usa grados Celsius. El sistema imperial usa grados Fahrenheit."
 
-#: collective/weather/interfaces.py:27
+#: ./interfaces.py:51
 msgid "help_weather_api"
+msgstr ""
+
+#. Default: "Enter API key if chosen weather service requires it."
+#: ./interfaces.py:61
+msgid "help_weather_api_key"
 msgstr ""
 

@@ -16,33 +16,179 @@ msgstr ""
 
 # Translations for weather conditions from Yahoo
 
-msgid "Partly Cloudy"
+msgid "Blowing Snow"
+msgstr ""
+
+msgid "Blustery"
+msgstr ""
+
+msgid "Clear (Night)"
+msgstr ""
+
+msgid "Cloudy"
+msgstr ""
+
+msgid "Cold"
+msgstr ""
+
+msgid "Drizzle"
+msgstr ""
+
+msgid "Dust"
 msgstr ""
 
 msgid "Fair"
 msgstr ""
 
-msgid "Mostly Cloudy"
+msgid "Fair (Day)"
 msgstr ""
 
-msgid "Rain"
-msgstr ""
-
-msgid "Showers"
+msgid "Fair (Night)"
 msgstr ""
 
 msgid "Few Showers"
 msgstr ""
 
-msgid "Sunny"
+msgid "Foggy"
+msgstr ""
+
+msgid "Freezing Drizzle"
+msgstr ""
+
+msgid "Freezing Rain"
+msgstr ""
+
+msgid "Hail"
+msgstr ""
+
+msgid "Haze"
+msgstr ""
+
+msgid "Heavy Snow"
+msgstr ""
+
+msgid "Heavy Snow"
+msgstr ""
+
+msgid "Hot"
+msgstr ""
+
+msgid "Hurricane"
+msgstr ""
+
+msgid "Isolated Thundershowers"
+msgstr ""
+
+msgid "Isolated Thunderstorms"
+msgstr ""
+
+msgid "Light Rain Shower"
+msgstr ""
+
+msgid "Light Snow Showers"
+msgstr ""
+
+msgid "Mixed Rain And Hail"
+msgstr ""
+
+msgid "Mixed Rain And Sleet"
+msgstr ""
+
+msgid "Mixed Rain And Snow"
+msgstr ""
+
+msgid "Mixed Snow And Sleet"
+msgstr ""
+
+msgid "Mostly Cloudy"
+msgstr ""
+
+msgid "Mostly Cloudy (Day)"
+msgstr ""
+
+msgid "Mostly Cloudy (Night)"
 msgstr ""
 
 msgid "Mostly Sunny"
 msgstr ""
 
+msgid "Not Available"
+msgstr ""
+
+msgid "Partly Cloudy"
+msgstr ""
+
+msgid "Partly Cloudy"
+msgstr ""
+
+msgid "Partly Cloudy (Day)"
+msgstr ""
+
+msgid "Partly Cloudy (Night)"
+msgstr ""
+
+msgid "Rain"
+msgstr ""
+
+msgid "Scattered Showers"
+msgstr ""
+
+msgid "Scattered Snow Showers"
+msgstr ""
+
 msgid "Scattered T-Storms"
 msgstr ""
 
+msgid "Scattered Thunderstorms"
+msgstr ""
+
+msgid "Scattered Thunderstorms"
+msgstr ""
+
+msgid "Severe Thunderstorms"
+msgstr ""
+
+msgid "Showers"
+msgstr ""
+
+msgid "Showers"
+msgstr ""
+
+msgid "Sleet"
+msgstr ""
+
+msgid "Smoky"
+msgstr ""
+
+msgid "Snow"
+msgstr ""
+
+msgid "Snow Flurries"
+msgstr ""
+
+msgid "Snow Showers"
+msgstr ""
+
+msgid "Sunny"
+msgstr ""
+
+msgid "Sunny"
+msgstr ""
+
+msgid "Thundershowers"
+msgstr ""
+
+msgid "Thunderstorms"
+msgstr ""
+
+msgid "Tornado"
+msgstr ""
+
+msgid "Tropical storm"
+msgstr ""
+
+msgid "Windy"
+msgstr ""
 #: configure.zcml
 msgid "Uninstall profile for the collective.weather package."
 msgstr ""
