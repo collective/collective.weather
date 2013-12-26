@@ -3,11 +3,11 @@
 from collective.weather.interfaces import IWeatherSettings
 from collective.weather.config import PROJECTNAME
 from collective.weather.testing import INTEGRATION_TESTING
+from plone import api
 from plone.app.testing import logout
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.registry.interfaces import IRegistry
-from zope.component import getMultiAdapter
 from zope.component import getUtility
 
 import unittest2 as unittest
@@ -23,8 +23,8 @@ class ControlPanelTestCase(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
     def test_controlpanel_has_view(self):
-        view = getMultiAdapter(
-            (self.portal, self.portal.REQUEST), name='weather-settings')
+        request = self.layer['request']
+        view = api.content.get_view('weather-settings', self.portal, request)
         view = view.__of__(self.portal)
         self.assertTrue(view())
 

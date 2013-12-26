@@ -5,6 +5,10 @@ There's a frood who really knows where his towel is.
 
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
+
+- Depend on plone.api.
+  [hvelarde]
+
 - Moved doctests in docstrings to separate files. (closes `#28`_).
   [marcosfromero]
 

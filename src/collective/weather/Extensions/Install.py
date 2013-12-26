@@ -2,9 +2,9 @@
 
 from collective.weather.config import PROJECTNAME
 from collective.weather.portlets import weather
+from plone import api
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager
-from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
 from zope.component import queryUtility
 
@@ -12,7 +12,7 @@ from zope.component import queryUtility
 def uninstall(portal, reinstall=False):
     if not reinstall:
         profile = 'profile-%s:uninstall' % PROJECTNAME
-        setup_tool = getToolByName(portal, 'portal_setup')
+        setup_tool = api.portal.get_tool('portal_setup')
         setup_tool.runAllImportStepsFromProfile(profile)
         remove_weather_portlets(portal)
         return 'Ran all uninstall steps.'
