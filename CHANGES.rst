@@ -8,6 +8,9 @@ There's a frood who really knows where his towel is.
 
 - Reduce complexity in utilities. (closes `#8`_). [marcosfromero]
 
+- Remove dependency on pywapi.
+  [hvelarde]
+
 - Depend on plone.api.
   [hvelarde]
 
