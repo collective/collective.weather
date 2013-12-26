@@ -11,10 +11,6 @@ COOKIE_KEY = 'collective.weather.%s'
 # Time that should pass before fetching new weather information.
 TIME_THRESHOLD = timedelta(minutes=30)
 
-WEATHER_APIS = SimpleVocabulary([
-    SimpleTerm(value=u'yahoo', title=_(u'Yahoo! Weather')),
-])
-
 UNIT_SYSTEMS = SimpleVocabulary([
     SimpleTerm(value=u'metric', title=_(u'Metric')),
     SimpleTerm(value=u'imperial', title=_(u'Imperial')),

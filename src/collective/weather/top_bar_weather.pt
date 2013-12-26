@@ -13,8 +13,8 @@
   <dd class="actionMenuContent">
     <ul>
         <li tal:repeat="city view/cities_list"
-            tal:attributes="id string:top-weather-${city/id};
-                            data-city-id city/id;
+            tal:attributes="id string:top-weather-${city/location_id};
+                            data-city-id city/location_id;
                             data-city-name city/name;">
             <a href="#"
                class="weather-choose-city"

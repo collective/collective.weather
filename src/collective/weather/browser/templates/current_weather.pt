@@ -5,7 +5,7 @@
     <a id="current-city"
        href=""
        tal:define="city_name current_city/name|nothing;
-                   city_id current_city/id|nothing"
+                   city_id current_city/location_id|nothing"
        tal:attributes="data-city-id city_id">
         <span tal:content="city_name">Córdoba, Argentina</span>
     </a>

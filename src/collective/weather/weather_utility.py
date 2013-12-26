@@ -98,7 +98,7 @@ class WeatherUtility(object):
                 logger.warning(u'No "condition" in result, or malformed response.')
 
         for city in self.weather_info.keys():
-            match = [i for i in self.cities_list if city == i['id']]
+            match = [i for i in self.cities_list if city == i['location_id']]
             if not match:
                 logger.warning('The city %s is not listed in the list of cities. Removing weather data' % city)
                 del self.weather_info[city]
@@ -114,14 +114,13 @@ class WeatherUtility(object):
         if settings.location_ids:
             for i in settings.location_ids:
                 try:
-                    id, name, location_id = i.split('|')
+                    location_id, name = i.split('|')
                 except ValueError:
                     logger.warning(u'Malformed line: %s' % i)
                     continue
 
-                result = {'id': id,
+                result = {'location_id': location_id,
                           'name': name,
-                          'location_id': location_id,
                           'type': settings.weather_api}
 
                 self.cities_list.append(result)
@@ -138,20 +137,20 @@ class WeatherUtility(object):
         if not city:
             result = self.weather_info
         else:
-            result = self.weather_info.get(city['id'], None)
+            result = self.weather_info.get(city['location_id'], None)
 
         return result
 
     def get_city(self, city):
         self.update_locations()
-        match = [i for i in self.cities_list if i['id'] == city]
+        match = [i for i in self.cities_list if i['location_id'] == city]
         if match:
             result = match[0]
         else:
             result = self.cities_list[0]
             logger.warning(
                 u'Requested city "{0}" is not a valid city, returning the '
-                u'first one of the list: {1}'.format(city, result['id']))
+                u'first one of the list: {1}'.format(city, result['location_id']))
 
         return result
 

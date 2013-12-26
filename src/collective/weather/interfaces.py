@@ -70,7 +70,7 @@ class IWeatherSettings(form.Schema):
         description=_(
             u'help_location_ids',
             default=u'Enter here all available locations that will be '
-                    u'available. Format: id|name|location_id. Check the '
+                    u'available. Format: location_id|name. Check the '
                     u'<a href="https://github.com/collective/collective.weather#finding-locations">package documentation</a> '
                     u'for further information on how to find ids.'),
         value_type=schema.TextLine(),
