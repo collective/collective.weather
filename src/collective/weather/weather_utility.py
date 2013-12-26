@@ -8,8 +8,10 @@ from collective.weather.interfaces import IWeatherInfo
 from collective.weather.interfaces import IWeatherUtility
 from datetime import datetime
 from plone.registry.interfaces import IRegistry
+from Products.CMFCore.utils import getToolByName
 from zope.component import getUtility
 from zope.component import queryUtility
+from zope.component.hooks import getSite
 from zope.globalrequest import getRequest
 from zope.interface import implements
 
@@ -72,8 +74,10 @@ class WeatherUtility(object):
             utility = queryUtility(IWeatherInfo, name=provider)
             if utility:
                 weather_api = utility(api_key)
+                portal = getSite()
+                ltool = getToolByName(portal, 'portal_languages')
                 try:
-                    result = weather_api.getWeatherInfo(cityid, units=units, lang='en')
+                    result = weather_api.getWeatherInfo(cityid, units=units, lang=ltool.getDefaultLanguage())
                 except Exception, msg:
                     result = {'error': msg}
             logger.info(u'Result: {0}'.format(result))
