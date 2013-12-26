@@ -55,7 +55,6 @@ class RegistryTestCase(unittest.TestCase):
         self.portal = self.layer['portal']
         self.registry = getUtility(IRegistry)
         self.settings = self.registry.forInterface(IWeatherSettings)
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
     def test_weather_api_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'weather_api'))
