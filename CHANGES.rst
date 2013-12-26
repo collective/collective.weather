@@ -5,6 +5,9 @@ There's a frood who really knows where his towel is.
 
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
+- Moved doctests in docstrings to separate files. (closes `#28`_).
+  [marcosfromero]
+
 - forecast.io and weather underground named utilities. (closes `#18`_).
   [marcosfromero]
 
@@ -68,4 +71,5 @@ There's a frood who really knows where his towel is.
 .. _`#14`: https://github.com/collective/collective.weather/issues/14
 .. _`#18`: https://github.com/collective/collective.weather/issues/18
 .. _`#19`: https://github.com/collective/collective.weather/issues/19
+.. _`#28`: https://github.com/collective/collective.weather/issues/28
 .. _`How to make your Plone add-on products uninstall cleanly`: http://blog.keul.it/2013/05/how-to-make-your-plone-add-on-products.html
