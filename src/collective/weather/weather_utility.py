@@ -26,21 +26,7 @@ class WeatherUtility(object):
     cities_list = []
     current_city = ''
 
-    def _update_weather_info(self, city_id=None):
-        start_update = datetime.now()
-
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(IWeatherSettings)
-        units = settings.units
-        degrees = 'C'
-        if units == 'imperial':
-            degrees = 'F'
-
-        provider = settings.weather_api
-        api_key = settings.weather_api_key
-
-        now = start_update
-
+    def _get_cities_to_update(self, city_id=None):
         if city_id:
             logger.info(u'Update Weather: {0}'.format(city_id))
             cities_list = [city['id'] for city in self.cities_list]
@@ -59,14 +45,30 @@ class WeatherUtility(object):
             logger.info(u'Update Weather for all cities')
             to_update = self.cities_list
 
-        for city in to_update:
+        return to_update
 
+    def _update_weather_info(self, city_id=None):
+        start_update = datetime.now()
+
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(IWeatherSettings)
+        units = settings.units
+        degrees = units == 'imperial' and 'F' or 'C'
+
+        provider = settings.weather_api
+        api_key = settings.weather_api_key
+
+        now = start_update
+
+        to_update = self._get_cities_to_update(city_id)
+
+        for city in to_update:
             old_data = self.get_weather_info(city)
 
-            if old_data and old_data.get('date'):
-                if old_data.get('date') > now - TIME_THRESHOLD:
-                    logger.info(u'Last update was done %s. Not updating again' % old_data.get('date'))
-                    continue
+            if old_data and old_data.get('date') and \
+               old_data.get('date') > now - TIME_THRESHOLD:
+                logger.info(u'Last update was done %s. Not updating again' % old_data.get('date'))
+                continue
 
             cityid = city['location_id'].encode('utf-8')
             logger.info(u'Getting data for city: ' + cityid)
@@ -97,15 +99,18 @@ class WeatherUtility(object):
             else:
                 logger.warning(u'No "condition" in result, or malformed response.')
 
+        self._remove_old_cities()
+
+        end_update = datetime.now()
+        took = end_update - start_update
+        logger.info('Weather update took: %s' % took)
+
+    def _remove_old_cities(self):
         for city in self.weather_info.keys():
             match = [i for i in self.cities_list if city == i['id']]
             if not match:
                 logger.warning('The city %s is not listed in the list of cities. Removing weather data' % city)
                 del self.weather_info[city]
-
-        end_update = datetime.now()
-        took = end_update - start_update
-        logger.info('Weather update took: %s' % took)
 
     def update_locations(self):
         self.cities_list = []

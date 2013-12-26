@@ -26,50 +26,45 @@ class TestProvider(object):
         """Dummy implementation of getWeatherInfo for testing puroposes
         """
 
-        if location == 'ARCA0023':
-            weather_info = {'summary': u'Windy',
-                            'temperature': 20,
-                            'icon': u'icon.png'}
+        WEATHER = {
+            'ARCA0023': {'summary': u'Windy',
+                         'temperature': 20,
+                         'icon': u'icon.png'},
 
-        if location == 'USCA0638':
-            weather_info = {'summary': u'Snowing',
-                            'temperature': -8,
-                            'icon': u'icon.png'}
+            'USCA0638': {'summary': u'Snowing',
+                         'temperature': -8,
+                         'icon': u'icon.png'},
 
-        if location == 'NEW123':
-            weather_info = {'summary': u'Snowing',
-                            'temperature': -8,
-                            'icon': u'icon.png'}
+            'NEW123': {'summary': u'Snowing',
+                       'temperature': -8,
+                       'icon': u'icon.png'},
 
-        if location == 'NEW123-invalid':
-            weather_info = {'temperature': -8,
-                            'icon': u'icon.png'}
+            'NEW123-invalid': {'temperature': -8,
+                               'icon': u'icon.png'},
+
+            'ARCA0024': {'summary': u'Windy',
+                         'temperature': 10,
+                         'icon': u'icon.png'},
+
+            'USCA0639': {'summary': u'Snowing',
+                         'temperature': -10,
+                         'icon': u'icon.png'},
+
+            'NEW124': {'summary': u'Snowing',
+                       'temperature': -20,
+                       'icon': u'icon.png'},
+
+            'NEW125': {'summary': u'Snowing',
+                       'temperature': -20,
+                       'icon': u'icon.png'}
+        }
 
         if location == 'ARBA0023-urllib-exception':
             raise urllib2.URLError('')
-
-        if location == 'ARBA0023-exception':
+        elif location == 'ARBA0023-exception':
             raise ValueError
-
-        if location == 'ARCA0024':
-            weather_info = {'summary': u'Windy',
-                            'temperature': 10,
-                            'icon': u'icon.png'}
-
-        if location == 'USCA0639':
-            weather_info = {'summary': u'Snowing',
-                            'temperature': -10,
-                            'icon': u'icon.png'}
-
-        if location == 'NEW124':
-            weather_info = {'summary': u'Snowing',
-                            'temperature': -20,
-                            'icon': u'icon.png'}
-
-        if location == 'NEW125':
-            weather_info = {'summary': u'Snowing',
-                            'temperature': -20,
-                            'icon': u'icon.png'}
+        else:
+            weather_info = WEATHER[location]
 
         if 'error' in weather_info:
             warning = 'Test weather api returned this {0} error: {1}'
