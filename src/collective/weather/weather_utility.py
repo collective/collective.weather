@@ -26,7 +26,17 @@ class WeatherUtility(object):
     cities_list = []
     current_city = ''
 
+    def _has_to_update(self, city, now):
+        old_data = self.get_weather_info(city)
+        if old_data and old_data.get('date') and \
+           old_data.get('date') > now - TIME_THRESHOLD:
+            logger.info(u'Last update was done %s. Not updating again' % old_data.get('date'))
+            return False
+        else:
+            return True
+
     def _get_cities_to_update(self, city_id=None):
+
         if city_id:
             logger.info(u'Update Weather: {0}'.format(city_id))
             cities_list = [city['id'] for city in self.cities_list]
@@ -61,14 +71,9 @@ class WeatherUtility(object):
         now = start_update
 
         to_update = self._get_cities_to_update(city_id)
+        to_update = [city for city in to_update if self._has_to_update(city, now)]
 
         for city in to_update:
-            old_data = self.get_weather_info(city)
-
-            if old_data and old_data.get('date') and \
-               old_data.get('date') > now - TIME_THRESHOLD:
-                logger.info(u'Last update was done %s. Not updating again' % old_data.get('date'))
-                continue
 
             cityid = city['location_id'].encode('utf-8')
             logger.info(u'Getting data for city: ' + cityid)
@@ -103,7 +108,7 @@ class WeatherUtility(object):
 
         end_update = datetime.now()
         took = end_update - start_update
-        logger.info('Weather update took: %s' % took)
+        logger.debug('Weather update took: %s' % took)
 
     def _remove_old_cities(self):
         for city in self.weather_info.keys():
