@@ -5,6 +5,8 @@ There's a frood who really knows where his towel is.
 
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
+- Moved doctests in docstrings to separate files. (closes `#28`_).
+  [marcosfromero]
 
 - Translation of Yahoo weather conditions. (see `#11`_).
   [marcosfromero]
@@ -69,7 +71,6 @@ There's a frood who really knows where his towel is.
 .. _`#6`: https://github.com/collective/collective.weather/issues/6
 .. _`#7`: https://github.com/collective/collective.weather/issues/7
 .. _`#9`: https://github.com/collective/collective.weather/issues/9
-.. _`#11`: https://github.com/collective/collective.weather/issues/11
 .. _`#14`: https://github.com/collective/collective.weather/issues/14
 .. _`#18`: https://github.com/collective/collective.weather/issues/18
 .. _`#19`: https://github.com/collective/collective.weather/issues/19

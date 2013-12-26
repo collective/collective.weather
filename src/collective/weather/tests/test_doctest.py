@@ -15,15 +15,18 @@ def test_suite():
                 layer=FUNCTIONAL_TESTING),
     ])
     suite.addTests([
-        layered(doctest.DocTestSuite('collective.weather.utilities.yahoo'),
+        layered(doctest.DocFileSuite('tests/yahoo.txt',
+                                     package='collective.weather'),
                 layer=FUNCTIONAL_TESTING),
     ])
     suite.addTests([
-        layered(doctest.DocTestSuite('collective.weather.utilities.forecastio'),
+        layered(doctest.DocFileSuite('tests/forecastio.txt',
+                                     package='collective.weather'),
                 layer=FUNCTIONAL_TESTING),
     ])
     suite.addTests([
-        layered(doctest.DocTestSuite('collective.weather.utilities.wunderground'),
+        layered(doctest.DocFileSuite('tests/wunderground.txt',
+                                     package='collective.weather'),
                 layer=FUNCTIONAL_TESTING),
     ])
     return suite

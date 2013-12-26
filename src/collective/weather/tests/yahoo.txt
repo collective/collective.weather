@@ -1,0 +1,64 @@
+Functional test
+
+    >>> from zope.component import getUtility
+    >>> from collective.weather.interfaces import IWeatherInfo
+
+Modify logger output for testing purposes
+
+    >>> import sys, logging
+    >>> root_logger = logging.getLogger()
+    >>> handler = logging.StreamHandler(sys.stdout)
+    >>> formatter = logging.Formatter("%(name)s - %(levelname)s - %(message)s")
+    >>> handler.setFormatter(formatter)
+    >>> root_logger.addHandler(handler)
+
+
+Get the utility
+
+    >>> utility = getUtility(IWeatherInfo, name='yahoo')
+
+Test the utility with a blank key (log output)
+
+    >>> yahoo = utility('')
+
+Monkey patch _getWeatherInfo to avoid actual web service call
+
+    >>> def _getWeatherInfo(location, units):
+    ...    weather_infos = {
+    ...        '2502265,c': {'temperature': 18.0,
+    ...                     'summary': 'Sunny',
+    ...                     'icon': 'sunny-icon.png'},
+    ...        '2502265,f': {'temperature': 65.0,
+    ...                     'summary': 'Sunny',
+    ...                     'icon': 'sunny-icon.png'}
+    ...    }
+    ...    key = '{0},{1}'.format(location, units)
+    ...    if key in weather_infos:
+    ...        return weather_infos[key]
+    ...    else:
+    ...        return {}
+
+    >>> yahoo._getWeatherInfo = _getWeatherInfo
+
+Test with a known location
+
+    >>> info = yahoo.getWeatherInfo('2502265', units='metric')
+    >>> '%.2f' % info['temperature']  # For Python 2.6
+    '18.00'
+    >>> info['summary']
+    'Sunny'
+    >>> info['icon']
+    'sunny-icon.png'
+
+Test with a different unit
+
+    >>> info = yahoo.getWeatherInfo('2502265', units='imperial')
+    >>> '%.2f' % info['temperature']  # For Python 2.6
+    '65.00'
+
+Test with a unknown location (log output)
+
+    >>> info = yahoo.getWeatherInfo('4444444')
+    collective.weather - WARNING - Yahoo! weather api returned no information for location 4444444
+    >>> info
+    {}
