@@ -54,7 +54,7 @@ class PortletTestCase(unittest.TestCase):
             del mapping[m]
 
         addview = mapping.restrictedTraverse('+/' + portlet.addview)
-        addview.createAndAdd(data={'header': u'Weather', 'location': u'Cordoba'})
+        addview.createAndAdd(data={'header': u'Weather', 'location': u'ARCA0023'})
 
         self.assertEqual(len(mapping), 1)
         self.assertTrue(isinstance(mapping.values()[0], weather.Assignment))
@@ -99,7 +99,7 @@ class RenderTestCase(unittest.TestCase):
             (context, request, view, manager, assignment), IPortletRenderer)
 
     def test_render(self):
-        assignment = weather.Assignment(header=u'Weather', location=u'Cordoba')
+        assignment = weather.Assignment(header=u'Weather', location=u'ARCA0023')
 
         r = self.renderer(assignment=assignment)
         r = r.__of__(self.portal)

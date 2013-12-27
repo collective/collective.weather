@@ -35,19 +35,19 @@ class WeatherUtility(object):
         else:
             return True
 
-    def _get_cities_to_update(self, city_id=None):
+    def _get_cities_to_update(self, location_id=None):
 
-        if city_id:
-            logger.info(u'Update Weather: {0}'.format(city_id))
-            cities_list = [city['id'] for city in self.cities_list]
-            if city_id in cities_list:
+        if location_id:
+            logger.info(u'Update Weather: {0}'.format(location_id))
+            cities_list = [city['location_id'] for city in self.cities_list]
+            if location_id in cities_list:
                 # If asked city exists in our list of cities, find it
-                match = [i for i in self.cities_list if city_id == i['id']]
+                match = [i for i in self.cities_list if location_id == i['location_id']]
                 to_update = [match[0]]
             else:
                 logger.warning(
                     u'Requested city "{0}" is not a valid city, '
-                    u'updating first one of the list'.format(city_id))
+                    u'updating first one of the list'.format(location_id))
                 # If asked city does not exist, update first one
                 to_update = [self.cities_list[0]]
         else:
@@ -57,7 +57,7 @@ class WeatherUtility(object):
 
         return to_update
 
-    def _update_weather_info(self, city_id=None):
+    def _update_weather_info(self, location_id=None):
         start_update = datetime.now()
 
         registry = getUtility(IRegistry)
@@ -70,7 +70,7 @@ class WeatherUtility(object):
 
         now = start_update
 
-        to_update = self._get_cities_to_update(city_id)
+        to_update = self._get_cities_to_update(location_id)
         to_update = [city for city in to_update if self._has_to_update(city, now)]
 
         for city in to_update:
@@ -99,8 +99,8 @@ class WeatherUtility(object):
                                'conditions': result.get('summary', None),
                                'icon': result.get('icon', None)}
 
-                self.weather_info[city['id']] = {'date': now,
-                                                 'weather': new_weather}
+                self.weather_info[city['location_id']] = {'date': now,
+                                                          'weather': new_weather}
             else:
                 logger.warning(u'No "condition" in result, or malformed response.')
 

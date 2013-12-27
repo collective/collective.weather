@@ -48,8 +48,8 @@ And we check again
 
 Now, change the city
 
-    >>> browser.open(portalURL+'/@@update-weather?city=Los Angeles')
-    >>> browser.open(portalURL+'?city=Los Angeles')
+    >>> browser.open(portalURL+'/@@update-weather?city=USCA0638')
+    >>> browser.open(portalURL+'?city=USCA0638')
     >>> "No weather information" in browser.contents
     False
     >>> "-8°C" in browser.contents
