@@ -65,11 +65,11 @@ class Renderer(base.Renderer):
         self.current_city = None
         if self.data.location in vocab:
             location = vocab.by_value[self.data.location]
-            self.current_city = {'id': location.value, 'name': location.title}
+            self.current_city = {'location_id': location.value, 'name': location.title}
 
         self.weather_info = None
         if not self.current_city is None:
-            weather_utility.update_weather_info(self.current_city['id'])
+            weather_utility.update_weather_info(self.current_city['location_id'])
             self.weather_info = weather_utility.get_weather_info(self.current_city)
 
 

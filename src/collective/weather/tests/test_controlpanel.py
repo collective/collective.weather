@@ -68,8 +68,8 @@ class RegistryTestCase(unittest.TestCase):
         self.assertTrue(hasattr(self.settings, 'location_ids'))
         # as defined in the test fixture
         expected = [
-            u'Cordoba|Cordoba, Argentina|ARCA0023',
-            u'Los Angeles|Los Angeles, California|USCA0638'
+            u'ARCA0023|Cordoba, Argentina',
+            u'USCA0638|Los Angeles, California'
         ]
         self.assertEqual(self.settings.location_ids, expected)
 

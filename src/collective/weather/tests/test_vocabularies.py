@@ -21,8 +21,8 @@ class VocabulariesTestCase(unittest.TestCase):
         locations = util(self.portal)
         # as defined in the test fixture
         self.assertEqual(len(locations), 2)
-        self.assertIn('Cordoba', locations)
-        self.assertIn(u'Los Angeles', locations)
+        self.assertIn('ARCA0023', locations)
+        self.assertIn('USCA0638', locations)
 
     def test_providers_vocabulary(self):
         name = 'collective.weather.Providers'

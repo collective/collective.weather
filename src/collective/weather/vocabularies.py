@@ -16,7 +16,7 @@ def LocationsVocabulary(context):
     items = []
     for l in locations:
         items.append(
-            SimpleVocabulary.createTerm(l['id'], l['location_id'], l['name']))
+            SimpleVocabulary.createTerm(l['location_id'], l['location_id'], l['name']))
 
     return SimpleVocabulary(items)
 

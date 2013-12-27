@@ -30,12 +30,10 @@ class UtilityTestCase(unittest.TestCase):
         settings = registry.forInterface(IWeatherSettings)
         old_ids = deepcopy(settings.location_ids)
 
-        expected_values = [{'id': u'Cordoba',
-                            'location_id': u'ARCA0023',
+        expected_values = [{'location_id': u'ARCA0023',
                             'name': u'Cordoba, Argentina',
                             'type': 'testprovider'},
-                           {'id': u'Los Angeles',
-                            'location_id': u'USCA0638',
+                           {'location_id': u'USCA0638',
                             'name': u'Los Angeles, California',
                             'type': 'testprovider'}]
 
@@ -44,18 +42,15 @@ class UtilityTestCase(unittest.TestCase):
         self.assertEqual(actual_values, expected_values)
 
         # We add a new city to the registry
-        settings.location_ids.append(u'New city|New city, Test|LALA1212')
+        settings.location_ids.append(u'LALA1212|New city, Test')
 
-        expected_values = [{'id': u'Cordoba',
-                            'location_id': u'ARCA0023',
+        expected_values = [{'location_id': u'ARCA0023',
                             'name': u'Cordoba, Argentina',
                             'type': 'testprovider'},
-                           {'id': u'Los Angeles',
-                            'location_id': u'USCA0638',
+                           {'location_id': u'USCA0638',
                             'name': u'Los Angeles, California',
                             'type': 'testprovider'},
-                           {'id': u'New city',
-                            'location_id': u'LALA1212',
+                           {'location_id': u'LALA1212',
                             'name': u'New city, Test',
                             'type': 'testprovider'}]
 
@@ -66,16 +61,13 @@ class UtilityTestCase(unittest.TestCase):
         # Finally, we add a malformed value to the list
         settings.location_ids.append('My city')
 
-        expected_values = [{'id': u'Cordoba',
-                            'location_id': u'ARCA0023',
+        expected_values = [{'location_id': u'ARCA0023',
                             'name': u'Cordoba, Argentina',
                             'type': 'testprovider'},
-                           {'id': u'Los Angeles',
-                            'location_id': u'USCA0638',
+                           {'location_id': u'USCA0638',
                             'name': u'Los Angeles, California',
                             'type': 'testprovider'},
-                           {'id': u'New city',
-                            'location_id': u'LALA1212',
+                           {'location_id': u'LALA1212',
                             'name': u'New city, Test',
                             'type': 'testprovider'}]
 
@@ -93,12 +85,12 @@ class UtilityTestCase(unittest.TestCase):
         # Update weather info
         self.weather_utility.update_weather_info()
 
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
-                                            'temp': u'-8\xb0C',
-                                            'icon': u'icon.png'},
-                           u'Cordoba': {'conditions': u'Windy',
-                                        'temp': u'20\xb0C',
-                                        'icon': u'icon.png'}}
+        expected_values = {u'USCA0638': {'conditions': u'Snowing',
+                                         'temp': u'-8\xb0C',
+                                         'icon': u'icon.png'},
+                           u'ARCA0023': {'conditions': u'Windy',
+                                         'temp': u'20\xb0C',
+                                         'icon': u'icon.png'}}
 
         actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
 
@@ -106,19 +98,19 @@ class UtilityTestCase(unittest.TestCase):
 
         # Now, we add a new city
         old_locations = deepcopy(settings.location_ids)
-        settings.location_ids.append(u'New weather|New weather|NEW123')
+        settings.location_ids.append(u'NEW123|New weather')
 
         self.weather_utility.update_weather_info()
 
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
-                                            'temp': u'-8\xb0C',
-                                            'icon': u'icon.png'},
-                           u'Cordoba': {'conditions': u'Windy',
-                                        'temp': u'20\xb0C',
-                                        'icon': u'icon.png'},
-                           u'New weather': {'conditions': u'Snowing',
-                                            'icon': u'icon.png',
-                                            'temp': u'-8\xb0C'}}
+        expected_values = {u'USCA0638': {'conditions': u'Snowing',
+                                         'temp': u'-8\xb0C',
+                                         'icon': u'icon.png'},
+                           u'ARCA0023': {'conditions': u'Windy',
+                                         'temp': u'20\xb0C',
+                                         'icon': u'icon.png'},
+                           u'NEW123': {'conditions': u'Snowing',
+                                       'icon': u'icon.png',
+                                       'temp': u'-8\xb0C'}}
 
         actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
 
@@ -129,83 +121,12 @@ class UtilityTestCase(unittest.TestCase):
 
         self.weather_utility.update_weather_info()
 
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
-                                            'temp': u'-8\xb0C',
-                                            'icon': u'icon.png'},
-                           u'Cordoba': {'conditions': u'Windy',
-                                        'temp': u'20\xb0C',
-                                        'icon': u'icon.png'}}
-
-        actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
-
-        self.assertEqual(actual_values, expected_values)
-
-        # We are going to forge weather info into the utility so we simulate invalid returned values and errors
-        self.weather_utility.weather_info['New weather'] = {'weather': {'conditions': u'Snowing',
-                                                                        'temp': u'-8\xb0C',
-                                                                        'icon': u'icon.png'}}
-
-        # We create a city with the same name but different location_id, so we can simulate
-        # invalid results for an existing city. In this case, we should still see old data
-        settings.location_ids.append(u'New weather|New weather|NEW123-invalid')
-        self.weather_utility.update_weather_info()
-
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
-                                            'temp': u'-8\xb0C',
-                                            'icon': u'icon.png'},
-                           u'Cordoba': {'conditions': u'Windy',
-                                        'temp': u'20\xb0C',
-                                        'icon': u'icon.png'},
-                           u'New weather': {'conditions': u'Snowing',
-                                            'temp': u'-8\xb0C',
-                                            'icon': u'icon.png'}}
-
-        actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
-
-        self.assertEqual(actual_values, expected_values)
-
-        self.weather_utility.weather_info['Buenos Aires'] = {'weather': {'conditions': u'Snowing',
-                                                                         'temp': u'-8\xb0C',
-                                                                         'icon': u'icon.png'}}
-
-        # If we get a urllib exception, then also keep the existing value
-        settings.location_ids.append(u'Buenos Aires|Buenos Aires, Argentina|ARBA0023-urllib-exception')
-
-        self.weather_utility.update_weather_info()
-
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
-                                            'temp': u'-8\xb0C',
-                                            'icon': u'icon.png'},
-                           u'Cordoba': {'conditions': u'Windy',
-                                        'temp': u'20\xb0C',
-                                        'icon': u'icon.png'},
-                           u'New weather': {'conditions': u'Snowing',
-                                            'temp': u'-8\xb0C',
-                                            'icon': u'icon.png'},
-                           u'Buenos Aires': {'conditions': u'Snowing',
-                                             'temp': u'-8\xb0C',
-                                             'icon': u'icon.png'}}
-
-        actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
-        self.assertEqual(actual_values, expected_values)
-
-        # If we get a any exception, then also keep the existing value
-        settings.location_ids.append(u'Buenos Aires|Buenos Aires, Argentina|ARBA0023-exception')
-
-        self.weather_utility.update_weather_info()
-
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
-                                            'temp': u'-8\xb0C',
-                                            'icon': u'icon.png'},
-                           u'Cordoba': {'conditions': u'Windy',
-                                        'temp': u'20\xb0C',
-                                        'icon': u'icon.png'},
-                           u'New weather': {'conditions': u'Snowing',
-                                            'temp': u'-8\xb0C',
-                                            'icon': u'icon.png'},
-                           u'Buenos Aires': {'conditions': u'Snowing',
-                                             'temp': u'-8\xb0C',
-                                             'icon': u'icon.png'}}
+        expected_values = {u'USCA0638': {'conditions': u'Snowing',
+                                         'temp': u'-8\xb0C',
+                                         'icon': u'icon.png'},
+                           u'ARCA0023': {'conditions': u'Windy',
+                                         'temp': u'20\xb0C',
+                                         'icon': u'icon.png'}}
 
         actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
 
@@ -216,27 +137,26 @@ class UtilityTestCase(unittest.TestCase):
         self.weather_utility.weather_info = {}
         self.weather_utility.update_weather_info()
 
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
-                                            'temp': u'-8\xb0F',
-                                            'icon': u'icon.png'},
-                           u'Cordoba': {'conditions': u'Windy',
-                                        'temp': u'20\xb0F',
-                                        'icon': u'icon.png'}}
+        expected_values = {u'USCA0638': {'conditions': u'Snowing',
+                                         'temp': u'-8\xb0F',
+                                         'icon': u'icon.png'},
+                           u'ARCA0023': {'conditions': u'Windy',
+                                         'temp': u'20\xb0F',
+                                         'icon': u'icon.png'}}
 
         actual_values = dict([(i, self.weather_utility.get_weather_info()[i]['weather']) for i in self.weather_utility.get_weather_info()])
 
         self.assertEqual(actual_values, expected_values)
 
     def test_get_city(self):
-        city = self.weather_utility.get_city('Cordoba')
-        expected_city = {'id': u'Cordoba',
-                         'location_id': u'ARCA0023',
+        city = self.weather_utility.get_city('ARCA0023')
+        expected_city = {'location_id': u'ARCA0023',
                          'name': u'Cordoba, Argentina',
                          'type': 'testprovider'}
 
         self.assertEqual(city, expected_city)
 
-        city = self.weather_utility.get_city('Cordoba2')
+        city = self.weather_utility.get_city('ARCA00232')
 
         self.assertEqual(city, expected_city)
 
@@ -245,28 +165,25 @@ class UtilityTestCase(unittest.TestCase):
         COOKIE_KEY = 'collective.weather.current_city'
 
         city = self.weather_utility.get_current_city()
-        expected_city = {'id': u'Cordoba',
-                         'location_id': u'ARCA0023',
+        expected_city = {'location_id': u'ARCA0023',
                          'name': u'Cordoba, Argentina',
                          'type': 'testprovider'}
 
         self.assertEqual(city, expected_city)
 
-        self.request.cookies[COOKIE_KEY] = 'Los Angeles'
+        self.request.cookies[COOKIE_KEY] = 'USCA0638'
 
         city = self.weather_utility.get_current_city()
-        expected_city = {'id': u'Los Angeles',
-                         'location_id': u'USCA0638',
+        expected_city = {'location_id': u'USCA0638',
                          'name': u'Los Angeles, California',
                          'type': 'testprovider'}
 
         self.assertEqual(city, expected_city)
 
-        self.request.cookies[COOKIE_KEY] = 'Los Angeles5'
+        self.request.cookies[COOKIE_KEY] = 'USCA06385'
 
         city = self.weather_utility.get_current_city()
-        expected_city = {'id': u'Cordoba',
-                         'location_id': u'ARCA0023',
+        expected_city = {'location_id': u'ARCA0023',
                          'name': u'Cordoba, Argentina',
                          'type': 'testprovider'}
 
@@ -280,20 +197,20 @@ class UtilityTestCase(unittest.TestCase):
         # What we first do is replace all locations created from the registry, with new values
         old_locations = deepcopy(settings.location_ids)
         settings.location_ids = [
-            u'Cordoba|Cordoba, Argentina|ARCA0024',
-            u'Los Angeles|Los Angeles, California|USCA0639',
-            u'New weather|New weather|NEW124',
-            u'New weather2|New weather|NEW125',
+            u'ARCA0024|Cordoba, Argentina',
+            u'USCA0639|Los Angeles, California',
+            u'NEW124|New weather',
+            u'NEW125|New weather2',
         ]
         # And reset any existing weather info
         self.weather_utility.weather_info = {}
 
         # Update weather info for Los Angeles
-        self.weather_utility.update_weather_info('Los Angeles')
+        self.weather_utility.update_weather_info('USCA0639')
 
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
-                                            'temp': u'-10\xb0C',
-                                            'icon': u'icon.png'}}
+        expected_values = {u'USCA0639': {'conditions': u'Snowing',
+                                         'temp': u'-10\xb0C',
+                                         'icon': u'icon.png'}}
 
         wi = self.weather_utility.get_weather_info()
 
@@ -302,14 +219,14 @@ class UtilityTestCase(unittest.TestCase):
         self.assertEqual(actual_values, expected_values)
 
         # Now, for New weather2
-        self.weather_utility.update_weather_info('New weather2')
+        self.weather_utility.update_weather_info('NEW125')
 
-        expected_values = {u'Los Angeles': {'conditions': u'Snowing',
-                                            'temp': u'-10\xb0C',
-                                            'icon': u'icon.png'},
-                           u'New weather2': {'conditions': u'Snowing',
-                                             'icon': u'icon.png',
-                                             'temp': u'-20\xb0C'}}
+        expected_values = {u'USCA0639': {'conditions': u'Snowing',
+                                         'temp': u'-10\xb0C',
+                                         'icon': u'icon.png'},
+                           u'NEW125': {'conditions': u'Snowing',
+                                       'icon': u'icon.png',
+                                       'temp': u'-20\xb0C'}}
 
         wi = self.weather_utility.get_weather_info()
 
@@ -320,15 +237,15 @@ class UtilityTestCase(unittest.TestCase):
         # Now, if i ask for an invalid city, i should get for the first one
         self.weather_utility.update_weather_info('New weather3')
 
-        expected_values = {u'Cordoba': {'conditions': u'Windy',
-                                        'temp': u'10\xb0C',
-                                        'icon': u'icon.png'},
-                           u'Los Angeles': {'conditions': u'Snowing',
-                                            'temp': u'-10\xb0C',
-                                            'icon': u'icon.png'},
-                           u'New weather2': {'conditions': u'Snowing',
-                                             'icon': u'icon.png',
-                                             'temp': u'-20\xb0C'}}
+        expected_values = {u'ARCA0024': {'conditions': u'Windy',
+                                         'temp': u'10\xb0C',
+                                         'icon': u'icon.png'},
+                           u'USCA0639': {'conditions': u'Snowing',
+                                         'temp': u'-10\xb0C',
+                                         'icon': u'icon.png'},
+                           u'NEW125': {'conditions': u'Snowing',
+                                       'icon': u'icon.png',
+                                       'temp': u'-20\xb0C'}}
 
         wi = self.weather_utility.get_weather_info()
 
@@ -337,20 +254,20 @@ class UtilityTestCase(unittest.TestCase):
         self.assertEqual(actual_values, expected_values)
 
         # Finally, ask for New weather
-        self.weather_utility.update_weather_info('New weather')
+        self.weather_utility.update_weather_info('NEW124')
 
-        expected_values = {u'Cordoba': {'conditions': u'Windy',
-                                        'temp': u'10\xb0C',
-                                        'icon': u'icon.png'},
-                           u'Los Angeles': {'conditions': u'Snowing',
-                                            'temp': u'-10\xb0C',
-                                            'icon': u'icon.png'},
-                           u'New weather': {'conditions': u'Snowing',
-                                            'icon': u'icon.png',
-                                            'temp': u'-20\xb0C'},
-                           u'New weather2': {'conditions': u'Snowing',
-                                             'icon': u'icon.png',
-                                             'temp': u'-20\xb0C'}}
+        expected_values = {u'ARCA0024': {'conditions': u'Windy',
+                                         'temp': u'10\xb0C',
+                                         'icon': u'icon.png'},
+                           u'USCA0639': {'conditions': u'Snowing',
+                                         'temp': u'-10\xb0C',
+                                         'icon': u'icon.png'},
+                           u'NEW124': {'conditions': u'Snowing',
+                                       'icon': u'icon.png',
+                                       'temp': u'-20\xb0C'},
+                           u'NEW125': {'conditions': u'Snowing',
+                                       'icon': u'icon.png',
+                                       'temp': u'-20\xb0C'}}
 
         wi = self.weather_utility.get_weather_info()
 

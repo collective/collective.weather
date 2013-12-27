@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Refactor weather_utility to use location_id as key. (closes `#36`_).
+  [marcosfromero]
+
 - Reduce complexity in utilities. (closes `#8`_). [marcosfromero]
 
 - Remove dependency on pywapi.
@@ -84,4 +87,5 @@ There's a frood who really knows where his towel is.
 .. _`#14`: https://github.com/collective/collective.weather/issues/14
 .. _`#18`: https://github.com/collective/collective.weather/issues/18
 .. _`#19`: https://github.com/collective/collective.weather/issues/19
+.. _`#36`: https://github.com/collective/collective.weather/issues/36
 .. _`How to make your Plone add-on products uninstall cleanly`: http://blog.keul.it/2013/05/how-to-make-your-plone-add-on-products.html
