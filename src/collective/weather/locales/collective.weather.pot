@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.weather\n"
-"POT-Creation-Date: 2013-12-26 14:52+0000\n"
+"POT-Creation-Date: 2014-04-11 14:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.weather\n"
 
-#: ./profiles/default/portlets.xml
+#: collective/weather/profiles/default/portlets.xml
 msgid "A portlet that shows the weather forecast for selected cities."
 msgstr ""
 
-#: ./interfaces.py:60
+#: collective/weather/interfaces.py:60
 msgid "API key"
 msgstr ""
 
-#: ./portlets/weather.py:82
+#: collective/weather/portlets/weather.py:82
 msgid "Add Weather Portlet"
 msgstr ""
 
-#: ./interfaces.py:69
+#: collective/weather/interfaces.py:69
 msgid "Available locations"
 msgstr ""
 
@@ -40,7 +40,7 @@ msgstr ""
 msgid "Blustery"
 msgstr ""
 
-#: ./portlets/weather.py:27
+#: collective/weather/portlets/weather.py:27
 msgid "Choose one of the preconfigured locations."
 msgstr ""
 
@@ -59,7 +59,7 @@ msgstr ""
 msgid "Dust"
 msgstr ""
 
-#: ./portlets/weather.py:94
+#: collective/weather/portlets/weather.py:94
 msgid "Edit Weather Portlet"
 msgstr ""
 
@@ -99,7 +99,7 @@ msgstr ""
 msgid "Hurricane"
 msgstr ""
 
-#: ./config.py:20
+#: collective/weather/config.py:16
 msgid "Imperial"
 msgstr ""
 
@@ -115,11 +115,11 @@ msgstr ""
 msgid "Light Snow Showers"
 msgstr ""
 
-#: ./portlets/weather.py:26
+#: collective/weather/portlets/weather.py:26
 msgid "Location"
 msgstr ""
 
-#: ./config.py:19
+#: collective/weather/config.py:15
 msgid "Metric"
 msgstr ""
 
@@ -147,8 +147,8 @@ msgstr ""
 msgid "Mostly Sunny"
 msgstr ""
 
-#: ./browser/templates/current_weather.pt:25
-#: ./portlets/weather.pt:31
+#: collective/weather/browser/templates/current_weather.pt:25
+#: collective/weather/portlets/weather.pt:31
 msgid "No weather information"
 msgstr ""
 
@@ -164,7 +164,7 @@ msgstr ""
 msgid "Partly Cloudy (Night)"
 msgstr ""
 
-#: ./portlets/weather.py:20
+#: collective/weather/portlets/weather.py:20
 msgid "Portlet header"
 msgstr ""
 
@@ -183,14 +183,14 @@ msgstr ""
 msgid "Scattered Thunderstorms"
 msgstr ""
 
-#: ./controlpanel.py:12
+#: collective/weather/controlpanel.py:12
 msgid "Settings for the collective.weather package"
 msgstr ""
 
 msgid "Severe Thunderstorms"
 msgstr ""
 
-#: ./interfaces.py:94
+#: collective/weather/interfaces.py:93
 msgid "Show weather viewlet?"
 msgstr ""
 
@@ -221,7 +221,7 @@ msgstr ""
 msgid "Thunderstorms"
 msgstr ""
 
-#: ./portlets/weather.py:21
+#: collective/weather/portlets/weather.py:21
 msgid "Title of the rendered portlet."
 msgstr ""
 
@@ -235,54 +235,50 @@ msgstr ""
 msgid "Uninstall profile for the collective.weather package."
 msgstr ""
 
-#: ./interfaces.py:82
+#: collective/weather/interfaces.py:81
 msgid "Units"
 msgstr ""
 
-#: ./profiles/default/controlpanel.xml
+#: collective/weather/profiles/default/controlpanel.xml
 msgid "Weather"
 msgstr ""
 
-#: ./controlpanel.py:11
+#: collective/weather/controlpanel.py:11
 msgid "Weather Setup"
 msgstr ""
 
-#: ./profiles/default/portlets.xml
+#: collective/weather/profiles/default/portlets.xml
 msgid "Weather portlet"
 msgstr ""
 
-#: ./interfaces.py:50
+#: collective/weather/interfaces.py:50
 msgid "Weather service to be used"
 msgstr ""
 
 msgid "Windy"
 msgstr ""
 
-#: ./config.py:15
-msgid "Yahoo! Weather"
-msgstr ""
-
-#. Default: "Enter here all available locations that will be available. Format: id|name|location_id. Check the <a href=\"https://github.com/collective/collective.weather#finding-locations\">package documentation</a> for further information on how to find ids."
-#: ./interfaces.py:70
+#. Default: "Enter here all available locations that will be available. Format: location_id|name. Check the <a href=\"https://github.com/collective/collective.weather#finding-locations\">package documentation</a> for further information on how to find ids."
+#: collective/weather/interfaces.py:70
 msgid "help_location_ids"
 msgstr ""
 
 #. Default: "Defines whether or not the weather viewlet will be shown site wide."
-#: ./interfaces.py:95
+#: collective/weather/interfaces.py:94
 msgid "help_show_viewlet"
 msgstr ""
 
 #. Default: "System of units to be used: metric or imperial. Metric system uses degrees Celsius. Imperial system uses degrees Fahrenheit."
-#: ./interfaces.py:83
+#: collective/weather/interfaces.py:82
 msgid "help_units"
 msgstr ""
 
-#: ./interfaces.py:51
+#: collective/weather/interfaces.py:51
 msgid "help_weather_api"
 msgstr ""
 
 #. Default: "Enter API key if chosen weather service requires it."
-#: ./interfaces.py:61
+#: collective/weather/interfaces.py:61
 msgid "help_weather_api_key"
 msgstr ""
 
