@@ -19,9 +19,7 @@ There's a frood who really knows where his towel is.
 - Update package documentation.
   [marcosfromero, hvelarde]
 
-- Weather viewlet is disabled as it is too buggy and is causing a lot of
-  weird issues.
-  [hvelarde]
+- Spanish and Brazilian Portuguese translations were updated. [hvelarde]
 
 - Refactor weather_utility to use location_id as key. (closes `#36`_).
   [marcosfromero]
