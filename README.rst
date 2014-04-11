@@ -62,18 +62,17 @@ Usage
 
 Go to Site Setup and select 'Weather'.
 
-Select the weather service to be used (currently only Yahoo! Weather is
-supported).
-
 Enter the list of locations that are going to be available on the site in the
 following format::
 
-    id|name|location_id
+    location_id|name
 
-Where *id* should be a unique value and not repeated among any of the
+Where *location_id* should be a unique value and not repeated among any of the
 locations; *name* is the name to be shown in the drop down (this doesn't need
-to be unique); *location_id* is the id used by `The Weather Channel`_ to get
-the forecast information (see below how to find these ids).
+to be unique). Some examples could be::
+
+    455827|São Paulo (for Yahoo! Weather)
+    -23.548871,-46.638814|São Paulo (for Forecast.io and Weather Underground)
 
 Select the sistem of units: Metric or Imperial. Metric system uses degrees
 Celsius. Imperial system uses degrees Fahrenheit.
@@ -87,20 +86,19 @@ weather conditions.
 You'll have to change the **Available locations** setting depending on your
 selection. Please, refer to providers documentation for more information:
 
--   `Yahoo Weather`_ needs a `WOEID`_. There's a `convenient online tool`_ to
-    get WOEIDs.
--   `Forecast.io API`_ just needs a ``latitude, longitude`` coordinate.
--   `Weather Underground`_ accepts many options (check the ``query``
-    option).
+- `Yahoo Weather`_ needs a `WOEID`_. There's a convenient `online tool to
+  get WOEID`_.
+- `Forecast.io API`_ just needs a ``latitude, longitude`` coordinate.
+- `Weather Underground`_ accepts many options (check the ``query`` option).
 
 Portlet
 ^^^^^^^
 
 The package includes a portlet that you can add in your site.
 
-* Open the 'Manage portlets' screen and select 'Weather portlet'
-* Set the title of the portlet
-* Select a city from the list
+- Open the 'Manage portlets' screen and select 'Weather portlet'
+- Set the title of the portlet
+- Select a city from the list
 
 .. image:: https://raw.github.com/collective/collective.weather/master/portlet.png
     :align: center
@@ -108,6 +106,11 @@ The package includes a portlet that you can add in your site.
 
 Viewlet
 ^^^^^^^
+
+.. Warning::
+    The weather viewlet, as originaly planned, has proven to be pretty complex
+    to implement. Current implementation is still buggy. Use it at your own
+    risk.
 
 The package also includes a viewlet that will display the weather in one of
 the locations defined in the settings. The viewlet will be displayed on top of
@@ -128,7 +131,10 @@ the viewlet.
     :alt: The Weather viewlet
 
 Internals
-^^^^^^^^^
++++++++++
+
+.. Note::
+    This section could be outdated.
 
 The weather viewlet uses Javascript in order to change cities, so this will
 only work for Javascript enabled browsers.
@@ -169,9 +175,9 @@ it will be listed as an option in the provider's drop-down.
 This package already comes with some utilities you can check to get a quick
 idea of how to create yours:
 
--   `yahoo`_
--   `forecast.io`_
--   `wunderground`_
+- `yahoo <https://github.com/collective/collective.weather/blob/master/src/collective/weather/utilities/yahoo.py>`_
+- `forecast.io <https://github.com/collective/collective.weather/blob/master/src/collective/weather/utilities/forecastio.py>`_
+- `wunderground <https://github.com/collective/collective.weather/blob/master/src/collective/weather/utilities/wunderground.pyweather>`_
 
 `The API for this utility`_ is very simple.
 
@@ -179,9 +185,8 @@ In case your utility needs `an API key you can pass it on initialization`_.
 
 Here's and example you can copy and paste to start your custom utility::
 
-    """ Example of a named utility for IWeatherInfo
+    """Example of a named utility for IWeatherInfo.
     """
-
     from collective.weather.interfaces import IWeatherInfo
     from zope.interface import implements
 
@@ -189,7 +194,6 @@ Here's and example you can copy and paste to start your custom utility::
     class DummyProvider(object):
         """Dummy weather implementation of IWeatherInfo
         """
-
         implements(IWeatherInfo)
 
         def __init__(self, key=None):
@@ -198,10 +202,11 @@ Here's and example you can copy and paste to start your custom utility::
         def getWeatherInfo(self, location, units='metric', lang='en'):
             """Dummy implementation of getWeatherInfo as an example
             """
-
-            return {'summary': u'What a lovely day!',
-                    'temperature': 20,
-                    'icon': u'lovely-day-icon.png'}
+            return {
+                'summary': u'What a lovely day!',
+                'temperature': 20,
+                'icon': u'lovely-day-icon.png',
+            }
 
 Not entirely unlike
 -------------------
@@ -210,25 +215,13 @@ Not entirely unlike
     A very old an unmaintained product, Weather Forecast is a portlet that
     will display the observation of the weather. Compatible with Plone 2.5.
 
-.. _`Yahoo Weather`: http://developer.yahoo.com/weather/
-.. _WOEID: http://developer.yahoo.com/geo/geoplanet/guide/concepts.html#w
-    oeids>WOEID</a>. There's a <a href=
-.. _convenient online tool: http://woeid.rosselliot.co.nz/lookup
 .. _`Forecast.io API`: https://developer.forecast.io/docs/v2
-.. _Weather Underground:
-    http://www.wunderground.com/weather/api/d/docs?d=data/index&MR=1
+.. _`online tool to get WOEID`: http://woeid.rosselliot.co.nz/lookup
 .. _`opening a support ticket`: https://github.com/collective/collective.weather/issues
-.. _`The Weather Channel`: http://www.weather.com/
 .. _`Weather Forecast`: http://plone.org/products/ploneweatherforecast
+.. _`Yahoo Weather`: http://developer.yahoo.com/weather/
 .. _`Yahoo! Weather`: http://weather.yahoo.com/
-.. _yahoo: https://github.com/collective/collective.weather/blob/master/s
-    rc/collective/weather/utilities/yahoo.py
-.. _forecast.io: https://github.com/collective/collective.weather/blob/ma
-    ster/src/collective/weather/utilities/forecastio.py
-.. _wunderground: https://github.com/collective/collective.weather/blob/ma
-    ster/src/collective/weather/utilities/wunderground.pyweather
-.. _The API for this utility: https://github.com/collective/collective.we
-    ather/blob/master/src/collective/weather/interfaces.py#L21
-.. _an API key you can pass it on initialization: https://github.com/col
-    lective/collective.weather/blob/master/src/collective/weather/utilities/f
-    orecastio.py#L114
+.. _an API key you can pass it on initialization: https://github.com/collective/collective.weather/blob/master/src/collective/weather/utilities/forecastio.py#L114
+.. _The API for this utility: https://github.com/collective/collective.weather/blob/master/src/collective/weather/interfaces.py#L21
+.. _Weather Underground: http://www.wunderground.com/weather/api/d/docs?d=data/index&MR=1
+.. _WOEID: http://developer.yahoo.com/geo/geoplanet/guide/concepts.html#woeids

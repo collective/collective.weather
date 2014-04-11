@@ -6,36 +6,38 @@ There's a frood who really knows where his towel is.
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+.. Warning::
+    This release includes many changes in the package structure and is not
+    backwards compatible.
+
+- Update package documentation.
+  [marcosfromero, hvelarde]
+
+- Weather viewlet is disabled as it is too buggy and is causing a lot of
+  weird issues.
+  [hvelarde]
+
 - Refactor weather_utility to use location_id as key. (closes `#36`_).
   [marcosfromero]
 
-- Reduce complexity in utilities. (closes `#8`_). [marcosfromero]
-
-- Remove dependency on pywapi.
+- Depend on plone.api and remove dependency on pywapi.
   [hvelarde]
 
-- Depend on plone.api.
-  [hvelarde]
-
-- Move doctests in docstrings to separate files. (closes `#28`_).
+- New named utilities for Forecast.io and Weather Underground (closes `#18`_).
   [marcosfromero]
 
-- Translation of Yahoo weather conditions. (see `#11`_).
+- New API for named utilities and Yahoo! Weather implementation.
   [marcosfromero]
 
-- forecast.io and weather underground named utilities. (closes `#18`_).
+- The weather portlet is now configurable.
   [marcosfromero]
-
-- New API for named utilities and yahoo implementation. [marcosfromero]
-
-- Configurable weather portlet (header and location). [marcosfromero]
 
 
 1.0a3 (2013-10-29)
 ^^^^^^^^^^^^^^^^^^
 
 .. Warning::
-    This release includes many changes in the package structure and is no
+    This release includes many changes in the package structure and is not
     backwards compatible.
 
 - Spanish and Brazilian Portuguese translations were updated. [hvelarde]
@@ -82,8 +84,8 @@ There's a frood who really knows where his towel is.
 
 .. _`#6`: https://github.com/collective/collective.weather/issues/6
 .. _`#7`: https://github.com/collective/collective.weather/issues/7
-.. _`#8`: https://github.com/collective/collective.weather/issues/8
 .. _`#9`: https://github.com/collective/collective.weather/issues/9
+.. _`#11`: https://github.com/collective/collective.weather/issues/11
 .. _`#14`: https://github.com/collective/collective.weather/issues/14
 .. _`#18`: https://github.com/collective/collective.weather/issues/18
 .. _`#19`: https://github.com/collective/collective.weather/issues/19

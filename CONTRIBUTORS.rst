@@ -5,10 +5,10 @@ Share and Enjoy
 of the following people:
 
 - Franco Pellegrini (original author)
+- Marcos F. Romero
 - Héctor Velarde
 - Silvestre Huens
 - Gonzalo Almeida
-- Marcos F. Romero
 - `Tango Desktop Project`_ (icon)
 - `Adam Whitcroft's Climacons`_ (icon set)
 
