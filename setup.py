@@ -62,14 +62,11 @@ setup(name='collective.weather',
       ],
       extras_require={
           'test': [
+              'AccessControl',
               'plone.app.testing',
               'plone.browserlayer',
               'plone.testing',
               'unittest2',
           ],
       },
-      entry_points="""
-      [z3c.autoinclude.plugin]
-      target = plone
-      """,
       )
