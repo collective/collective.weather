@@ -75,7 +75,7 @@ class UtilityTestCase(unittest.TestCase):
 
         self.assertEqual(actual_values, expected_values)
 
-        #restore old values
+        # restore old values
         settings.location_ids = old_ids
 
     def test_update_weather_info(self):

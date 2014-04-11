@@ -87,7 +87,7 @@ class WeatherUtility(object):
                     result = {'error': msg}
             logger.info(u'Result: {0}'.format(result))
 
-            if not result == {} and not 'error' in result and \
+            if not result == {} and 'error' not in result and \
                'temperature' in result and \
                'summary' in result and \
                'icon' in result:

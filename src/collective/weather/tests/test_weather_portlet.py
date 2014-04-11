@@ -108,11 +108,11 @@ class RenderTestCase(unittest.TestCase):
         # XXX: at this point the weather information has already been
         #      updated by another test; we need to isolate this
         # at first rendering no weather information is available
-        #self.assertIn(u'Cordoba, Argentina', r.render())
-        #self.assertIn(u'No weather information', r.render())
+        # self.assertIn(u'Cordoba, Argentina', r.render())
+        # self.assertIn(u'No weather information', r.render())
 
         # call the update weather view and test again
-        #self.portal.unrestrictedTraverse('@@update-weather')()
+        # self.portal.unrestrictedTraverse('@@update-weather')()
         self.assertIn(u'Cordoba, Argentina', r.render())
         self.assertIn(u'Windy', r.render())
         self.assertIn(u'20\xb0C', r.render())
