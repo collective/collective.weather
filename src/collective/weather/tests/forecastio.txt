@@ -21,7 +21,9 @@ Test the utility with a blank key (log output)
 
     >>> forecastio = utility('')
     >>> forecastio.getWeatherInfo('25,20')
-    collective.weather - WARNING - Missing forecast.io api key
+    Traceback (most recent call last):
+        ...
+    ValueError: Missing Forecast.io API key
 
 Initialize the utility with the provider's key
 

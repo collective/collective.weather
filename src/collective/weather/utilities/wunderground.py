@@ -109,9 +109,10 @@ class Wunderground(object):
            - Country (or its wunderground non-iso code)/city
         """
 
-        if self.key.strip() == '':
-            logger.warning(u'Missing Weather Underground api key')
-            return None
+        if not self.key:
+            msg = u'Missing Weather Underground API key'
+            logger.warning(msg)
+            raise ValueError(msg)
 
         # location might be a tuplish lat, lang
         if isinstance(location, (list, tuple)):

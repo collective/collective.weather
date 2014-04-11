@@ -21,7 +21,9 @@ Test the utility with a blank key (log output)
 
     >>> wunderground = utility('')
     >>> wunderground.getWeatherInfo('Argentina/Buenos_Aires')
-    collective.weather - WARNING - Missing Weather Underground api key
+    Traceback (most recent call last):
+        ...
+    ValueError: Missing Weather Underground API key
 
 Initialize the utility with the provider's key
 

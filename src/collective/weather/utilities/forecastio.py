@@ -67,10 +67,10 @@ class ForecastIO(object):
         """location must be a tuplish (lat, lang)
            unfortunately lang is not configurable for forecast.io
         """
-
-        if self.key.strip() == '':
-            logger.warning(u'Missing forecast.io api key')
-            return None
+        if not self.key:
+            msg = u'Missing Forecast.io API key'
+            logger.warning(msg)
+            raise ValueError(msg)
 
         if isinstance(location, basestring):
             location = location.split(',')

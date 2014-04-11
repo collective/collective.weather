@@ -158,9 +158,11 @@ class WeatherUtility(object):
             result = match[0]
         else:
             result = self.cities_list[0]
+            # FIXME: we should clean the cookie when storing an invalid value
             logger.warning(
-                u'Requested city "{0}" is not a valid city, returning the '
-                u'first one of the list: {1}'.format(city, result['location_id']))
+                u'Requested city "{0}" is not a valid city (outdated cookie?). '
+                u'Returning the first one of the list: {1}'.format(city, result['location_id'])
+            )
 
         return result
 
@@ -175,9 +177,9 @@ class WeatherUtility(object):
             value = request.cookies.get(cookie, '')
             if not value:
                 result = self.cities_list[0]
-                logger.info(u'No cookie was present, returning first available city: %s' % result)
+                logger.info(u'No cookie was present; returning first city: {0}'.format(result))
             else:
-                logger.info(u'Cookie present, getting city: %s' % value)
                 result = self.get_city(value)
+                logger.info(u'Cookie present; getting city: {0}'.format(result))
 
         return result
