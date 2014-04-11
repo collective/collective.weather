@@ -52,16 +52,16 @@ class IWeatherSettings(form.Schema):
             u'help_weather_api',
             default=u''),
         default='yahoo',
-        required=True,
         vocabulary='collective.weather.Providers',
+        required=True,
     )
 
-    weather_api_key = schema.TextLine(
+    weather_api_key = schema.ASCIILine(
         title=_(u'API key'),
         description=_(
             u'help_weather_api_key',
             default=u'Enter API key if chosen weather service requires it.'),
-        default=u'',
+        default='',
         required=False,
     )
 
@@ -69,13 +69,12 @@ class IWeatherSettings(form.Schema):
         title=_(u'Available locations'),
         description=_(
             u'help_location_ids',
-            default=u'Enter here all available locations that will be '
-                    u'available. Format: location_id|name. Check the '
-                    u'<a href="https://github.com/collective/collective.weather#finding-locations">package documentation</a> '
-                    u'for further information on how to find ids.'),
+            default=u'Enter here all available locations that will be available. '
+                    u'Format: location_id|name. '
+                    u'Check the <a href="https://github.com/collective/collective.weather#finding-locations">package documentation</a> for further information on how to find ids.'),
         value_type=schema.TextLine(),
-        required=True,
         default=[],
+        required=True,
     )
 
     units = schema.Choice(
@@ -85,17 +84,16 @@ class IWeatherSettings(form.Schema):
             default=u'System of units to be used: metric or imperial. '
                     u'Metric system uses degrees Celsius. '
                     u'Imperial system uses degrees Fahrenheit.'),
-        required=True,
         default='metric',
         vocabulary=UNIT_SYSTEMS,
+        required=True,
     )
 
     show_viewlet = schema.Bool(
         title=_(u'Show weather viewlet?'),
         description=_(
             u'help_show_viewlet',
-            default=u'Defines whether or not the weather viewlet will be '
-                    u'shown site wide.'),
-        required=True,
+            default=u'Defines whether or not the weather viewlet will be shown site wide.'),
         default=False,
+        required=True,
     )
